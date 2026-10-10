@@ -303,7 +303,16 @@ export function BoardView({
                         </div>
 
                         <p className="mb-2 line-clamp-2 text-xs font-medium text-fg">
-                          {task.name || labels.badges.untitled}
+                          <button
+                            type="button"
+                            onClick={(event) => {
+                              event.stopPropagation()
+                              onClickTask(task)
+                            }}
+                            className="rounded-sm text-left hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                          >
+                            {task.name || labels.badges.untitled}
+                          </button>
                         </p>
 
                         {(startDate || endDate) && (

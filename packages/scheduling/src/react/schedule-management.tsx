@@ -203,7 +203,7 @@ export function ScheduleManagementDialog({
                               onClick={() => void onUpdateCalendar(calendar.id, { isDefault: true })}
                               aria-label={labels.menu.primary}
                               title={labels.menu.primary}
-                              className="text-fg-muted transition-colors hover:text-primary"
+                              className="text-fg-muted transition-colors hover:text-primary rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                             >
                               <Star className="h-3.5 w-3.5" />
                             </button>
@@ -212,7 +212,7 @@ export function ScheduleManagementDialog({
                             type="button"
                             onClick={() => void onDeleteCalendar(calendar.id)}
                             aria-label={labels.editor.delete}
-                            className="text-fg-muted transition-colors hover:text-danger"
+                            className="text-fg-muted transition-colors hover:text-danger rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                           >
                             <Trash2 className="h-3.5 w-3.5" />
                           </button>
@@ -235,6 +235,7 @@ export function ScheduleManagementDialog({
                                   })
                                 }
                                 className={cn(
+                                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
                                   'rounded-md px-2 py-1 text-[10px] font-medium transition-colors',
                                   working
                                     ? 'bg-primary-subtle text-primary'
@@ -282,6 +283,7 @@ export function ScheduleManagementDialog({
                           aria-pressed={working}
                           onClick={() => setCalendarDays((c) => ({ ...c, [day]: !working }))}
                           className={cn(
+                            'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
                             'rounded-md px-2 py-1 text-[10px] font-medium transition-colors',
                             working ? 'bg-primary-subtle text-primary' : 'bg-bg-subtle text-fg-muted',
                           )}
@@ -344,7 +346,7 @@ export function ScheduleManagementDialog({
                           type="button"
                           onClick={() => void onDeleteResource(resource.id)}
                           aria-label={labels.editor.delete}
-                          className="text-fg-muted transition-colors hover:text-danger"
+                          className="text-fg-muted transition-colors hover:text-danger rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                         >
                           <Trash2 className="h-3.5 w-3.5" />
                         </button>
@@ -450,7 +452,7 @@ function List({
             type="button"
             onClick={item.onDelete}
             aria-label={item.deleteLabel}
-            className="text-fg-muted transition-colors hover:text-danger"
+            className="text-fg-muted transition-colors hover:text-danger rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             <Trash2 className="h-3.5 w-3.5" />
           </button>

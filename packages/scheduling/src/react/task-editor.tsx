@@ -625,7 +625,7 @@ export function TaskEditor({
                                 current.filter((_, entryIndex) => entryIndex !== index),
                               )
                             }
-                            className="text-fg-muted transition-colors hover:text-danger"
+                            className="text-fg-muted transition-colors hover:text-danger rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                           >
                             <Trash2 className="h-3.5 w-3.5" />
                           </button>
@@ -826,7 +826,7 @@ function DependencyList({
                 onClick={() => onRemove(dependency.id)}
                 aria-label={removeLabel}
                 title={removeLabel}
-                className="text-fg-muted transition-colors hover:text-danger"
+                className="text-fg-muted transition-colors hover:text-danger rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 <Trash2 className="h-3.5 w-3.5" />
               </button>

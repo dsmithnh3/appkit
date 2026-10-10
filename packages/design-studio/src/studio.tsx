@@ -185,8 +185,8 @@ export function DesignStudioEditor({
           {tab === 'print' ? <PrintPanel artboard={artboard} onPatchArtboard={patchArtboard} /> : null}
         </div>
       </aside>
-      <section ref={viewportRef} className="relative grid min-h-0 min-w-0 place-items-center overflow-auto bg-surface-muted p-5">
-        <div className="rounded-lg bg-surface-subtle p-8 shadow-inner">
+      <section ref={viewportRef} className="relative grid min-h-0 min-w-0 place-items-center overflow-auto bg-bg-subtle p-5">
+        <div className="rounded-lg bg-surface-hover p-8 shadow-inner">
           <ArtboardCanvas artboard={artboard} zoom={zoom} sample={editorCatalog.sample} selectedElementId={selectedElementId} onSelect={(id, userInitiated) => { setSelectedElementId(id); if (userInitiated && id) setTab('inspector') }} onModify={patchElement} />
         </div>
         <div className="absolute right-4 bottom-4 flex items-center gap-1 rounded-md border border-border bg-surface/95 px-1.5 py-1 shadow-sm">

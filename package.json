@@ -17,7 +17,7 @@
     "test": "turbo run test && pnpm test:release-order && pnpm test:registry-closure && pnpm test:colour-tokens",
     "test:release-order": "node --test scripts/publish-order.test.mjs",
     "test:registry-closure": "node --test scripts/registry-dependency-closure.test.mjs",
-    "test:colour-tokens": "node --test scripts/fg-subtle-usage.test.mjs scripts/white-black-usage.test.mjs",
+    "test:colour-tokens": "node --test scripts/fg-subtle-usage.test.mjs scripts/white-black-usage.test.mjs scripts/colour-token-usage.test.mjs",
     "test:registry-consumers": "node scripts/test-registry-consumers.mjs",
     "check:boundaries": "node scripts/check-package-boundaries.mjs",
     "test:isolation": "node scripts/check-package-isolation.mjs",

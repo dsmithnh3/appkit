@@ -2,6 +2,7 @@ import { readFileSync, readdirSync } from 'node:fs'
 import { extname, join, relative, resolve } from 'node:path'
 import { findFgSubtleViolations } from './fg-subtle-usage.mjs'
 import { findWhiteBlackViolations } from './white-black-usage.mjs'
+import { definedColours, findUndefinedColourTokens } from './colour-token-usage.mjs'
 
 const root = resolve(import.meta.dirname, '..')
 const roots = [
@@ -11,7 +12,7 @@ const roots = [
   join(root, 'apps', 'playground', 'lib'),
 ]
 const sourceExtensions = new Set(['.ts', '.tsx', '.mjs', '.css'])
-const rawTailwindPalette = /\b(?:bg|text|border|ring|fill|stroke|from|via|to)-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-[0-9]/g
+const rawTailwindPalette = /\b(?:bg|text|border|ring|ring-offset|outline|divide|fill|stroke|from|via|to|shadow|decoration|caret|accent|placeholder)-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-[0-9]/g
 const errors = []
 
 function files(directory) {
@@ -74,9 +75,12 @@ errors.push(
   }),
 )
 
+const tokensCss = readFileSync(join(root, 'packages', 'tokens', 'src', 'tokens.css'), 'utf8')
+errors.push(...findUndefinedColourTokens({ root, roots, defined: definedColours(tokensCss) }))
+
 if (errors.length) {
   console.error(`Production-quality check failed:\n${errors.map((error) => `- ${error}`).join('\n')}`)
   process.exit(1)
 }
 
-console.log('Production source contains no suppressions, unfinished markers, raw UI palettes or white/black utilities, fg-subtle on readable text, empty handlers, fake-success adapters, or silently discarded promises.')
+console.log('Production source contains no suppressions, unfinished markers, raw UI palettes, white/black or undefined colour utilities, fg-subtle on readable text, empty handlers, fake-success adapters, or silently discarded promises.')

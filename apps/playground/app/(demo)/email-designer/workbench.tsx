@@ -180,7 +180,7 @@ export function EmailWorkbench() {
           <p className="mt-2 text-xs font-semibold tracking-wide text-fg-muted uppercase">
             Plain-text part
           </p>
-          <pre className="rounded-md border border-border bg-surface-muted p-3 text-xs whitespace-pre-wrap text-fg-muted">
+          <pre className="rounded-md border border-border bg-bg-subtle p-3 text-xs whitespace-pre-wrap text-fg-muted">
             {rendered.text || '—'}
           </pre>
         </div>

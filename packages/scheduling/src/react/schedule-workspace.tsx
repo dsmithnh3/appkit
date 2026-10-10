@@ -325,7 +325,7 @@ export function ScheduleWorkspace({
               action={
                 <button
                   type="button"
-                  className="text-sm font-medium text-primary hover:underline"
+                  className="text-sm font-medium text-primary hover:underline rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   onClick={() => void handleAddTask()}
                 >
                   {labels.empty.action}

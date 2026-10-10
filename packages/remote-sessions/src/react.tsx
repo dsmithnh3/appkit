@@ -183,7 +183,7 @@ function semanticTerminalTheme(host: HTMLElement): ITheme {
     green: swatch('text-success'),
     yellow: swatch('text-warning'),
     blue: swatch('text-info'),
-    magenta: swatch('text-accent'),
+    magenta: swatch('text-accent-violet'),
     cyan: swatch('text-info'),
     white: swatch('text-fg'),
     brightBlack: swatch('text-fg-muted'),
@@ -191,7 +191,7 @@ function semanticTerminalTheme(host: HTMLElement): ITheme {
     brightGreen: swatch('text-success'),
     brightYellow: swatch('text-warning'),
     brightBlue: swatch('text-info'),
-    brightMagenta: swatch('text-accent'),
+    brightMagenta: swatch('text-accent-violet'),
     brightCyan: swatch('text-info'),
     brightWhite: swatch('text-fg'),
   }

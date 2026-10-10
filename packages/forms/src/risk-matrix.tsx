@@ -198,7 +198,7 @@ function readableTextColor(hex: string): string {
 
 function NotRated({ prefix }: { prefix?: string }) {
   return (
-    <span className="inline-flex items-center gap-1 rounded-full bg-surface-muted px-2 py-0.5 text-[11px] font-medium text-fg-muted ring-1 ring-border ring-inset">
+    <span className="inline-flex items-center gap-1 rounded-full bg-bg-subtle px-2 py-0.5 text-[11px] font-medium text-fg-muted ring-1 ring-border ring-inset">
       <GeneratedValue value={prefix ? `${prefix} · ` : ''} />
       <GeneratedText id="m_13e61f4185333d" />
     </span>
@@ -217,7 +217,7 @@ function RiskChip({
   prefix?: string
 }) {
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-muted px-2 py-0.5 text-[11px] font-medium text-fg-muted ring-1 ring-border ring-inset">
+    <span className="inline-flex items-center gap-1.5 rounded-full bg-bg-subtle px-2 py-0.5 text-[11px] font-medium text-fg-muted ring-1 ring-border ring-inset">
       <span
         aria-hidden
         className="size-2 shrink-0 rounded-full ring-1 ring-black/10"
