@@ -33,3 +33,58 @@ test('JavaScript and CSS semantic palettes cannot drift', () => {
 test('system dark defaults stay identical to the explicit dark theme', () => {
   assert.deepEqual(channels(block(':root:not(.light):not(.dark)')), channels(block('.dark')))
 })
+
+function luminance([r, g, b]: readonly number[]): number {
+  const linear = (channel: number) => {
+    const value = channel / 255
+    return value <= 0.03928 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4
+  }
+  return 0.2126 * linear(r!) + 0.7152 * linear(g!) + 0.0722 * linear(b!)
+}
+
+function contrast(a: readonly number[], b: readonly number[]): number {
+  const [hi, lo] = [luminance(a), luminance(b)].sort((x, y) => y - x) as [number, number]
+  return (hi + 0.05) / (lo + 0.05)
+}
+
+type Pair = readonly [foreground: keyof typeof palette.light, background: keyof typeof palette.light]
+
+const GROUNDS = ['bg', 'bg-subtle', 'surface', 'elevated'] as const
+
+// WCAG 2.x AA: 4.5:1 for body-size text, 3:1 for focus indicators and other
+// meaningful non-text marks. fg-subtle is deliberately absent: it is reserved
+// for placeholders and decorative icons, never readable text.
+const TEXT_PAIRS: Pair[] = [
+  ...GROUNDS.flatMap((ground): Pair[] => [
+    ['fg', ground],
+    ['fg-muted', ground],
+  ]),
+  ['primary-fg', 'primary'],
+  ['danger-fg', 'danger'],
+  ['warning-fg', 'warning'],
+  ['success-fg', 'success'],
+  ['info-fg', 'info'],
+  ['danger', 'danger-subtle'],
+  ['warning', 'warning-subtle'],
+  ['success', 'success-subtle'],
+  ['info', 'info-subtle'],
+]
+const FOCUS_PAIRS: Pair[] = GROUNDS.map((ground): Pair => ['ring', ground])
+
+test('text tokens meet WCAG AA on the grounds they are drawn on, in both themes', () => {
+  for (const mode of ['light', 'dark'] as const) {
+    for (const [fg, bg] of TEXT_PAIRS) {
+      const ratio = contrast(palette[mode][fg], palette[mode][bg])
+      assert.ok(ratio >= 4.5, `${mode}: ${fg} on ${bg} is ${ratio.toFixed(2)}:1, under 4.5:1`)
+    }
+  }
+})
+
+test('the focus ring reaches 3:1 against every ground, in both themes', () => {
+  for (const mode of ['light', 'dark'] as const) {
+    for (const [ring, ground] of FOCUS_PAIRS) {
+      const ratio = contrast(palette[mode][ring], palette[mode][ground])
+      assert.ok(ratio >= 3, `${mode}: ${ring} on ${ground} is ${ratio.toFixed(2)}:1, under 3:1`)
+    }
+  }
+})

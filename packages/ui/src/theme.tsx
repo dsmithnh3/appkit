@@ -141,7 +141,7 @@ export function ThemeToggle({
         title={labels.current(activeLabel)}
         aria-label={labels.current(activeLabel)}
         className={cn(
-          'grid size-9 place-items-center rounded-md text-fg-muted transition-colors hover:bg-surface-hover hover:text-fg',
+          'grid size-9 place-items-center rounded-md text-fg-muted transition-colors hover:bg-surface-hover hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg',
           className,
         )}
       >
@@ -168,7 +168,7 @@ export function ThemeToggle({
             onClick={() => setTheme(option.value)}
             title={labels[option.value]}
             className={cn(
-              'inline-flex h-7 flex-1 items-center justify-center rounded-md transition-colors',
+              'inline-flex h-7 flex-1 items-center justify-center rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring',
               selected ? 'bg-surface text-primary shadow-sm' : 'text-fg-muted hover:text-fg',
             )}
           >

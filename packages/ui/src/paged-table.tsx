@@ -169,7 +169,7 @@ export function PagedTable<T>({
             onClick={() => toggleSort(column.key)}
             aria-label={typeof column.header === 'string' ? labels.sortBy(column.header) : undefined}
             className={cn(
-              'inline-flex items-center gap-1 uppercase tracking-wide transition-colors hover:text-fg',
+              'inline-flex items-center gap-1 rounded-sm uppercase tracking-wide transition-colors hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg',
               alignRight && 'flex-row-reverse',
               active && 'text-fg',
             )}

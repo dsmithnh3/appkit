@@ -108,7 +108,7 @@ export function RecordList<Row>({
 
   const cell = (row: Row, c: RecordColumn<Row>) => {
     const v = (row as Record<string, unknown>)[c.key]
-    const emptyText = <span className="text-fg-subtle">—</span>
+    const emptyText = <span className="text-fg-muted">—</span>
     if (c.render && c.kind !== 'actions')
       return <TableCell key={c.key}>{c.render(row)}</TableCell>
     switch (c.kind) {
@@ -118,7 +118,7 @@ export function RecordList<Row>({
             {c.href && v != null && v !== ''
               ? renderLink({
                   href: c.href(row),
-                  className: 'text-primary hover:underline',
+                  className: 'rounded-sm text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg',
                   children: String(v),
                 })
               : emptyText}
@@ -195,13 +195,22 @@ export function RecordList<Row>({
                       key={c.key}
                       style={c.width ? { width: c.width } : undefined}
                       className={cn(alignRight && 'text-right', c.kind === 'actions' && 'text-right')}
+                      aria-sort={
+                        c.sortable && onSortChange
+                          ? active
+                            ? sort!.dir === 'asc'
+                              ? 'ascending'
+                              : 'descending'
+                            : 'none'
+                          : undefined
+                      }
                     >
                       {c.sortable && onSortChange ? (
                         <button
                           type="button"
                           onClick={() => onSortChange(c.key)}
                           className={cn(
-                            'inline-flex items-center gap-1 uppercase tracking-wide transition-colors hover:text-fg',
+                            'inline-flex items-center gap-1 rounded-sm uppercase tracking-wide transition-colors hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg',
                             alignRight && 'flex-row-reverse',
                             active && 'text-fg',
                           )}

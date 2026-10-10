@@ -16,11 +16,11 @@ Never write a raw color. Every surface, text, and border resolves through a
 | Group | Utilities |
 |---|---|
 | Surfaces | `bg-bg` `bg-bg-subtle` `bg-surface` `bg-surface-hover` `bg-elevated` `bg-overlay` |
-| Text | `text-fg` `text-fg-muted` `text-fg-subtle` |
+| Text | `text-fg` `text-fg-muted` · `text-fg-subtle` for placeholders, disabled items and decorative icons only (it is under 4.5:1; readable text uses `text-fg-muted`) |
 | Borders | `border-border` `border-border-strong` `border-border-subtle` |
 | Brand | `bg-primary` `bg-primary-hover` `bg-primary-active` `text-primary-fg` `bg-primary-subtle` |
 | Semantic | `{bg,text,border}-{danger,warning,success,info}` + each `*-subtle` / `*-fg` |
-| Focus | `ring-ring` |
+| Focus | `ring-ring` at full strength: `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring` plus `ring-offset-2 ring-offset-bg` on standalone controls, or `ring-inset` on rows, tabs and bar items inside clipping containers |
 | Shape | `rounded-{sm,md,lg,xl}` (off `--radius`) · shadows `shadow-{sm,md,lg}` |
 
 Opacity works (`bg-primary/40`, `bg-overlay/50`). Light/dark is one `.dark` class
@@ -74,7 +74,7 @@ support full-height embedded workspaces; controlled in-memory
 search/sort/pagination with typed reference/amount/status/custom/actions
 columns) · URL list kit: `parseListParams` /
 `parsePrefixedListParams`, `ListNavProvider`, `SearchInput`, `FilterChips`,
-`SortableTh` / `SortTh`, `Pagination` (shareable server-list state) · `LineGrid`
+`SortableTh` / `SortTh` (set `aria-sort` on the active column and pass `<th>` attributes through), `Pagination` (shareable server-list state) · `LineGrid`
 (the **spreadsheet line editor**: Enter appends, Alt+↑/↓ moves, ⌘D/⌘⌫, data-driven
 columns) · `OrgChart` (parent-pointer hierarchies: server-rendered border
 connectors, collapsible branches, zoom, optional drag-to-reparent; the pure
@@ -118,6 +118,10 @@ sidebar via `navigationMode="topbar" | "sidebar"`. The registry supports the
 siblings' serializable `iconKey`, `id`, subgroup, exact-match, and mobile-pin
 fields; mobile uses the same data in a drawer and bottom tab bar. `TopNav`,
 `AppSidebar`, `SidebarNav`, and `MobileTabBar` are also exported directly.
+The sidebar remembers a person's collapse choice in the `SIDEBAR_COLLAPSED_COOKIE`
+cookie: server-render `defaultCollapsed={readSidebarCollapsed(await cookies())}`
+to paint the remembered width on first load, or omit `defaultCollapsed` and the
+rail restores it after mount.
 Hosts can tune top-level topbar typography and active/inactive emphasis through
 `topNavigationItemClassName`, `topNavigationActiveItemClassName`, and
 `topNavigationInactiveItemClassName` without changing sidebar or mobile

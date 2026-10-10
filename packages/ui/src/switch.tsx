@@ -18,7 +18,7 @@ export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
       )}
     >
       <input ref={ref} type="checkbox" role="switch" className="peer sr-only" disabled={disabled} {...props} />
-      <span className="absolute inset-0 rounded-full bg-border-strong transition-colors duration-200 peer-checked:bg-primary peer-focus-visible:ring-2 peer-focus-visible:ring-ring/50 peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-bg" />
+      <span className="absolute inset-0 rounded-full bg-border-strong transition-colors duration-200 peer-checked:bg-primary peer-focus-visible:ring-2 peer-focus-visible:ring-ring peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-bg" />
       <span className="pointer-events-none absolute left-0.5 size-5 rounded-full bg-white shadow-sm transition-transform duration-200 ease-out peer-checked:translate-x-5 motion-reduce:transition-none" />
     </label>
   ),

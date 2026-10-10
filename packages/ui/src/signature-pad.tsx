@@ -445,7 +445,7 @@ export function SignaturePad({
                   style={{ top: `${(2 / 3) * 100}%` }}
                 />
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-xs text-fg-subtle">{t('Sign here')}</span>
+                  <span className="text-xs text-fg-muted">{t('Sign here')}</span>
                 </div>
               </div>
             ) : null}

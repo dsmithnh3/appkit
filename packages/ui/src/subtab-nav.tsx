@@ -54,7 +54,7 @@ export function SubtabNav({
       disabled={tab.disabled}
       onClick={() => onSelect?.(tab.key)}
       className={cn(
-        'relative flex shrink-0 items-center gap-2 border-b-2 px-3 py-3 text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-40',
+        'relative flex shrink-0 items-center gap-2 border-b-2 px-3 py-3 text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring',
         selected
           ? 'border-transparent text-primary'
           : 'border-transparent text-fg-muted hover:border-border-strong hover:text-fg',

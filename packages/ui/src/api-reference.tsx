@@ -69,7 +69,7 @@ export function CodeBlock({ code, className }: { code: string; className?: strin
         type="button"
         onClick={copy}
         aria-label="Copy"
-        className="absolute right-2 top-2 rounded-md p-1.5 text-fg-subtle opacity-0 transition hover:bg-surface-hover hover:text-fg group-hover:opacity-100"
+        className="absolute right-2 top-2 rounded-md p-1.5 text-fg-muted opacity-0 transition hover:bg-surface-hover hover:text-fg group-hover:opacity-100"
       >
         {copied ? <Check className="size-4 text-success" /> : <Copy className="size-4" />}
       </button>
@@ -154,7 +154,7 @@ export function ApiEndpoint({
               {endpoint.description ? <p className="text-sm text-fg-muted">{endpoint.description}</p> : null}
               {endpoint.permission ? (
                 <div className="flex items-center gap-2 text-xs">
-                  <span className="text-fg-subtle">Requires</span>
+                  <span className="text-fg-muted">Requires</span>
                   <Badge variant="secondary" className="font-mono">
                     {endpoint.permission}
                   </Badge>
@@ -177,7 +177,7 @@ export function ApiEndpoint({
                           <td className="px-3 py-2 font-mono text-fg">
                             {p.name}
                             {p.required ? <span className="text-danger"> *</span> : null}
-                            <span className="ml-1 text-[11px] text-fg-subtle">{p.in ?? 'query'}</span>
+                            <span className="ml-1 text-[11px] text-fg-muted">{p.in ?? 'query'}</span>
                           </td>
                           <td className="px-3 py-2 font-mono text-fg-muted">{p.type ?? 'string'}</td>
                           <td className="px-3 py-2 text-fg-muted">{p.description}</td>
@@ -210,7 +210,7 @@ export function ApiEndpoint({
                   {result ? (
                     <div className="space-y-1.5">
                       <div className="flex items-center gap-2 text-xs">
-                        <span className="text-fg-subtle">Response</span>
+                        <span className="text-fg-muted">Response</span>
                         <Badge variant={result.status >= 200 && result.status < 300 ? 'success' : 'destructive'}>
                           {result.status || 'error'}
                         </Badge>
@@ -268,7 +268,7 @@ export function ApiReference({
       {baseUrl ? (
         <div className="flex flex-col gap-2 rounded-xl border border-border bg-surface p-4 sm:flex-row sm:items-center">
           <div className="min-w-0 flex-1">
-            <div className="text-xs text-fg-subtle">Base URL</div>
+            <div className="text-xs text-fg-muted">Base URL</div>
             <code className="truncate font-mono text-sm text-fg">{baseUrl}</code>
           </div>
           {showBearerToken ? (
@@ -284,7 +284,7 @@ export function ApiReference({
 
       {groups.map(([tag, eps]) => (
         <section key={tag} className="space-y-2">
-          <h3 className="px-0.5 text-xs font-semibold uppercase tracking-wide text-fg-subtle">{tag}</h3>
+          <h3 className="px-0.5 text-xs font-semibold uppercase tracking-wide text-fg-muted">{tag}</h3>
           <div className="space-y-2">
             {eps.map((e, i) => (
               <ApiEndpoint key={`${e.method}-${e.path}-${i}`} endpoint={e} baseUrl={baseUrl} apiKey={apiKey || initialApiKey} />

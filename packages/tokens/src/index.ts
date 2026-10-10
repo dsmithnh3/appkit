@@ -76,13 +76,13 @@ const light: Record<ColorToken, Channels> = {
   'primary-subtle': [240, 253, 250],
   'signature-surface': [255, 255, 255],
   'signature-ink': [15, 23, 42],
-  danger: [220, 38, 38],
+  danger: [185, 28, 28],
   'danger-fg': [255, 255, 255],
   'danger-subtle': [254, 242, 242],
-  warning: [217, 119, 6],
+  warning: [180, 83, 9],
   'warning-fg': [255, 255, 255],
   'warning-subtle': [255, 251, 235],
-  success: [22, 163, 74],
+  success: [21, 128, 61],
   'success-fg': [255, 255, 255],
   'success-subtle': [240, 253, 244],
   info: [37, 99, 235],
@@ -97,7 +97,7 @@ const light: Record<ColorToken, Channels> = {
   'accent-sky': [2, 132, 199],
   'accent-indigo': [79, 70, 229],
   'accent-violet': [124, 58, 237],
-  ring: [20, 184, 166],
+  ring: [13, 148, 136],
 }
 
 const dark: Record<ColorToken, Channels> = {

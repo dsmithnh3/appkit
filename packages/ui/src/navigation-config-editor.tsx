@@ -169,7 +169,7 @@ function NavigationConfigRow({
         disabled={disabled}
         aria-label={labels.drag(registryItem.label)}
         onPointerDown={(event) => dragControls.start(event)}
-        className="cursor-grab touch-none rounded-md p-1 text-fg-subtle transition-colors hover:bg-surface-hover hover:text-fg disabled:cursor-not-allowed disabled:opacity-40 active:cursor-grabbing"
+        className="cursor-grab touch-none rounded-md p-1 text-fg-muted transition-colors hover:bg-surface-hover hover:text-fg disabled:cursor-not-allowed disabled:opacity-40 active:cursor-grabbing focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
       >
         <GripVertical className="size-4" aria-hidden />
       </button>

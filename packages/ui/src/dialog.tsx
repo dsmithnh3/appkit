@@ -4,6 +4,7 @@ import * as React from 'react'
 import { createPortal } from 'react-dom'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { X } from 'lucide-react'
+import { FOCUSABLE_SELECTOR, trapTabKey } from './focus-trap'
 import { cn } from './utils'
 
 export type DialogSize = 'sm' | 'md' | 'lg' | 'xl'
@@ -52,6 +53,8 @@ export function Dialog({
   fullHeight,
 }: DialogProps) {
   const reduce = useReducedMotion()
+  const titleId = React.useId()
+  const descriptionId = React.useId()
   const [mounted, setMounted] = React.useState(false)
   const panelRef = React.useRef<HTMLDivElement>(null)
   const onCloseRef = React.useRef(onClose)
@@ -65,8 +68,6 @@ export function Dialog({
     const prevOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
     const previouslyFocused = document.activeElement as HTMLElement | null
-    const focusablesSelector =
-      'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
     const focusTimer = window.setTimeout(() => {
       const panel = panelRef.current
       if (!panel) return
@@ -75,7 +76,7 @@ export function Dialog({
       // first DOM-order control (which is often the corner close button).
       if (panel.contains(document.activeElement)) return
       const preferred = panel.querySelector<HTMLElement>('[autofocus]')
-      const first = panel.querySelector<HTMLElement>(focusablesSelector)
+      const first = panel.querySelector<HTMLElement>(FOCUSABLE_SELECTOR)
       ;(preferred ?? first ?? panel).focus()
     }, 0)
     function onKey(e: KeyboardEvent) {
@@ -84,27 +85,8 @@ export function Dialog({
         onCloseRef.current()
         return
       }
-      if (e.key !== 'Tab') return
       const panel = panelRef.current
-      if (!panel) return
-      const items = Array.from(panel.querySelectorAll<HTMLElement>(focusablesSelector)).filter(
-        (el) => el.offsetParent !== null || el === document.activeElement,
-      )
-      if (items.length === 0) {
-        e.preventDefault()
-        panel.focus()
-        return
-      }
-      const first = items[0]!
-      const last = items[items.length - 1]!
-      const activeEl = document.activeElement
-      if (e.shiftKey && (activeEl === first || activeEl === panel)) {
-        e.preventDefault()
-        last.focus()
-      } else if (!e.shiftKey && activeEl === last) {
-        e.preventDefault()
-        first.focus()
-      }
+      if (panel) trapTabKey(e, panel)
     }
     document.addEventListener('keydown', onKey)
     return () => {
@@ -120,7 +102,7 @@ export function Dialog({
   return createPortal(
     <AnimatePresence>
       {open ? (
-        <div className="fixed inset-0 z-[65] flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-[58] flex items-center justify-center p-4">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -134,6 +116,8 @@ export function Dialog({
             ref={panelRef}
             role="dialog"
             aria-modal="true"
+            aria-labelledby={title ? titleId : undefined}
+            aria-describedby={description ? descriptionId : undefined}
             tabIndex={-1}
             initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.96, y: 8 }}
             animate={reduce ? { opacity: 1 } : { opacity: 1, scale: 1, y: 0 }}
@@ -147,8 +131,16 @@ export function Dialog({
           >
             {title || description ? (
               <div className="space-y-1 px-6 pt-6">
-                {title ? <h2 className="text-lg font-semibold text-fg">{title}</h2> : null}
-                {description ? <p className="text-sm text-fg-muted">{description}</p> : null}
+                {title ? (
+                  <h2 id={titleId} className="text-lg font-semibold text-fg">
+                    {title}
+                  </h2>
+                ) : null}
+                {description ? (
+                  <p id={descriptionId} className="text-sm text-fg-muted">
+                    {description}
+                  </p>
+                ) : null}
               </div>
             ) : null}
             {!hideClose ? (
@@ -156,7 +148,7 @@ export function Dialog({
                 type="button"
                 onClick={onClose}
                 aria-label={closeLabel}
-                className="absolute right-4 top-4 rounded-md p-1.5 text-fg-muted transition-colors hover:bg-surface-hover hover:text-fg"
+                className="absolute right-4 top-4 rounded-md p-1.5 text-fg-muted transition-colors hover:bg-surface-hover hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
               >
                 <X className="size-4" />
               </button>

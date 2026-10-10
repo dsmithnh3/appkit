@@ -300,7 +300,7 @@ export function SidebarNav({
             {collapsed ? (
               <div className="mx-2 mb-1 border-t border-border-subtle" aria-hidden />
             ) : (
-              <div className="px-2 pb-1 text-[10px] font-semibold tracking-wider text-fg-subtle uppercase">
+              <div className="px-2 pb-1 text-[10px] font-semibold tracking-wider text-fg-muted uppercase">
                 {group.label}
               </div>
             )}
@@ -348,7 +348,7 @@ export function SidebarNav({
                     active
                       ? 'bg-primary-subtle text-primary'
                       : 'text-fg-muted hover:bg-surface-hover hover:text-fg',
-                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40',
+                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
                   )}
                 >
                   <NavIcon iconKey={group.iconKey} icon={group.icon} size={14} className="shrink-0" />
@@ -450,7 +450,7 @@ function CollapsedWorkspace({
             active
               ? 'bg-primary-subtle text-primary before:bg-primary'
               : 'text-fg-muted before:bg-transparent hover:bg-surface-hover hover:text-fg',
-            'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40',
+            'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
           )}
         >
           <NavIcon iconKey={group.iconKey} icon={group.icon} size={17} />
@@ -533,7 +533,7 @@ function NavLink({
           active
             ? 'bg-primary-subtle text-fg before:h-6 before:bg-primary'
             : 'text-fg-muted before:bg-transparent hover:bg-surface-hover hover:text-fg hover:before:bg-border-strong',
-          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40',
+          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
         ),
         children: (
           <>
@@ -584,7 +584,7 @@ function SubgroupSection({
       : hasActiveChild && !open
         ? 'text-primary'
         : 'text-fg-muted hover:bg-surface-hover hover:text-fg',
-    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40',
+    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
   )
   const chevron = (
     <ChevronRight

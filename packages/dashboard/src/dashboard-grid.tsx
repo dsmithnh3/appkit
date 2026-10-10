@@ -185,7 +185,7 @@ function DashboardLibrary({ open, onClose, items, present, categoryLabels, onAdd
   }, [items, query])
   return <Drawer open={open} onClose={onClose} title="Widgets" description="Click to add to your dashboard" size="md" bodyClassName="app-scroll px-3 py-4 sm:px-5">
     <div className="space-y-6">
-      <label className="relative block"><span className="sr-only">Search widgets</span><Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-fg-subtle" /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search widgets…" className="h-9 w-full rounded-lg border border-border bg-surface pl-9 pr-3 text-sm text-fg outline-none transition focus:border-primary focus:ring-2 focus:ring-ring/20" /></label>
+      <label className="relative block"><span className="sr-only">Search widgets</span><Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-fg-subtle" /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search widgets…" className="h-9 w-full rounded-lg border border-border bg-surface pl-9 pr-3 text-sm text-fg outline-none transition focus:border-primary focus:ring-2 focus:ring-ring" /></label>
       {categories.map(([category, categoryItems]) => <section key={category} className="space-y-2">
         <h3 className="px-1 text-xs font-semibold uppercase tracking-wider text-fg-subtle">{categoryLabels?.[category] ?? category}</h3>
         <div className="space-y-1.5">{categoryItems.map((item) => {

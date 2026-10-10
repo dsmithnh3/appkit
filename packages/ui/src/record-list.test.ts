@@ -27,3 +27,24 @@ test('RecordList supports full-height embedded table layouts', () => {
   assert.match(markup, /table-fixed/)
   assert.match(markup, /Embedded record/)
 })
+
+test('RecordList announces sortable columns with aria-sort', () => {
+  const markup = renderToStaticMarkup(
+    React.createElement(RecordList<{ id: string; name: string; total: number }>, {
+      columns: [
+        { key: 'name', label: 'Name', sortable: true },
+        { key: 'total', label: 'Total', kind: 'amount', sortable: true },
+        { key: 'id', label: 'Id' },
+      ],
+      rows: [{ id: 'r1', name: 'Record', total: 5 }],
+      getRowId: (row) => row.id,
+      sort: { key: 'total', dir: 'desc' },
+      onSortChange: () => {},
+    }),
+  )
+  const heads = [...markup.matchAll(/<th\b[^>]*>/g)].map((match) => match[0])
+  assert.equal(heads.length, 3)
+  assert.match(heads[0]!, /aria-sort="none"/, 'a sortable but unsorted column says none')
+  assert.match(heads[1]!, /aria-sort="descending"/)
+  assert.doesNotMatch(heads[2]!, /aria-sort/, 'a column that cannot sort carries no aria-sort')
+})

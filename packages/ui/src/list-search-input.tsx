@@ -85,7 +85,7 @@ export function SearchInput({
           type="button"
           aria-label={clearLabel}
           onClick={() => setEdit(applySearchInputEdit('', urlValue, navigationPending))}
-          className="absolute right-2.5 top-2 text-fg-subtle hover:text-fg-muted"
+          className="absolute right-2.5 top-2 text-fg-muted hover:text-fg"
         >
           <X size={16} />
         </button>

@@ -662,7 +662,7 @@ export function NotificationInbox({
           <div className={cn('px-3 pb-2.5 sm:px-4', filter.kind === 'todos' && 'hidden')}>
             <div className="relative">
               <Search size={15} className="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-fg-subtle" />
-              <input type="search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder={copy.search} className="h-9 w-full rounded-lg border border-border bg-bg-subtle pl-8 pr-8 text-base text-fg outline-none transition-colors placeholder:text-fg-subtle focus:border-primary focus:bg-surface focus:ring-2 focus:ring-ring/20 sm:text-sm" />
+              <input type="search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder={copy.search} className="h-9 w-full rounded-lg border border-border bg-bg-subtle pl-8 pr-8 text-base text-fg outline-none transition-colors placeholder:text-fg-subtle focus:border-primary focus:bg-surface focus:ring-2 focus:ring-ring sm:text-sm" />
               {search ? <button type="button" onClick={() => setSearch('')} aria-label={copy.clearSearch} className="absolute right-2 top-1/2 -translate-y-1/2 rounded p-0.5 text-fg-subtle hover:text-fg"><X size={14} /></button> : null}
             </div>
           </div>

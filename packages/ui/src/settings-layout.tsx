@@ -86,7 +86,7 @@ export function AdminHub({
                 {group.label || group.description ? (
                   <div className="space-y-1 px-0.5">
                     {group.label ? (
-                      <h2 className="text-xs font-semibold tracking-wider text-fg-subtle uppercase">
+                      <h2 className="text-xs font-semibold tracking-wider text-fg-muted uppercase">
                         {group.label}
                       </h2>
                     ) : null}
@@ -189,7 +189,7 @@ export function AdminHub({
                       </>
                     )
                     const className = cn(
-                      'group rounded-xl border border-border bg-surface shadow-sm transition-all',
+                      'group rounded-xl border border-border bg-surface shadow-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg',
                       detailed ? 'flex h-full flex-col p-4' : 'flex items-center gap-3 p-3.5',
                       card.href && 'hover:shadow-md',
                       card.href && accent.border,
@@ -247,7 +247,7 @@ export function SettingsNav({
         {groups.map((group, gi) => (
           <div key={gi} className="space-y-1">
             {group.label ? (
-              <h3 className="px-2 text-xs font-semibold tracking-wider text-fg-subtle uppercase">
+              <h3 className="px-2 text-xs font-semibold tracking-wider text-fg-muted uppercase">
                 {group.label}
               </h3>
             ) : null}
@@ -261,7 +261,7 @@ export function SettingsNav({
                       aria-current={active ? 'page' : undefined}
                       onClick={() => onSelect(item.key)}
                       className={cn(
-                        'flex w-full items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-sm transition-colors',
+                        'flex w-full items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring',
                         active
                           ? 'bg-primary-subtle font-medium text-primary'
                           : 'text-fg-muted hover:bg-surface-hover hover:text-fg',

@@ -84,7 +84,7 @@ export function Pagination({
             <ChevronLeft size={14} />
             {labels.prev}
           </PageButton>
-          <span className="px-2 text-fg-subtle">{labels.pageOf(page, pageCount)}</span>
+          <span className="px-2 text-fg-muted">{labels.pageOf(page, pageCount)}</span>
           <PageButton href={nextHref} disabled={page >= pageCount}>
             {labels.next}
             <ChevronRight size={14} />

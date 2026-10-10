@@ -259,7 +259,7 @@ export const WalkingCharacter = React.memo(function WalkingCharacter({
         aria-label={character.name}
         className={cn(
           'block rounded-lg outline-none transition-opacity',
-          onSelect ? 'cursor-pointer focus-visible:ring-2 focus-visible:ring-ring/50' : 'pointer-events-none',
+          onSelect ? 'cursor-pointer focus-visible:ring-2 focus-visible:ring-ring' : 'pointer-events-none',
         )}
         style={{ width: size, height: size, y: bounce, rotate }}
       >

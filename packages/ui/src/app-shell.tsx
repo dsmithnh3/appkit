@@ -27,7 +27,7 @@ export function AppShell({
   headerMiddle,
   header,
   banner,
-  defaultCollapsed = false,
+  defaultCollapsed,
   navigationMode = 'topbar',
   linkRender,
   moreLabel = 'More',
@@ -52,6 +52,11 @@ export function AppShell({
   /** Right-side utility actions and account menu. */
   header?: React.ReactNode
   banner?: React.ReactNode
+  /**
+   * Sidebar's initial collapsed state. Server-render it with
+   * `readSidebarCollapsed(cookies)` to paint the remembered width; omit it and
+   * the sidebar restores the person's last choice after mount.
+   */
   defaultCollapsed?: boolean
   navigationMode?: AppShellNavigationMode
   linkRender?: LinkRender
@@ -93,7 +98,7 @@ export function AppShell({
             type="button"
             onClick={() => setMobileOpen(true)}
             aria-label={openNavigationLabel}
-            className="grid size-9 shrink-0 place-items-center rounded-md border border-border text-fg-muted transition-colors hover:bg-surface-hover hover:text-fg lg:hidden"
+            className="grid size-9 shrink-0 place-items-center rounded-md border border-border text-fg-muted transition-colors hover:bg-surface-hover hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg lg:hidden"
           >
             <Menu size={18} />
           </button>

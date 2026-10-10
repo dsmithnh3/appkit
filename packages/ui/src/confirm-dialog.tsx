@@ -5,6 +5,7 @@ import { createPortal } from 'react-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { AlertTriangle, HelpCircle } from 'lucide-react'
 import { Button } from './button'
+import { trapTabKey } from './focus-trap'
 
 export type ConfirmTone = 'default' | 'danger'
 
@@ -64,12 +65,24 @@ export type ConfirmRootProps = {
 /** Mount once near the root of an application that calls `confirmDialog`. */
 export function ConfirmRoot({ labels = {} }: ConfirmRootProps) {
   const request = React.useSyncExternalStore(subscribe, () => current, () => null)
+  const panelRef = React.useRef<HTMLDivElement>(null)
+  const confirmRef = React.useRef<HTMLButtonElement>(null)
 
+  // Enter is deliberately not handled here: focus starts on the confirm button,
+  // so Enter activates whichever button has focus, and Enter on Cancel cancels.
+  // Focus is moved here rather than by `autoFocus`, which would run before this
+  // effect and leave nothing to restore.
   React.useEffect(() => {
     if (!request) return
+    const previouslyFocused = document.activeElement as HTMLElement | null
+    confirmRef.current?.focus()
     function onKey(event: KeyboardEvent) {
-      if (event.key === 'Escape') settle(false)
-      if (event.key === 'Enter') settle(true)
+      if (event.key === 'Escape') {
+        settle(false)
+        return
+      }
+      const panel = panelRef.current
+      if (panel) trapTabKey(event, panel)
     }
     document.addEventListener('keydown', onKey)
     const previousOverflow = document.body.style.overflow
@@ -77,6 +90,7 @@ export function ConfirmRoot({ labels = {} }: ConfirmRootProps) {
     return () => {
       document.removeEventListener('keydown', onKey)
       document.body.style.overflow = previousOverflow
+      if (previouslyFocused && document.contains(previouslyFocused)) previouslyFocused.focus()
     }
   }, [request])
 
@@ -101,6 +115,8 @@ export function ConfirmRoot({ labels = {} }: ConfirmRootProps) {
             aria-hidden="true"
           />
           <motion.div
+            ref={panelRef}
+            tabIndex={-1}
             initial={{ opacity: 0, scale: 0.96, y: 8 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 8 }}
@@ -118,7 +134,7 @@ export function ConfirmRoot({ labels = {} }: ConfirmRootProps) {
             </div>
             <div className="flex justify-end gap-2 border-t border-border bg-bg-subtle px-6 py-4">
               <Button variant="outline" onClick={() => settle(false)}>{cancelLabel}</Button>
-              <Button autoFocus variant={danger ? 'destructive' : 'default'} onClick={() => settle(true)}>{confirmLabel}</Button>
+              <Button ref={confirmRef} variant={danger ? 'destructive' : 'default'} onClick={() => settle(true)}>{confirmLabel}</Button>
             </div>
           </motion.div>
         </div>

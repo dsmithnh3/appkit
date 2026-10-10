@@ -111,7 +111,7 @@ export function MultiSelect({
             onClick={() => setOpen((current) => !current)}
             className={cn(
               'flex min-h-9 w-full items-center gap-1.5 rounded-md border border-border bg-surface px-3 py-1.5 text-left text-sm text-fg outline-none transition-colors',
-              'hover:border-border-strong focus-visible:ring-2 focus-visible:ring-ring/50',
+              'hover:border-border-strong focus-visible:ring-2 focus-visible:ring-ring',
               'disabled:pointer-events-none disabled:opacity-50',
               triggerClassName,
             )}
@@ -165,7 +165,7 @@ export function MultiSelect({
         </div>
         <div className="max-h-72 overflow-y-auto p-1">
           {filtered.length === 0 ? (
-            <div className="px-3 py-8 text-center text-sm text-fg-subtle">{noMatchesLabel}</div>
+            <div className="px-3 py-8 text-center text-sm text-fg-muted">{noMatchesLabel}</div>
           ) : (
             filtered.map((option) => {
               const checked = selected.has(option.value)
@@ -202,7 +202,7 @@ export function MultiSelect({
                     ) : null}
                   </span>
                   {option.group ? (
-                    <span className="shrink-0 text-[10px] font-medium tracking-wide text-fg-subtle uppercase">
+                    <span className="shrink-0 text-[10px] font-medium tracking-wide text-fg-muted uppercase">
                       {option.group}
                     </span>
                   ) : null}

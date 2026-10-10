@@ -4,6 +4,7 @@ import * as React from 'react'
 import { createPortal } from 'react-dom'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { Button } from './button'
+import { trapTabKey } from './focus-trap'
 import { Input } from './input'
 import { Label } from './label'
 
@@ -84,34 +85,14 @@ export function PromptRoot({
     const previousOverflow = document.body.style.overflow
     const previouslyFocused = document.activeElement as HTMLElement | null
     document.body.style.overflow = 'hidden'
-    const focusable =
-      'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === 'Escape') {
         event.preventDefault()
         settle(null)
         return
       }
-      if (event.key !== 'Tab') return
       const panel = panelRef.current
-      if (!panel) return
-      const items = Array.from(panel.querySelectorAll<HTMLElement>(focusable)).filter(
-        (element) => element.offsetParent !== null || element === document.activeElement,
-      )
-      if (items.length === 0) {
-        event.preventDefault()
-        panel.focus()
-        return
-      }
-      const first = items[0]!
-      const last = items.at(-1)!
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault()
-        last.focus()
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault()
-        first.focus()
-      }
+      if (panel) trapTabKey(event, panel)
     }
     document.addEventListener('keydown', onKeyDown)
     return () => {
@@ -141,8 +122,6 @@ export function PromptRoot({
           aria-labelledby={titleId}
         >
           <motion.div
-            ref={panelRef}
-            tabIndex={-1}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -152,6 +131,8 @@ export function PromptRoot({
             aria-hidden="true"
           />
           <motion.div
+            ref={panelRef}
+            tabIndex={-1}
             initial={reduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.96, y: 8 }}
             animate={reduceMotion ? { opacity: 1 } : { opacity: 1, scale: 1, y: 0 }}
             exit={reduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.96, y: 8 }}

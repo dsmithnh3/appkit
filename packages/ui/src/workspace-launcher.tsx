@@ -182,7 +182,7 @@ function BreakdownMeter({
     <div>
       <div className="mb-1.5 flex items-center justify-between gap-3 text-[11px]">
         <span className="truncate font-medium text-fg-muted">{breakdown.label}</span>
-        <span className="shrink-0 tabular-nums text-fg-subtle">{formatCount(total)}</span>
+        <span className="shrink-0 tabular-nums text-fg-muted">{formatCount(total)}</span>
       </div>
       <div className="flex h-4 overflow-visible rounded-full bg-bg-subtle">
         {breakdown.segments.map((segment, index) => {

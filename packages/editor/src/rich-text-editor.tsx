@@ -125,7 +125,7 @@ export function RichTextEditor({
     <div
       className={cn(
         'rounded-md border border-border-strong bg-surface shadow-sm transition-shadow',
-        'focus-within:border-primary focus-within:ring-2 focus-within:ring-ring/40',
+        'focus-within:border-primary focus-within:ring-2 focus-within:ring-ring',
         disabled && 'opacity-60',
         className,
       )}

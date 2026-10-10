@@ -4,15 +4,18 @@ import * as React from 'react'
 import { PanelLeftClose, PanelLeftOpen } from 'lucide-react'
 import { SidebarNav, type SidebarNavGroup } from './sidebar-nav'
 import type { LinkRender } from './settings-layout'
+import { SIDEBAR_COLLAPSED_COOKIE, readSidebarCollapsed } from './sidebar-state'
 import { cn } from './utils'
 
-const COOKIE = 'appkit_sidebar_collapsed'
-
 /**
- * The desktop nav rail: brand + collapse toggle (persisted to a cookie so the
- * server can render the right width next load), the grouped nav, and a footer
+ * The desktop nav rail: brand + collapse toggle, the grouped nav, and a footer
  * slot (theme toggle, version, etc.). Hidden below `lg` — pair with AppShell's
  * built-in mobile nav.
+ *
+ * The collapse toggle persists to the `SIDEBAR_COLLAPSED_COOKIE` cookie. Pass
+ * `defaultCollapsed={readSidebarCollapsed(cookieHeaderOrStore)}` from the
+ * server to render the remembered width on first paint; when it is omitted the
+ * rail restores the remembered state from the cookie after mount.
  */
 export function AppSidebar({
   groups,
@@ -20,7 +23,7 @@ export function AppSidebar({
   brand,
   footer,
   collapsedFooter,
-  defaultCollapsed = false,
+  defaultCollapsed,
   collapsible = true,
   linkRender,
   expandLabel = 'Expand sidebar',
@@ -31,18 +34,23 @@ export function AppSidebar({
   brand?: React.ReactNode
   footer?: React.ReactNode
   collapsedFooter?: React.ReactNode
+  /** Initial collapsed state. Omit to restore the person's last choice from the cookie after mount. */
   defaultCollapsed?: boolean
   collapsible?: boolean
   linkRender?: LinkRender
   expandLabel?: string
   collapseLabel?: string
 }) {
-  const [collapsed, setCollapsed] = React.useState(defaultCollapsed)
+  const [collapsed, setCollapsed] = React.useState(defaultCollapsed ?? false)
+  React.useEffect(() => {
+    if (defaultCollapsed !== undefined || !collapsible) return
+    if (readSidebarCollapsed(document.cookie)) setCollapsed(true)
+  }, [defaultCollapsed, collapsible])
   const toggle = React.useCallback(() => {
     setCollapsed((c) => {
       const next = !c
       try {
-        document.cookie = `${COOKIE}=${next ? '1' : '0'};path=/;max-age=31536000;samesite=lax`
+        document.cookie = `${SIDEBAR_COLLAPSED_COOKIE}=${next ? '1' : '0'};path=/;max-age=31536000;samesite=lax`
       } catch {
         // Cookie persistence can be unavailable; local interaction still works.
       }
@@ -66,7 +74,7 @@ export function AppSidebar({
             aria-label={collapsed ? expandLabel : collapseLabel}
             title={collapsed ? expandLabel : collapseLabel}
             className={cn(
-              'grid size-8 place-items-center rounded-md text-fg-subtle transition-colors hover:bg-surface-hover hover:text-fg',
+              'grid size-8 place-items-center rounded-md text-fg-muted transition-colors hover:bg-surface-hover hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg',
               collapsed ? '' : 'ml-auto',
             )}
           >

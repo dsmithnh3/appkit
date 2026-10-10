@@ -195,7 +195,7 @@ function FilterItem({
       <Check size={14} className={cn('shrink-0', active ? 'text-primary' : 'text-transparent')} />
       <span className="flex-1 truncate">{children}</span>
       {typeof count === 'number' ? (
-        <span className={cn('shrink-0 text-xs tabular-nums', active ? 'text-primary/80' : 'text-fg-subtle')}>
+        <span className={cn('shrink-0 text-xs tabular-nums', active ? 'text-primary/80' : 'text-fg-muted')}>
           {count}
         </span>
       ) : null}

@@ -61,7 +61,7 @@ export const TableRow = React.forwardRef<HTMLTableRowElement, TableRowProps>(
     <tr
       ref={ref}
       className={cn(
-        'border-b border-border-subtle transition-colors duration-150 hover:bg-surface-hover data-[state=selected]:bg-bg-subtle',
+        'border-b border-border-subtle transition-colors duration-150 hover:bg-surface-hover data-[state=selected]:bg-primary-subtle',
         !noAnimate && 'appkit-row',
         className,
       )}
