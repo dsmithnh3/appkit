@@ -214,7 +214,11 @@ export interface SchedulingLabels {
     milestone: string
     untitled: string
     schedule: string
+    /** Names a row's drag handle: `${reorder}: ${task name}`. */
+    reorder: string
     reorderHint: string
+    /** Added to `reorderHint` where the handle also takes arrow keys. */
+    reorderKeysHint: string
     expand: string
     collapse: string
     resizeSplit: string
@@ -471,7 +475,9 @@ export const defaultSchedulingLabels: SchedulingLabels = {
     milestone: 'MS',
     untitled: 'Untitled',
     schedule: 'Schedule',
+    reorder: 'Reorder',
     reorderHint: 'Drag to reorder. Move right to nest under a task, or left to pull back out.',
+    reorderKeysHint: 'With the keyboard, Up and Down move the task, Right nests it and Left pulls it back out.',
     expand: 'Expand',
     collapse: 'Collapse',
     resizeSplit: 'Resize schedule split',

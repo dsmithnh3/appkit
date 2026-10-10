@@ -3,7 +3,7 @@
   "entries": [
     {
       "file": "packages/forms/src/element-preview.tsx",
-      "match": "className=\"flex items-center gap-1 rounded border border-border bg-white px-2 py-1.5 text-xs text-fg-subtle\"",
+      "match": "className=\"flex items-center gap-1 rounded border border-border bg-surface px-2 py-1.5 text-xs text-fg-subtle\"",
       "reason": "empty-value placeholder"
     },
     {

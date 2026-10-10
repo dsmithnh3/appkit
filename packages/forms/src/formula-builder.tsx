@@ -245,7 +245,7 @@ export function FormulaBuilder({
                     value={repeatingSections.map((sec) => {
                       const rowCount = preview.rowCounts[sec.id] ?? 0
                       return (
-                        <div key={sec.id} className="rounded border border-border bg-white p-2">
+                        <div key={sec.id} className="rounded border border-border bg-surface p-2">
                           <div className="flex items-center justify-between">
                             <span className="font-semibold">
                               <GeneratedValue value={sec.label} />
@@ -376,7 +376,7 @@ function Node({
   }
 
   return (
-    <div className="space-y-2 rounded-md border border-border bg-white p-2">
+    <div className="space-y-2 rounded-md border border-border bg-surface p-2">
       <div className="flex items-center justify-between gap-1">
         <Select
           className="h-7 flex-1 text-xs"
