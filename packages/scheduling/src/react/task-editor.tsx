@@ -577,7 +577,7 @@ export function TaskEditor({
                   </div>
 
                   {resourceAssignments.length === 0 ? (
-                    <p className="text-xs text-fg-subtle">{labels.editor.noResources}</p>
+                    <p className="text-xs text-fg-muted">{labels.editor.noResources}</p>
                   ) : (
                     <div className="space-y-2">
                       {resourceAssignments.map((assignment, index) => (
@@ -625,7 +625,7 @@ export function TaskEditor({
                                 current.filter((_, entryIndex) => entryIndex !== index),
                               )
                             }
-                            className="text-fg-subtle transition-colors hover:text-danger"
+                            className="text-fg-muted transition-colors hover:text-danger"
                           >
                             <Trash2 className="h-3.5 w-3.5" />
                           </button>
@@ -806,7 +806,7 @@ function DependencyList({
     <div className="space-y-2">
       <Label>{heading}</Label>
       {dependencies.length === 0 ? (
-        <p className="text-xs text-fg-subtle">{empty}</p>
+        <p className="text-xs text-fg-muted">{empty}</p>
       ) : (
         <div className="space-y-2">
           {dependencies.map((dependency) => (
@@ -816,7 +816,7 @@ function DependencyList({
             >
               <div className="min-w-0 flex-1">
                 <p className="truncate text-xs text-fg">{nameOf(dependency)}</p>
-                <p className="text-[11px] text-fg-subtle">
+                <p className="text-[11px] text-fg-muted">
                   {typeLabel(dependency.type)}
                   {dependency.lagDays ? ` · ${lagLabel(dependency.lagDays)}` : ''}
                 </p>
@@ -826,7 +826,7 @@ function DependencyList({
                 onClick={() => onRemove(dependency.id)}
                 aria-label={removeLabel}
                 title={removeLabel}
-                className="text-fg-subtle transition-colors hover:text-danger"
+                className="text-fg-muted transition-colors hover:text-danger"
               >
                 <Trash2 className="h-3.5 w-3.5" />
               </button>
@@ -848,7 +848,7 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
 }
 
 function Hint({ children }: { children: React.ReactNode }) {
-  return <p className="text-[11px] text-fg-subtle">{children}</p>
+  return <p className="text-[11px] text-fg-muted">{children}</p>
 }
 
 function Note({ children }: { children: React.ReactNode }) {
@@ -862,7 +862,7 @@ function Note({ children }: { children: React.ReactNode }) {
 function Card({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="space-y-2 rounded-xl border border-border bg-surface px-4 py-4">
-      <h4 className="text-xs font-semibold tracking-[0.16em] text-fg-subtle uppercase">{title}</h4>
+      <h4 className="text-xs font-semibold tracking-[0.16em] text-fg-muted uppercase">{title}</h4>
       {children}
     </div>
   )
@@ -871,7 +871,7 @@ function Card({ title, children }: { title: string; children: React.ReactNode })
 function Metric({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="rounded-lg border border-border bg-bg-subtle px-3 py-2">
-      <p className="text-[10px] tracking-wide text-fg-subtle uppercase">{label}</p>
+      <p className="text-[10px] tracking-wide text-fg-muted uppercase">{label}</p>
       <p className="mt-1 font-medium text-fg">{children}</p>
     </div>
   )
@@ -880,7 +880,7 @@ function Metric({ label, children }: { label: string; children: React.ReactNode 
 function Row({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="flex items-center justify-between gap-3 text-xs">
-      <span className="text-fg-subtle">{label}</span>
+      <span className="text-fg-muted">{label}</span>
       <span className="truncate text-right font-medium text-fg">{children}</span>
     </div>
   )

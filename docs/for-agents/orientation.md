@@ -16,7 +16,7 @@ Never write a raw color. Every surface, text, and border resolves through a
 | Group | Utilities |
 |---|---|
 | Surfaces | `bg-bg` `bg-bg-subtle` `bg-surface` `bg-surface-hover` `bg-elevated` `bg-overlay` |
-| Text | `text-fg` `text-fg-muted` · `text-fg-subtle` for placeholders, disabled items and decorative icons only (it is under 4.5:1; readable text uses `text-fg-muted`) |
+| Text | `text-fg` `text-fg-muted` · `text-fg-subtle` for placeholders, disabled items and decorative icons only (it is under 4.5:1; readable text uses `text-fg-muted`). `pnpm check:quality` fails on any other `text-fg-subtle`; a reviewed exception goes in `scripts/fg-subtle-allowlist.json` with its reason |
 | Borders | `border-border` `border-border-strong` `border-border-subtle` |
 | Brand | `bg-primary` `bg-primary-hover` `bg-primary-active` `text-primary-fg` `bg-primary-subtle` |
 | Semantic | `{bg,text,border}-{danger,warning,success,info}` + each `*-subtle` / `*-fg` |
@@ -66,6 +66,12 @@ flows) · `Progress` (determinate + indeterminate) · `Skeleton`
 backdrop, focus trap, scroll-lock, **expand-to-fullscreen**, stacked/nested) ·
 `Popover` (portal-positioned floating panel) · `ContextMenu` + `useContextMenu`
 (kebab / right-click menu, items array) · `Tooltip`.
+
+Modal layers stack in the order they open. A `Dialog` opened over a `Drawer`, a
+`Drawer` opened from a `Dialog`, and a confirm or prompt over either all paint
+above the layer they came from (a layer opens at its own z-index or at the
+highest modal layer already open), and only the top layer handles Tab and
+Escape, so one Escape closes one layer.
 
 **Data display** — `Table` (+ `TableHeader/Body/Row/Head/Cell`, staggered rows;
 use `containerClassName` to adapt its default card shell when embedded) ·

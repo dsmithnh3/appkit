@@ -48,7 +48,7 @@ const TONES: Record<NonNullable<SceneCharacter['status']>['tone'], { fg: string;
   // shout slightly: a warmer surface and a soft halo.
   waiting: { fg: 'text-warning', ring: 'ring-warning/60', glow: 'shadow-[0_0_14px_-2px_var(--color-warning)]' },
   trouble: { fg: 'text-danger', ring: 'ring-danger/60', glow: 'shadow-[0_0_14px_-4px_var(--color-danger)]' },
-  idle: { fg: 'text-fg-subtle', ring: 'ring-border/70' },
+  idle: { fg: 'text-fg-muted', ring: 'ring-border/70' },
 }
 
 /**

@@ -216,19 +216,19 @@ function RoleMultiSelect({ label, help, roles, selected, disabled, onToggle }: {
   return (
     <div className="space-y-1">
       <Label className="text-xs">{label}</Label>
-      {roles.length === 0 ? <p className="text-xs text-fg-subtle">No roles are available.</p> : (
+      {roles.length === 0 ? <p className="text-xs text-fg-muted">No roles are available.</p> : (
         <ul className="space-y-1">
           {roles.map((role) => (
             <li key={role.key}>
               <label className="flex cursor-pointer items-center gap-2 rounded-md border border-border px-3 py-1.5 text-sm hover:bg-surface-hover">
                 <Checkbox checked={selected.has(role.key)} disabled={disabled} onChange={() => onToggle(role.key)} />
-                <span className="flex-1 text-fg">{role.name}</span><span className="text-[10px] text-fg-subtle">{role.key}</span>
+                <span className="flex-1 text-fg">{role.name}</span><span className="text-[10px] text-fg-muted">{role.key}</span>
               </label>
             </li>
           ))}
         </ul>
       )}
-      <p className="text-[11px] text-fg-subtle">{help}</p>
+      <p className="text-[11px] text-fg-muted">{help}</p>
     </div>
   )
 }

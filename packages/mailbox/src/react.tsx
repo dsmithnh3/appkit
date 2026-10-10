@@ -267,7 +267,7 @@ function MailboxSwitcher({
 }) {
   return (
     <div className={cn('shrink-0 space-y-1.5', className)}>
-      <p className="px-0.5 text-[11px] font-semibold uppercase tracking-wide text-fg-subtle">
+      <p className="px-0.5 text-[11px] font-semibold uppercase tracking-wide text-fg-muted">
         {copy.mailbox}
       </p>
       <Select
@@ -414,7 +414,7 @@ function ThreadRow({
           <time
             suppressHydrationWarning
             dateTime={thread.at}
-            className="ml-auto shrink-0 text-[11px] whitespace-nowrap text-fg-subtle"
+            className="ml-auto shrink-0 text-[11px] whitespace-nowrap text-fg-muted"
           >
             {relativeTime(thread.at)}
           </time>
@@ -437,7 +437,7 @@ function AttachmentChip({ attachment, copy }: { attachment: MailAttachmentView; 
     >
       <Paperclip size={13} className="shrink-0 text-fg-subtle" aria-hidden />
       <span className="min-w-0 truncate font-medium text-fg">{attachment.filename}</span>
-      <span className="shrink-0 tabular-nums text-fg-subtle">{attachment.sizeLabel}</span>
+      <span className="shrink-0 tabular-nums text-fg-muted">{attachment.sizeLabel}</span>
       <Download
         size={13}
         aria-hidden
@@ -463,7 +463,7 @@ function MessageCard({ message, copy }: { message: MailMessageView; copy: Mailbo
         <time
           suppressHydrationWarning
           dateTime={message.at}
-          className="ml-auto shrink-0 text-[11px] whitespace-nowrap text-fg-subtle"
+          className="ml-auto shrink-0 text-[11px] whitespace-nowrap text-fg-muted"
         >
           {fullDate(message.at)}
         </time>
@@ -471,11 +471,11 @@ function MessageCard({ message, copy }: { message: MailMessageView; copy: Mailbo
       {message.bodyText.trim() ? (
         <p className="mt-2 text-sm leading-relaxed whitespace-pre-wrap text-fg">{message.bodyText}</p>
       ) : (
-        <p className="mt-2 text-sm text-fg-subtle">{copy.noBody}</p>
+        <p className="mt-2 text-sm text-fg-muted">{copy.noBody}</p>
       )}
       {message.attachments.length ? (
         <div className="mt-3 border-t border-border-subtle pt-2.5">
-          <p className="mb-1.5 text-[11px] font-semibold uppercase tracking-wide text-fg-subtle">
+          <p className="mb-1.5 text-[11px] font-semibold uppercase tracking-wide text-fg-muted">
             {copy.attachments}
           </p>
           <div className="flex flex-wrap gap-1.5">
@@ -547,7 +547,7 @@ function ReplyComposer({
       />
       {error ? <InlineError message={error} /> : null}
       <div className="flex items-center gap-2">
-        <span className="min-w-0 flex-1 truncate text-xs text-fg-subtle">{replyLabel ?? copy.reply}</span>
+        <span className="min-w-0 flex-1 truncate text-xs text-fg-muted">{replyLabel ?? copy.reply}</span>
         <Button type="submit" size="sm" disabled={busy || !text.trim()}>
           {busy ? <Loader2 size={14} className="animate-spin" /> : <Send size={14} />}
           {busy ? copy.sending : copy.send}
@@ -579,7 +579,7 @@ function ConversationPane({
           <Mail size={28} className="text-fg-subtle" />
         </div>
         <p className="text-sm font-medium text-fg-muted">{copy.emptyPane}</p>
-        <p className="max-w-xs text-xs text-fg-subtle">{copy.emptyPaneDescription}</p>
+        <p className="max-w-xs text-xs text-fg-muted">{copy.emptyPaneDescription}</p>
       </div>
     )
   }
@@ -867,7 +867,7 @@ export function MailboxInbox({
         <Inbox size={26} />
       </div>
       <p className="mt-3 text-sm font-medium text-fg-muted">{copy.emptyList}</p>
-      <p className="mt-1 text-xs text-fg-subtle">{copy.emptyListDescription}</p>
+      <p className="mt-1 text-xs text-fg-muted">{copy.emptyListDescription}</p>
     </div>
   )
 
@@ -887,7 +887,7 @@ export function MailboxInbox({
             </button>
             <div className="min-w-0 flex-1">
               <h1 className="truncate text-sm font-semibold text-fg">{copy[folder]}</h1>
-              <p className="text-[11px] text-fg-subtle">
+              <p className="text-[11px] text-fg-muted">
                 {total} {total === 1 ? copy.conversation : copy.conversations}
                 {unread ? ` · ${unread} ${copy.unread}` : ''}
               </p>

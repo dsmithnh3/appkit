@@ -304,3 +304,46 @@ test('a confirm or prompt raised over an open Dialog owns Tab and Escape; the Di
   assert.equal(await named, 'Q3 report')
   assert.equal(dialogClosed, 0)
 })
+
+function layerRoot(panel: Element): HTMLElement {
+  const root = panel.closest<HTMLElement>('[data-modal-layer]')
+  assert.ok(root, 'a modal layer marks its root with data-modal-layer')
+  return root
+}
+
+const pressEscape = () =>
+  act(async () => {
+    document.dispatchEvent(new dom.window.KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true }))
+  })
+
+test('Escape on a Dialog opened over a Drawer closes only the Dialog; the next Escape closes the Drawer', async (t) => {
+  const closed = { drawer: 0, dialog: 0 }
+  await render(t, React.createElement(Drawer, { open: true, onClose: () => closed.drawer++, title: 'Record', children: 'Body' }))
+  const dialog = await render(t, React.createElement(Dialog, { open: true, onClose: () => closed.dialog++, title: 'Edit' }, 'Body'))
+  await pressEscape()
+  assert.deepEqual(closed, { drawer: 0, dialog: 1 }, 'one Escape closes the top layer only')
+  await dialog()
+  await pressEscape()
+  assert.deepEqual(closed, { drawer: 1, dialog: 1 }, 'with the Dialog gone, the Drawer is the top layer')
+})
+
+test('a Drawer opened from an open Dialog paints above it and owns Tab and Escape', async (t) => {
+  const closed = { drawer: 0, dialog: 0 }
+  await render(t, React.createElement(Dialog, { open: true, onClose: () => closed.dialog++, title: 'Edit', footer: 'F' }, 'Body'))
+  await render(t, React.createElement(Drawer, { open: true, onClose: () => closed.drawer++, title: 'Record', children: 'Body' }))
+  const panels = Array.from(document.querySelectorAll<HTMLElement>('[role="dialog"]'))
+  const dialogPanel = panels.find((panel) => panel.textContent?.includes('Edit'))!
+  const drawerPanel = panels.find((panel) => panel.textContent?.includes('Record'))!
+  const dialogZ = Number(layerRoot(dialogPanel).getAttribute('data-modal-layer'))
+  const drawerRoot = layerRoot(drawerPanel)
+  const drawerZ = Number(drawerRoot.getAttribute('data-modal-layer'))
+  assert.equal(dialogZ, 58)
+  assert.ok(drawerZ >= dialogZ, `the drawer opens at the Dialog's layer or above (drawer ${drawerZ}, dialog ${dialogZ})`)
+  assert.equal(drawerRoot.style.zIndex, String(drawerZ), 'the raised layer is applied, not just recorded')
+  assert.ok(dialogPanel.compareDocumentPosition(drawerPanel) & dom.window.Node.DOCUMENT_POSITION_FOLLOWING, 'and comes later, so it paints on top at an equal layer')
+  dialogPanel.querySelector('button')!.focus()
+  pressTab()
+  assert.ok(drawerPanel.contains(document.activeElement), 'Tab goes to the layer on top')
+  await pressEscape()
+  assert.deepEqual(closed, { drawer: 1, dialog: 0 }, 'Escape closes the Drawer, not the Dialog under it')
+})

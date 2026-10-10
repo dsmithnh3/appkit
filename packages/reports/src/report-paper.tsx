@@ -49,7 +49,7 @@ export function ReportPaper({
       {organization ? <div className="text-base font-semibold">{organization}</div> : null}
       <h2 className="text-xl font-bold tracking-tight">{title}</h2>
       {periodPhrase ? <div className="text-sm text-fg-muted">{periodPhrase}</div> : null}
-      {note ? <div className="text-xs text-fg-subtle italic">{note}</div> : null}
+      {note ? <div className="text-xs text-fg-muted italic">{note}</div> : null}
     </header>
     {children}
   </article>

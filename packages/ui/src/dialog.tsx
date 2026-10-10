@@ -4,7 +4,8 @@ import * as React from 'react'
 import { createPortal } from 'react-dom'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { X } from 'lucide-react'
-import { FOCUSABLE_SELECTOR, trapTabKey } from './focus-trap'
+import { FOCUSABLE_SELECTOR, isTopModalLayer, trapTabKey } from './focus-trap'
+import { useModalLayer } from './modal-layer'
 import { cn } from './utils'
 
 export type DialogSize = 'sm' | 'md' | 'lg' | 'xl'
@@ -57,6 +58,7 @@ export function Dialog({
   const descriptionId = React.useId()
   const [mounted, setMounted] = React.useState(false)
   const panelRef = React.useRef<HTMLDivElement>(null)
+  const layer = useModalLayer<HTMLDivElement>(open, 58)
   const onCloseRef = React.useRef(onClose)
   React.useEffect(() => {
     onCloseRef.current = onClose
@@ -81,7 +83,9 @@ export function Dialog({
     }, 0)
     function onKey(e: KeyboardEvent) {
       if (e.key === 'Escape') {
+        // A popover or menu closes first, and a layer opened over this one owns Escape.
         if (document.querySelector('[data-ui-overlay]')) return
+        if (panelRef.current && !isTopModalLayer(panelRef.current)) return
         onCloseRef.current()
         return
       }
@@ -102,7 +106,7 @@ export function Dialog({
   return createPortal(
     <AnimatePresence>
       {open ? (
-        <div className="fixed inset-0 z-[58] flex items-center justify-center p-4">
+        <div ref={layer.ref} {...layer.attributes} className="fixed inset-0 z-[58] flex items-center justify-center p-4" style={layer.style}>
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

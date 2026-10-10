@@ -137,7 +137,7 @@ export function CardStudio({ initial, catalog, onSave, onRun, onDelete, onPublis
           <div className="flex flex-wrap gap-1.5">{FLAT_VISUALIZATIONS.map((key) => <button key={key} type="button" onClick={() => update((current) => ({ ...current, visualization: key }))} className={cn('flex items-center gap-1.5 rounded-md border px-3 py-2 text-sm transition [&_svg]:size-4', draft.visualization === key ? 'border-primary bg-primary-subtle text-primary' : 'border-border bg-surface text-fg-muted hover:bg-surface-hover hover:text-fg')}>{VIZ_ICONS[key]}{VISUALIZATIONS[key].label}</button>)}</div>
           <VisualizationSettingsPanel visualization={draft.visualization} settings={draft.visualizationSettings} result={preview} onChange={(visualizationSettings) => update((current) => ({ ...current, visualizationSettings }))} />
           <div className="relative min-h-[420px] rounded-xl border border-border bg-surface p-4 shadow-sm">{running ? <div className="absolute inset-0 z-10 grid place-items-center rounded-xl bg-surface/70 backdrop-blur-sm"><div className="flex items-center gap-2 text-sm text-fg-muted"><Loader2 className="size-4 animate-spin" />Running preview…</div></div> : null}{previewError ? <div role="alert" className="grid min-h-[380px] place-items-center px-8 text-center text-sm text-danger">{previewError}</div> : preview ? <div className="h-[380px]"><InsightResultView result={preview} visualization={draft.visualization} settings={draft.visualizationSettings} /></div> : null}</div>
-          {preview ? <div className="flex items-center justify-between text-xs text-fg-subtle"><span>{preview.rowCount} rows · {preview.durationMs}ms</span>{preview.truncated ? <Badge variant="warning">Truncated</Badge> : null}</div> : null}
+          {preview ? <div className="flex items-center justify-between text-xs text-fg-muted"><span>{preview.rowCount} rows · {preview.durationMs}ms</span>{preview.truncated ? <Badge variant="warning">Truncated</Badge> : null}</div> : null}
         </div>
       </div>
     </div>
@@ -162,7 +162,7 @@ function FormulaRow({ measure, fields, error, onChange, onError, onRemove }: { m
     if (parsed.ok) { onError(''); onChange({ ...measure, formula: parsed.expression }) }
     else onError(`${parsed.error} at character ${parsed.position + 1}`)
   }
-  return <div className="space-y-1.5 rounded-lg border border-border bg-bg-subtle p-2.5"><div className="flex gap-2"><Input value={measure.label ?? measure.alias} onChange={(event) => onChange({ ...measure, label: event.target.value, alias: event.target.value.toLowerCase().replace(/[^a-z0-9]+/g, '_') || 'custom_metric' })} aria-label="Formula label" className="h-9" /><IconButton label="Remove formula" onClick={onRemove} /></div><Textarea value={formula} onChange={(event) => parse(event.target.value)} aria-invalid={!!error} className="min-h-20 font-mono text-xs" aria-label="Formula expression" />{error ? <p className="text-xs text-danger">{error}</p> : <p className="text-[11px] text-fg-subtle">Use fields like [Created at] and functions such as count(), sum(), datediff(), and case().</p>}</div>
+  return <div className="space-y-1.5 rounded-lg border border-border bg-bg-subtle p-2.5"><div className="flex gap-2"><Input value={measure.label ?? measure.alias} onChange={(event) => onChange({ ...measure, label: event.target.value, alias: event.target.value.toLowerCase().replace(/[^a-z0-9]+/g, '_') || 'custom_metric' })} aria-label="Formula label" className="h-9" /><IconButton label="Remove formula" onClick={onRemove} /></div><Textarea value={formula} onChange={(event) => parse(event.target.value)} aria-invalid={!!error} className="min-h-20 font-mono text-xs" aria-label="Formula expression" />{error ? <p className="text-xs text-danger">{error}</p> : <p className="text-[11px] text-fg-muted">Use fields like [Created at] and functions such as count(), sum(), datediff(), and case().</p>}</div>
 }
 
 function FilterRow({ filter, fields, onChange, onRemove }: { filter: QueryFilter; fields: AnalyticsCatalog['sources'][number]['fields']; onChange: (filter: QueryFilter) => void; onRemove: () => void }) {
@@ -178,5 +178,5 @@ function VisualizationSettingsPanel({ visualization, settings, result, onChange 
 }
 
 function IconButton({ label, onClick }: { label: string; onClick: () => void }) {
-  return <button type="button" aria-label={label} onClick={onClick} className="grid size-9 shrink-0 place-items-center rounded-md text-fg-subtle transition hover:bg-surface-hover hover:text-danger"><Trash2 size={14} /></button>
+  return <button type="button" aria-label={label} onClick={onClick} className="grid size-9 shrink-0 place-items-center rounded-md text-fg-muted transition hover:bg-surface-hover hover:text-danger"><Trash2 size={14} /></button>
 }

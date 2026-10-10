@@ -63,7 +63,7 @@ function themeFor(density: PdfDensity, primary: string): PdfTheme {
     headerBorder: hexColor('border-strong'),
     rowBorder: hexColor('border-subtle'),
     zebra: hexColor('bg-subtle'),
-    empty: hexColor('fg-subtle'),
+    empty: hexColor('fg-muted'),
     font: 'Helvetica',
     fontBold: 'Helvetica-Bold',
     body: s.body,

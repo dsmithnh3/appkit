@@ -19,7 +19,7 @@ export function ActivityList({ events }: { events: AuditEventRecord[] }) {
             </div>
             <p className="mt-1 text-xs text-fg-muted">{event.actorName ?? 'System'}{event.requestId ? ` · Request ${event.requestId}` : ''}</p>
           </div>
-          <time className="whitespace-nowrap text-xs text-fg-subtle" dateTime={event.at.toISOString()}>{event.at.toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' })}</time>
+          <time className="whitespace-nowrap text-xs text-fg-muted" dateTime={event.at.toISOString()}>{event.at.toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' })}</time>
         </li>
       ))}
     </ol>

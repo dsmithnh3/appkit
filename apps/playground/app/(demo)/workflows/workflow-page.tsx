@@ -127,7 +127,7 @@ function ApprovalRecord() {
 function RecordField({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div>
-      <dt className="text-xs font-medium uppercase tracking-wide text-fg-subtle">{label}</dt>
+      <dt className="text-xs font-medium uppercase tracking-wide text-fg-muted">{label}</dt>
       <dd className="mt-1 text-sm text-fg">{children}</dd>
     </div>
   )

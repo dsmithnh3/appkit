@@ -178,7 +178,7 @@ export function MultiSelect({
                   disabled={option.disabled}
                   onClick={() => toggle(option)}
                   className={cn(
-                    'flex w-full items-start gap-2.5 rounded-md px-2.5 py-2 text-left text-sm transition-colors',
+                    'flex w-full items-start gap-2.5 rounded-md px-2.5 py-2 text-left text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring',
                     'hover:bg-surface-hover disabled:pointer-events-none disabled:opacity-40',
                     checked && 'bg-primary-subtle',
                   )}

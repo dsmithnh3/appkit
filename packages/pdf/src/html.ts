@@ -114,7 +114,7 @@ export async function renderHtmlDocumentPdf(input: HtmlDocumentPdfInput): Promis
     ? `<div style="font-size:8px;width:100%;padding:0 ${m};color:${color('fg-muted')};">${pageCounters(input.headerHtml)}</div>`
     : `<div></div>`
   const footerTemplate = input.footerHtml
-    ? `<div style="font-size:8px;width:100%;padding:0 ${m};color:${color('fg-subtle')};text-align:center;">${pageCounters(input.footerHtml)}</div>`
+    ? `<div style="font-size:8px;width:100%;padding:0 ${m};color:${color('fg-muted')};text-align:center;">${pageCounters(input.footerHtml)}</div>`
     : `<div></div>`
   const browser = await getBrowser()
   const page = await newPdfPage(browser)

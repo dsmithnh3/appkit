@@ -7,7 +7,7 @@ export const FOCUSABLE_SELECTOR =
  * <body> in the order they open, so a confirm raised from a Dialog, or a Dialog
  * opened from a Drawer, comes after the layer it sits on.
  */
-function isTopModalLayer(panel: HTMLElement): boolean {
+export function isTopModalLayer(panel: HTMLElement): boolean {
   const layers = document.querySelectorAll('[aria-modal="true"]')
   const top = layers[layers.length - 1]
   return !top || top === panel || top.contains(panel)

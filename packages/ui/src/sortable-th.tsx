@@ -48,7 +48,7 @@ function SortLink({
     <a
       href={href}
       onClick={navClick}
-      className={cn('inline-flex items-center gap-1.5 hover:text-fg', align === 'right' && 'flex-row-reverse')}
+      className={cn('inline-flex items-center gap-1.5 rounded-sm hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg', align === 'right' && 'flex-row-reverse')}
     >
       {children}
       {active ? (

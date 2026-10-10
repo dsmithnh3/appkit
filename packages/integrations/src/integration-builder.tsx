@@ -659,7 +659,7 @@ function RowList({
             onClick={() =>
               setRows((current) => current.filter((entry) => entry.id !== row.id))
             }
-            className="rounded p-1.5 text-fg-subtle hover:bg-danger-subtle hover:text-danger"
+            className="rounded p-1.5 text-fg-muted hover:bg-danger-subtle hover:text-danger"
             title="Remove row"
             aria-label="Remove row"
           >

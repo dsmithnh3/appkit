@@ -544,7 +544,7 @@ function RoleMembersManager({
                     <div className="truncate text-xs text-fg-muted">{member.email}</div>
                     <div className="mt-0.5 text-xs text-fg-muted">{scopeLabel(assignment.scope)}</div>
                   </div>
-                  {canManage && !locked ? <div className="flex shrink-0 gap-1"><Button variant="ghost" size="sm" onClick={() => setEditing(editing === assignment.id ? null : assignment.id)}>{editing === assignment.id ? 'Cancel' : 'Change scope'}</Button><Button variant="ghost" size="sm" className="text-danger" onClick={() => void confirmDialog({ message: `Remove ${member.name} from ${role.name}?`, confirmLabel: 'Remove assignment', tone: 'danger' }).then((confirmed) => confirmed ? onRemove(assignment.id) : false)}>Remove</Button></div> : <span className="text-xs text-fg-subtle">Protected</span>}
+                  {canManage && !locked ? <div className="flex shrink-0 gap-1"><Button variant="ghost" size="sm" onClick={() => setEditing(editing === assignment.id ? null : assignment.id)}>{editing === assignment.id ? 'Cancel' : 'Change scope'}</Button><Button variant="ghost" size="sm" className="text-danger" onClick={() => void confirmDialog({ message: `Remove ${member.name} from ${role.name}?`, confirmLabel: 'Remove assignment', tone: 'danger' }).then((confirmed) => confirmed ? onRemove(assignment.id) : false)}>Remove</Button></div> : <span className="text-xs text-fg-muted">Protected</span>}
                 </div>
                 {editing === assignment.id ? <AssignmentScopeEditor assignmentId={assignment.id} initial={assignment.scope} options={scopeOptions} onSave={async (next) => { if (await onUpdateScope(assignment.id, next)) setEditing(null) }} /> : null}
               </li>
@@ -567,7 +567,7 @@ function RoleTabs({ value, onChange, extensions }: { value: RoleTab; onChange: (
 }
 
 function Metric({ label, value, mono = false }: { label: string; value: string; mono?: boolean }) {
-  return <div><dt className="text-xs font-medium uppercase tracking-wide text-fg-subtle">{label}</dt><dd className={cn('mt-1 text-sm font-semibold text-fg', mono && 'font-mono')}>{value}</dd></div>
+  return <div><dt className="text-xs font-medium uppercase tracking-wide text-fg-muted">{label}</dt><dd className={cn('mt-1 text-sm font-semibold text-fg', mono && 'font-mono')}>{value}</dd></div>
 }
 
 function scopeLabel(scope: RoleScope): string {
@@ -597,7 +597,7 @@ function roleCan(role: RoleRecord, capability: keyof NonNullable<RoleRecord['cap
   if (capability === 'updateKey' || capability === 'delete') return !role.isBuiltIn
   return true
 }
-function RoleTypeFilters({ value, counts, onChange }: { value: 'built_in' | 'custom' | ''; counts: { built_in: number; custom: number }; onChange: (value: 'built_in' | 'custom' | '') => void }) { const filters = [{ value: '' as const, label: 'All', count: counts.built_in + counts.custom }, { value: 'built_in' as const, label: 'Built-in', count: counts.built_in }, { value: 'custom' as const, label: 'Custom', count: counts.custom }]; return <div className="flex max-w-full overflow-x-auto rounded-lg border border-border bg-surface p-1" aria-label="Filter roles by type">{filters.map((filter) => <button key={filter.value || 'all'} type="button" aria-pressed={value === filter.value} onClick={() => onChange(filter.value)} className={cn('flex shrink-0 items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium transition-colors', value === filter.value ? 'bg-primary-subtle text-primary' : 'text-fg-muted hover:bg-surface-hover hover:text-fg')}><span>{filter.label}</span><span className="tabular-nums text-fg-subtle">{filter.count}</span></button>)}</div> }
+function RoleTypeFilters({ value, counts, onChange }: { value: 'built_in' | 'custom' | ''; counts: { built_in: number; custom: number }; onChange: (value: 'built_in' | 'custom' | '') => void }) { const filters = [{ value: '' as const, label: 'All', count: counts.built_in + counts.custom }, { value: 'built_in' as const, label: 'Built-in', count: counts.built_in }, { value: 'custom' as const, label: 'Custom', count: counts.custom }]; return <div className="flex max-w-full overflow-x-auto rounded-lg border border-border bg-surface p-1" aria-label="Filter roles by type">{filters.map((filter) => <button key={filter.value || 'all'} type="button" aria-pressed={value === filter.value} onClick={() => onChange(filter.value)} className={cn('flex shrink-0 items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium transition-colors', value === filter.value ? 'bg-primary-subtle text-primary' : 'text-fg-muted hover:bg-surface-hover hover:text-fg')}><span>{filter.label}</span><span className="tabular-nums text-fg-muted">{filter.count}</span></button>)}</div> }
 
 function memberCan(member: MemberRecord, capability: keyof NonNullable<MemberRecord['capabilities']>): boolean {
   if (member.capabilities) return Boolean(member.capabilities[capability])

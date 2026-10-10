@@ -169,7 +169,7 @@ function CatalogCard({
       <p className="mt-2.5 line-clamp-2 text-xs text-fg-muted">
         {item.description}
       </p>
-      <p className="mt-auto pt-2 text-[11px] text-fg-subtle">{item.detail}</p>
+      <p className="mt-auto pt-2 text-[11px] text-fg-muted">{item.detail}</p>
       <div className="mt-3 flex justify-end border-t border-border-subtle pt-3">
         {item.added && item.addedHref && open ? (
           linkRender ? (

@@ -947,7 +947,7 @@ export function AgentMessageTimestamp({ value }: { value: string }) {
       aria-label={labels.full}
       tabIndex={0}
       suppressHydrationWarning
-      className="appkit-agent-message-timestamp mt-1 block w-fit rounded-sm text-[0.6875rem] leading-4 tabular-nums text-fg-subtle"
+      className="appkit-agent-message-timestamp mt-1 block w-fit rounded-sm text-[0.6875rem] leading-4 tabular-nums text-fg-muted"
     >
       {labels.compact}
     </time>
@@ -1319,7 +1319,7 @@ function AgentToolActivity({ parts, labels, toolLabels }: { parts: AgentToolPart
   const errored = parts.some(agentToolErrored)
   const count = parts.length
   const status = running ? labels.working : `${count} ${count === 1 ? labels.step : labels.steps}`
-  return <div className="text-sm"><button type="button" onClick={() => setOpen((value) => !value)} aria-expanded={open} className="flex h-7 max-w-full items-center gap-1.5 rounded-md px-1.5 text-left text-xs text-fg-muted transition-colors hover:bg-surface-hover hover:text-fg"><span className={cn('size-1.5 shrink-0 rounded-full', running ? 'animate-pulse bg-primary' : errored ? 'bg-danger' : 'bg-success')} /><span className="shrink-0 font-medium">{status}</span><span aria-hidden className="text-fg-subtle">·</span><span className="min-w-0 truncate">{toolLabels?.[latestName] ?? latestName.replaceAll('_', ' ')}</span><ChevronRight size={12} className={cn('shrink-0 text-fg-subtle transition-transform', open && 'rotate-90')} /></button>{open ? <div className="mt-1.5 space-y-1.5 border-l border-border pl-2">{parts.map((part, index) => { const name = agentToolName(part); return <AgentToolCard key={`${name}-${index}`} name={name} label={toolLabels?.[name]} state={String(part.state ?? 'output-available')} input={part.input} output={part.output} inputLabel={labels.input} resultLabel={labels.result} /> })}</div> : null}</div>
+  return <div className="text-sm"><button type="button" onClick={() => setOpen((value) => !value)} aria-expanded={open} className="flex h-7 max-w-full items-center gap-1.5 rounded-md px-1.5 text-left text-xs text-fg-muted transition-colors hover:bg-surface-hover hover:text-fg"><span className={cn('size-1.5 shrink-0 rounded-full', running ? 'animate-pulse bg-primary' : errored ? 'bg-danger' : 'bg-success')} /><span className="shrink-0 font-medium">{status}</span><span aria-hidden className="text-fg-muted">·</span><span className="min-w-0 truncate">{toolLabels?.[latestName] ?? latestName.replaceAll('_', ' ')}</span><ChevronRight size={12} className={cn('shrink-0 text-fg-subtle transition-transform', open && 'rotate-90')} /></button>{open ? <div className="mt-1.5 space-y-1.5 border-l border-border pl-2">{parts.map((part, index) => { const name = agentToolName(part); return <AgentToolCard key={`${name}-${index}`} name={name} label={toolLabels?.[name]} state={String(part.state ?? 'output-available')} input={part.input} output={part.output} inputLabel={labels.input} resultLabel={labels.result} /> })}</div> : null}</div>
 }
 
 export function ChatMarkdown({ children }: { children: string }) {
@@ -1336,5 +1336,5 @@ export function AgentToolCard({ name, label, state, input, output, inputLabel = 
 function AgentToolDetail({ label, value }: { label: string; value: unknown }) {
   let text: string
   try { text = JSON.stringify(value, null, 2) } catch { text = String(value) }
-  return <div className="min-w-0 max-w-full overflow-hidden"><div className="mb-1 text-[11px] font-semibold tracking-wide text-fg-subtle uppercase">{label}</div><pre className="max-h-60 max-w-full overflow-x-hidden overflow-y-auto rounded-md bg-surface p-2 text-xs leading-relaxed whitespace-pre-wrap break-words text-fg [overflow-wrap:anywhere] ring-1 ring-border">{text}</pre></div>
+  return <div className="min-w-0 max-w-full overflow-hidden"><div className="mb-1 text-[11px] font-semibold tracking-wide text-fg-muted uppercase">{label}</div><pre className="max-h-60 max-w-full overflow-x-hidden overflow-y-auto rounded-md bg-surface p-2 text-xs leading-relaxed whitespace-pre-wrap break-words text-fg [overflow-wrap:anywhere] ring-1 ring-border">{text}</pre></div>
 }

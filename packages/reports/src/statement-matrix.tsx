@@ -199,7 +199,7 @@ export function StatementMatrixTable<TDrillTarget>({
         </tr> : null}
         <tr className="border-b border-border-strong">
           <th className="min-w-64 py-2 pr-4 text-left font-semibold text-fg-muted" />
-          {columns.map((column, index) => <th key={column.key} className={cn('py-2 pl-4 text-right font-semibold whitespace-nowrap', column.kind === 'amount' ? 'text-fg-muted' : 'text-fg-subtle', groupStart.has(index) && 'border-l border-border')}>{column.label}</th>)}
+          {columns.map((column, index) => <th key={column.key} className={cn('py-2 pl-4 text-right font-semibold whitespace-nowrap', 'text-fg-muted', groupStart.has(index) && 'border-l border-border')}>{column.label}</th>)}
         </tr>
       </thead>
       <tbody>{lines.map((line, lineIndex) => {
@@ -210,7 +210,7 @@ export function StatementMatrixTable<TDrillTarget>({
           type="button"
           onClick={() => toggle(lineIndex)}
           aria-label={isCollapsed ? labels?.expandSection?.(line.label) ?? `Expand ${line.label}` : labels?.collapseSection?.(line.label) ?? `Collapse ${line.label}`}
-          className="mr-0.5 inline-flex size-4 shrink-0 items-center justify-center rounded text-fg-subtle hover:bg-surface-hover hover:text-fg"
+          className="mr-0.5 inline-flex size-4 shrink-0 items-center justify-center rounded text-fg-muted hover:bg-surface-hover hover:text-fg"
         >{isCollapsed ? <ChevronRight size={13} /> : <ChevronDown size={13} />}</button> : <span className="mr-0.5 inline-block size-4 shrink-0" />
 
         if (line.kind === 'section') return <tr key={line.key ?? lineIndex}>
@@ -220,7 +220,7 @@ export function StatementMatrixTable<TDrillTarget>({
         const subtotal = line.kind === 'subtotal'
         const total = line.kind === 'total'
         const weight = total || line.emphasis ? 'font-semibold text-fg' : subtotal ? 'font-medium' : ''
-        const rowContent = <>{line.number ? <span className="mr-1.5 font-mono text-xs text-fg-subtle">{line.number}</span> : null}{line.label}</>
+        const rowContent = <>{line.number ? <span className="mr-1.5 font-mono text-xs text-fg-muted">{line.number}</span> : null}{line.label}</>
         return <tr key={line.key ?? lineIndex} className={cn((subtotal || total) && '[&>td]:border-t [&>td]:border-border-strong', total && '[&>td]:border-b-[3px] [&>td]:border-double [&>td]:border-border-strong')}>
           <td className={cn('py-1 pr-4', weight, line.depth === 1 && 'pl-6', line.depth === 2 && 'pl-10', line.depth >= 3 && 'pl-14')}>
             <span className="inline-flex items-baseline">{line.kind === 'account' ? chevron : null}{line.kind === 'account' && renderRowLink ? renderRowLink(line, rowContent) : line.kind === 'account' && onOpenRow ? <button type="button" onClick={() => onOpenRow(line)} className="hover:text-primary hover:underline">{rowContent}</button> : rowContent}</span>

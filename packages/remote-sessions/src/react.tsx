@@ -178,7 +178,7 @@ function semanticTerminalTheme(host: HTMLElement): ITheme {
     foreground: swatch('text-fg'),
     cursor: swatch('text-fg'),
     selectionBackground: swatch('bg-info-subtle', 'backgroundColor'),
-    black: swatch('text-fg-subtle'),
+    black: swatch('text-fg-muted'),
     red: swatch('text-danger'),
     green: swatch('text-success'),
     yellow: swatch('text-warning'),

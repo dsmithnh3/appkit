@@ -248,7 +248,7 @@ export function PlatformUsersAdmin({
                 )}
               >
                 <span>{filter.label}</span>
-                <span className="tabular-nums text-fg-subtle">{counts[filter.value]}</span>
+                <span className="tabular-nums text-fg-muted">{counts[filter.value]}</span>
               </button>
             ))}
           </div>
@@ -1220,7 +1220,7 @@ function AccessRow({
 function Metric({ label, value, mono = false }: { label: string; value: string; mono?: boolean }) {
   return (
     <div>
-      <dt className="text-xs font-medium uppercase tracking-wide text-fg-subtle">{label}</dt>
+      <dt className="text-xs font-medium uppercase tracking-wide text-fg-muted">{label}</dt>
       <dd className={cn('mt-1 truncate text-sm font-semibold text-fg', mono && 'font-mono text-xs')}>{value}</dd>
     </div>
   )

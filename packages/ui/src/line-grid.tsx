@@ -200,7 +200,7 @@ export function LineGrid<Row extends Record<string, unknown>>({
                       setMenuRow(i)
                       menu.openBelow(e.currentTarget)
                     }}
-                    className="group flex size-7 items-center justify-center rounded text-fg-muted transition-colors hover:bg-surface-hover hover:text-fg"
+                    className="group flex size-7 items-center justify-center rounded text-fg-muted transition-colors hover:bg-surface-hover hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
                   >
                     <span className="text-[11px] tabular-nums group-hover:hidden">{i + 1}</span>
                     <GripVertical size={13} className="hidden group-hover:block" />

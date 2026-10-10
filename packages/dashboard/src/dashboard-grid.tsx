@@ -140,7 +140,7 @@ export function DashboardGrid({
       </div>
     </div> : null}
     {error ? <div role="alert" className="rounded-lg border border-danger/30 bg-danger-subtle px-3 py-2 text-sm text-danger">{error}</div> : null}
-    {!layout.length ? <div className="grid min-h-64 place-items-center rounded-xl border border-dashed border-border bg-bg-subtle text-sm text-fg-subtle"><div className="text-center"><LayoutGrid className="mx-auto mb-2 size-6" />{emptyLabel}</div></div> :
+    {!layout.length ? <div className="grid min-h-64 place-items-center rounded-xl border border-dashed border-border bg-bg-subtle text-sm text-fg-muted"><div className="text-center"><LayoutGrid className="mx-auto mb-2 size-6" />{emptyLabel}</div></div> :
       <div ref={measureRef} className="min-w-0">
         <Responsive
           className="appkit-dashboard-layout"
@@ -169,7 +169,7 @@ export function DashboardGrid({
 }
 
 function MissingCard({ id }: { id: string }) {
-  return <div className="grid h-full place-items-center rounded-xl border border-dashed border-border bg-bg-subtle px-3 text-center text-xs text-fg-subtle">Card unavailable: {id}</div>
+  return <div className="grid h-full place-items-center rounded-xl border border-dashed border-border bg-bg-subtle px-3 text-center text-xs text-fg-muted">Card unavailable: {id}</div>
 }
 
 function DashboardLibrary({ open, onClose, items, present, categoryLabels, onAdd }: { open: boolean; onClose: () => void; items: DashboardLibraryItem[]; present: Set<string>; categoryLabels?: Record<string, string>; onAdd: (item: DashboardLibraryItem) => void }) {
@@ -187,7 +187,7 @@ function DashboardLibrary({ open, onClose, items, present, categoryLabels, onAdd
     <div className="space-y-6">
       <label className="relative block"><span className="sr-only">Search widgets</span><Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-fg-subtle" /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search widgets…" className="h-9 w-full rounded-lg border border-border bg-surface pl-9 pr-3 text-sm text-fg outline-none transition focus:border-primary focus:ring-2 focus:ring-ring" /></label>
       {categories.map(([category, categoryItems]) => <section key={category} className="space-y-2">
-        <h3 className="px-1 text-xs font-semibold uppercase tracking-wider text-fg-subtle">{categoryLabels?.[category] ?? category}</h3>
+        <h3 className="px-1 text-xs font-semibold uppercase tracking-wider text-fg-muted">{categoryLabels?.[category] ?? category}</h3>
         <div className="space-y-1.5">{categoryItems.map((item) => {
           const added = present.has(item.id)
           return <button key={item.id} type="button" disabled={added} onClick={() => onAdd(item)} className="group flex w-full items-start gap-3 rounded-lg border border-border bg-surface px-3 py-2.5 text-left transition hover:border-primary/50 hover:bg-surface-hover disabled:opacity-45">
@@ -195,7 +195,7 @@ function DashboardLibrary({ open, onClose, items, present, categoryLabels, onAdd
           </button>
         })}</div>
       </section>)}
-      {!categories.length ? <div className="grid min-h-32 place-items-center rounded-lg border border-dashed border-border text-sm text-fg-subtle">No matching widgets.</div> : null}
+      {!categories.length ? <div className="grid min-h-32 place-items-center rounded-lg border border-dashed border-border text-sm text-fg-muted">No matching widgets.</div> : null}
     </div>
   </Drawer>
 }

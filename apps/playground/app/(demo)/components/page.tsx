@@ -83,7 +83,7 @@ function Swatch({ label, className, sub }: { label: string; className: string; s
     <div className="space-y-1.5">
       <div className={`h-14 rounded-lg border border-border ${className}`} />
       <div className="text-xs font-medium">{label}</div>
-      {sub ? <div className="font-mono text-[11px] text-fg-subtle">{sub}</div> : null}
+      {sub ? <div className="font-mono text-[11px] text-fg-muted">{sub}</div> : null}
     </div>
   )
 }
@@ -639,7 +639,7 @@ export default function ComponentGallery() {
         </Section>
 
         <Separator />
-        <footer className="reveal pb-4 text-sm text-fg-subtle">
+        <footer className="reveal pb-4 text-sm text-fg-muted">
           Built with appkit — tokenized, animated, themeable.
         </footer>
       </main>

@@ -3,7 +3,8 @@
 import * as React from 'react'
 import { createPortal } from 'react-dom'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import { FOCUSABLE_SELECTOR, trapTabKey } from './focus-trap'
+import { FOCUSABLE_SELECTOR, isTopModalLayer, trapTabKey } from './focus-trap'
+import { useModalLayer } from './modal-layer'
 import { cn } from './utils'
 
 // Z-INDEX SCALE (single source of truth for the ecosystem)
@@ -17,6 +18,11 @@ import { cn } from './utils'
 //   floating UI  : z-[60] — Popover, Select dropdown, Tooltip, confirm/prompt dialogs
 //   context menu : z-[70]
 //   toast        : z-[80]
+//
+// Modal layers (drawer, dialog) open at their base, or at the highest modal layer
+// already open when that is higher (`useModalLayer`), so a Drawer opened from a
+// Dialog paints above it. Equal layers paint in open order, the order Tab and
+// Escape use to find the top layer.
 //
 // The drawer's top edge is `--drawer-top` (default 0). An app shell sets it to
 // its header height so drawers sit beneath the persistent header:
@@ -139,6 +145,7 @@ export function Drawer({
   }, [initialFullscreen, open])
 
   const panelRef = React.useRef<HTMLElement>(null)
+  const layer = useModalLayer<HTMLDivElement>(open, stacked ? 55 : 50)
   const onCloseRef = React.useRef(onClose)
   React.useEffect(() => {
     onCloseRef.current = onClose
@@ -150,8 +157,11 @@ export function Drawer({
     if (!open) return
     function onKey(e: KeyboardEvent) {
       if (e.key !== 'Escape') return
+      // A popover or menu closes first, and a layer opened over this one (a nested
+      // drawer, a Dialog) owns Escape.
       if (document.querySelector('[data-ui-overlay]')) return
       if (!stacked && document.querySelector('[data-drawer-layer="nested"]')) return
+      if (panelRef.current && !isTopModalLayer(panelRef.current)) return
       onCloseRef.current()
     }
     document.addEventListener('keydown', onKey)
@@ -219,7 +229,9 @@ export function Drawer({
       {mounted && open ? (
         <div
           key="drawer"
+          ref={layer.ref}
           data-drawer-layer={stacked ? 'nested' : 'base'}
+          {...layer.attributes}
           className={cn(
             'fixed inset-x-0 bottom-0 top-[var(--drawer-top,0px)]',
             stacked ? 'z-[55]' : 'z-50',
@@ -229,7 +241,7 @@ export function Drawer({
           // z-index. Naming the drawer gives it its own top-layer group,
           // stacked over the page group, so the page can never flash across
           // an open drawer mid-navigation.
-          style={{ viewTransitionName: stacked ? 'appkit-drawer-nested' : 'appkit-drawer' }}
+          style={{ viewTransitionName: stacked ? 'appkit-drawer-nested' : 'appkit-drawer', ...layer.style }}
         >
           <motion.div
             initial={{ opacity: 0 }}

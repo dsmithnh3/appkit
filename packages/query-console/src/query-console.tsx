@@ -485,14 +485,14 @@ export function QueryConsole({
               ) : result ? (
                 <>
                   <span className="font-medium text-fg tabular-nums">{labels.rowCount(result.rowCount)}</span>
-                  <span className="flex items-center gap-1 text-fg-subtle tabular-nums">
+                  <span className="flex items-center gap-1 text-fg-muted tabular-nums">
                     <Clock size={12} /> {result.durationMs}ms
                   </span>
                   {result.truncated ? <Badge variant="warning">{labels.truncated(maxRows)}</Badge> : null}
                   {ranSelection ? <Badge variant="outline">{labels.ranSelection}</Badge> : null}
                 </>
               ) : (
-                <span className="text-fg-subtle">{labels.resultsIdle}</span>
+                <span className="text-fg-muted">{labels.resultsIdle}</span>
               )}
             </div>
             {result && result.rowCount > 0 ? (
@@ -533,7 +533,7 @@ export function QueryConsole({
                 </div>
                 <div>
                   <p className="text-sm font-medium text-fg-muted">{labels.runToSeeResults}</p>
-                  <p className="mt-0.5 text-xs text-fg-subtle">{labels.runHint}</p>
+                  <p className="mt-0.5 text-xs text-fg-muted">{labels.runHint}</p>
                 </div>
               </div>
             )}

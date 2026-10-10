@@ -31,7 +31,7 @@ export function ReportFilterTree({ entity, group, onChange, depth = 0 }: { entit
   }
   return <div className={depth === 0 ? 'space-y-2 rounded-lg border border-border p-3' : 'space-y-2 rounded-lg border border-border bg-bg-subtle p-3'}>
     <div className="flex items-center gap-2"><span className="text-xs text-fg-muted">Match</span><SearchSelect className="w-48" triggerClassName="h-8" value={group.combinator} onChange={(combinator) => onChange({ ...group, combinator: combinator as 'and' | 'or' })} options={[{ value: 'and', label: 'all conditions' }, { value: 'or', label: 'any condition' }]} ariaLabel="Match" /></div>
-    <div className="space-y-2">{group.rules.map((rule, index) => isGroup(rule) ? <ReportFilterTree key={index} entity={entity} group={rule} depth={depth + 1} onChange={(next) => setRule(index, next)} /> : <RuleRow key={index} entity={entity} rule={rule} onChange={(next) => setRule(index, next)} onRemove={() => remove(index)} />)}{group.rules.length === 0 ? <p className="text-xs text-fg-subtle">No conditions.</p> : null}</div>
+    <div className="space-y-2">{group.rules.map((rule, index) => isGroup(rule) ? <ReportFilterTree key={index} entity={entity} group={rule} depth={depth + 1} onChange={(next) => setRule(index, next)} /> : <RuleRow key={index} entity={entity} rule={rule} onChange={(next) => setRule(index, next)} onRemove={() => remove(index)} />)}{group.rules.length === 0 ? <p className="text-xs text-fg-muted">No conditions.</p> : null}</div>
     <div className="flex gap-2"><Button type="button" variant="outline" size="sm" onClick={addRule}><Plus size={14} />Add condition</Button>{depth < 3 ? <Button type="button" variant="ghost" size="sm" onClick={() => onChange({ ...group, rules: [...group.rules, { combinator: 'and', rules: [] }] })}><Plus size={14} />Add group</Button> : null}</div>
   </div>
 }
@@ -60,7 +60,7 @@ function RuleRow({ entity, rule, onChange, onRemove }: { entity: ReportEntity; r
       : operator?.needsValue === 'one' ? <Input className="h-8 w-40" type={column?.kind === 'date' ? 'date' : column?.kind === 'number' || column?.kind === 'money' ? 'number' : 'text'} value={typeof rule.value === 'string' || typeof rule.value === 'number' ? String(rule.value) : ''} placeholder="Value" onChange={(event) => onChange({ ...rule, value: event.target.value })} />
       : operator?.needsValue === 'list' && options.length ? <MultiSelect value={Array.isArray(rule.value) ? rule.value.map(String) : []} options={options} onChange={(next) => onChange({ ...rule, value: next })} />
       : operator?.needsValue === 'list' ? <TokenInput value={Array.isArray(rule.value) ? rule.value.map(String) : []} onChange={(next) => onChange({ ...rule, value: next })} />
-      : <span className="text-xs text-fg-subtle">No value</span>}
+      : <span className="text-xs text-fg-muted">No value</span>}
     <Button type="button" variant="ghost" size="sm" onClick={onRemove} aria-label="Remove condition"><Trash2 size={14} /></Button>
   </div>
 }

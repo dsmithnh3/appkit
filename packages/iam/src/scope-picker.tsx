@@ -138,7 +138,7 @@ function MultiPicker({
             )
           })}
         </div>
-      ) : <p className="text-xs text-fg-subtle">No selection yet.</p>}
+      ) : <p className="text-xs text-fg-muted">No selection yet.</p>}
     </div>
   )
 }

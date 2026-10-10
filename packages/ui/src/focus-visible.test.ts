@@ -7,6 +7,12 @@ import { renderToStaticMarkup } from 'react-dom/server'
 import { AccountMenu } from './account-menu'
 import { AppShell } from './app-shell'
 import { AppSidebar } from './app-sidebar'
+import { FileUploader } from './file-uploader'
+import { FilterChips } from './filter-chips'
+import { LineGrid } from './line-grid'
+import { ListNavProvider } from './list-nav'
+import { Pagination } from './list-pagination'
+import { SearchInput } from './list-search-input'
 import { MobileTabBar } from './mobile-tab-bar'
 import { NavigationConfigEditor } from './navigation-config-editor'
 import { NotificationsBell } from './notifications-bell'
@@ -14,6 +20,8 @@ import { OrgChart } from './org-chart'
 import { PagedTable } from './paged-table'
 import { RecordList } from './record-list'
 import { AdminHub, SettingsShell } from './settings-layout'
+import { SidebarNav } from './sidebar-nav'
+import { SortableTh, SortTh } from './sortable-th'
 import { SubtabNav } from './subtab-nav'
 import { ThemeProvider, ThemeToggle } from './theme'
 import { TopNav } from './top-nav'
@@ -91,11 +99,51 @@ const surfaces: Record<string, React.ReactElement> = {
     empty: 'Nothing here',
     rowKey: (row) => row.id,
   }),
+  Pagination: React.createElement(Pagination, { basePath: '/invoices', currentParams: {}, total: 60, page: 2, perPage: 20 }),
+  SortableTh: React.createElement(SortableTh, { basePath: '/invoices', currentParams: {}, column: 'total', active: true, dir: 'asc', children: 'Total' }),
+  SortTh: React.createElement(SortTh, { basePath: '/invoices', currentParams: {}, column: 'total', sort: 'name', dir: 'asc', children: 'Total' }),
+  FilterChips: React.createElement(FilterChips, {
+    basePath: '/invoices',
+    currentParams: {},
+    paramKey: 'status',
+    label: 'Status',
+    options: [{ value: 'open', label: 'Open' }],
+  }),
+  LineGrid: React.createElement(LineGrid<{ item: string }>, {
+    columns: [{ key: 'item', label: 'Item', width: '1fr', type: 'text' }],
+    rows: [{ item: 'Pipe' }],
+    onRowsChange: () => {},
+    emptyRow: () => ({ item: '' }),
+  }),
+  'SearchInput (with a query, so Clear shows)': React.createElement(ListNavProvider, {
+    value: { pathname: '/invoices', search: 'q=pipe', replace: () => {}, push: () => {} },
+    children: React.createElement(SearchInput),
+  }),
+  FileUploader: React.createElement(FileUploader, {
+    requestUploadAction: async () => ({ ok: false, error: 'offline' }),
+    finalizeUploadAction: async () => ({ ok: false, error: 'offline' }),
+    onUploaded: () => {},
+  } as never),
+  'SidebarNav (a subgroup with its own page)': React.createElement(SidebarNav, {
+    groups: [
+      {
+        // Subgroups render inside a workspace group (one with an id).
+        id: 'work',
+        label: 'Work',
+        items: [
+          { href: '/invoices/open', label: 'Open', subgroup: 'Invoices', subgroupHref: '/invoices' },
+          { href: '/invoices/paid', label: 'Paid', subgroup: 'Invoices', subgroupHref: '/invoices' },
+        ],
+      },
+    ],
+    pathname: '/invoices/open',
+  }),
 }
 
 /** Opening tags of everything a keyboard user can land on. */
 function focusables(markup: string): string[] {
-  return [...markup.matchAll(/<(button|a)\b[^>]*>/g)]
+  // Buttons, links, and anything else put in the tab order (a drop zone with tabindex="0").
+  return [...markup.matchAll(/<(?:(?:button|a)\b|[a-z]+\b(?=[^>]*\btabindex="0"))[^>]*>/g)]
     .map((match) => match[0])
     // React renders the disabled attribute as disabled="" — match that, not the `disabled:` class variant.
     .filter((tag) => !/\sdisabled=""/.test(tag) && !/tabindex="-1"/.test(tag))

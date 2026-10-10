@@ -577,15 +577,18 @@ function SubgroupSection({
     if (hasActiveChild) setOpen(true)
   }, [hasActiveChild])
 
-  const headerClass = cn(
+  const headerTone = cn(
     'group flex w-full items-center gap-2.5 rounded-md px-2 py-1.5 text-sm transition-colors duration-150 ease-out',
     selfActive
       ? 'bg-primary-subtle text-fg'
       : hasActiveChild && !open
         ? 'text-primary'
         : 'text-fg-muted hover:bg-surface-hover hover:text-fg',
-    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
   )
+  // The ring goes on whatever takes focus: the whole header when it is one
+  // button, or each half of a split header (the wrapper itself never focuses).
+  const focusRing = 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
+  const headerClass = cn(headerTone, focusRing)
   const chevron = (
     <ChevronRight
       size={15}
@@ -596,13 +599,13 @@ function SubgroupSection({
   return (
     <div>
       {href ? (
-        <div className={cn(headerClass, 'p-0')}>
+        <div className={cn(headerTone, 'p-0')}>
           <button
             type="button"
             aria-expanded={open}
             aria-label={label}
             onClick={() => setOpen((current) => !current)}
-            className="grid shrink-0 place-items-center self-stretch rounded-l-md pl-2 hover:bg-surface-active"
+            className={cn('grid shrink-0 place-items-center self-stretch rounded-l-md pl-2 hover:bg-surface-hover', focusRing, 'focus-visible:ring-inset')}
           >
             {chevron}
           </button>
@@ -610,7 +613,7 @@ function SubgroupSection({
             href,
             ariaCurrent: selfActive ? 'page' : undefined,
             dataWalkthrough: `nav:${href}`,
-            className: 'flex flex-1 items-center gap-2.5 rounded-r-md py-1.5 pr-2',
+            className: cn('flex flex-1 items-center gap-2.5 rounded-r-md py-1.5 pr-2', focusRing, 'focus-visible:ring-inset'),
             children: (
               <>
                 {iconKey ? <NavIcon iconKey={iconKey} className="shrink-0 text-fg-muted" /> : null}

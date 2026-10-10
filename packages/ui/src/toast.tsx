@@ -314,7 +314,7 @@ function ToastRow({
                   t.action!.onClick(e)
                   close()
                 }}
-                className="rounded-md bg-primary px-2.5 py-1 text-xs font-medium text-primary-fg hover:bg-primary-hover"
+                className="rounded-md bg-primary px-2.5 py-1 text-xs font-medium text-primary-fg hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-elevated"
               >
                 {t.action.label}
               </button>
@@ -326,7 +326,7 @@ function ToastRow({
                   t.cancel!.onClick?.(e)
                   close()
                 }}
-                className="rounded-md px-2.5 py-1 text-xs font-medium text-fg-muted hover:bg-surface-hover"
+                className="rounded-md px-2.5 py-1 text-xs font-medium text-fg-muted hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-elevated"
               >
                 {t.cancel.label}
               </button>
@@ -339,7 +339,7 @@ function ToastRow({
           type="button"
           onClick={close}
           aria-label="Dismiss"
-          className="-mr-1 rounded-md p-1 text-current opacity-60 transition-opacity hover:opacity-100"
+          className="-mr-1 rounded-md p-1 text-current opacity-60 transition-opacity hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           <X className="size-4" />
         </button>

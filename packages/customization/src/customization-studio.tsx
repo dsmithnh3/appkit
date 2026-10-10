@@ -311,7 +311,7 @@ function LibraryList({
   empty: string
 }) {
   if (items.length === 0) {
-    return <p className="rounded-md border border-dashed border-border p-4 text-sm text-fg-subtle">{empty}</p>
+    return <p className="rounded-md border border-dashed border-border p-4 text-sm text-fg-muted">{empty}</p>
   }
   return (
     <div className="space-y-1">
@@ -327,7 +327,7 @@ function LibraryList({
         >
           <span className="min-w-0">
             <span className="block truncate text-sm font-medium text-fg">{item.title}</span>
-            <span className="mt-0.5 block text-xs text-fg-subtle">{item.detail}</span>
+            <span className="mt-0.5 block text-xs text-fg-muted">{item.detail}</span>
           </span>
           {selectedId === item.id ? <Badge variant="secondary">Editing</Badge> : null}
         </button>

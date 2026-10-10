@@ -328,7 +328,7 @@ export function ScheduleToolbar({
         >
           <MenuSectionLabel>{labels.menu.activeBaseline}</MenuSectionLabel>
           {baselines.length === 0 ? (
-            <div className="rounded-md px-2 py-2 text-[11px] text-fg-subtle">
+            <div className="rounded-md px-2 py-2 text-[11px] text-fg-muted">
               {labels.menu.noBaselines}
             </div>
           ) : (
@@ -497,7 +497,7 @@ function ScheduleMenuItem({
     >
       <Icon className="h-3.5 w-3.5 shrink-0" />
       <span className="min-w-0 flex-1 truncate font-medium">{label}</span>
-      {detail ? <span className="shrink-0 text-[10px] text-fg-subtle">{detail}</span> : null}
+      {detail ? <span className="shrink-0 text-[10px] text-fg-muted">{detail}</span> : null}
       {selected ? <Check className="h-3 w-3 shrink-0" /> : null}
     </button>
   )
@@ -567,7 +567,7 @@ function ScheduleMenuPill({
 
 function MenuSectionLabel({ children }: { children: ReactNode }) {
   return (
-    <p className="px-2 py-1 text-[10px] font-semibold tracking-[0.14em] text-fg-subtle uppercase">
+    <p className="px-2 py-1 text-[10px] font-semibold tracking-[0.14em] text-fg-muted uppercase">
       {children}
     </p>
   )

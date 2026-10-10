@@ -89,7 +89,7 @@ export function QueryResultsGrid({ result, filter, labels }: QueryResultsGridPro
       <table className="w-full border-collapse text-[13px]">
         <thead className="sticky top-0 z-10">
           <tr className="bg-bg-subtle">
-            <th className="w-12 border-b border-border px-2 py-2 text-right font-medium text-fg-subtle tabular-nums">
+            <th className="w-12 border-b border-border px-2 py-2 text-right font-medium text-fg-muted tabular-nums">
               #
             </th>
             {result.columns.map((column) => {
@@ -135,7 +135,7 @@ export function QueryResultsGrid({ result, filter, labels }: QueryResultsGridPro
               key={rowIndex}
               className="border-b border-border-subtle odd:bg-surface even:bg-bg-subtle/40 hover:bg-primary-subtle"
             >
-              <td className="px-2 py-1.5 text-right align-top font-mono text-[11px] text-fg-subtle tabular-nums">
+              <td className="px-2 py-1.5 text-right align-top font-mono text-[11px] text-fg-muted tabular-nums">
                 {rowIndex + 1}
               </td>
               {result.columns.map((column) => {
@@ -152,7 +152,7 @@ export function QueryResultsGrid({ result, filter, labels }: QueryResultsGridPro
                     )}
                     title={isNull ? 'NULL' : queryCellText(value)}
                   >
-                    {isNull ? <span className="text-fg-subtle">∅</span> : queryCellText(value)}
+                    {isNull ? <span className="text-fg-muted">∅</span> : queryCellText(value)}
                   </td>
                 )
               })}

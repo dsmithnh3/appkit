@@ -1,0 +1,70 @@
+{
+  "note": "Uses of text-fg-subtle that scripts/fg-subtle-usage.mjs cannot recognise as a placeholder, a disabled state or an icon class, each reviewed. `match` is a substring of the class string in `file`. An entry that matches nothing fails the check.",
+  "entries": [
+    {
+      "file": "packages/forms/src/element-preview.tsx",
+      "match": "className=\"flex items-center gap-1 rounded border border-border bg-white px-2 py-1.5 text-xs text-fg-subtle\"",
+      "reason": "empty-value placeholder"
+    },
+    {
+      "file": "packages/forms/src/production-file-upload.tsx",
+      "match": "className=\"grid size-10 shrink-0 place-items-center rounded bg-bg-subtle text-fg-subtle\"",
+      "reason": "decorative icon tile"
+    },
+    {
+      "file": "packages/integrations/src/integration-hub.tsx",
+      "match": "className=\"flex items-center gap-1 self-center text-fg-subtle transition group-hover:text-fg-muted\"",
+      "reason": "decorative icon slot (tints only ArrowUpRight; the ghost delete Button sets its own text-fg)"
+    },
+    {
+      "file": "packages/mailbox/src/react.tsx",
+      "match": "className=\"flex size-14 items-center justify-center rounded-full bg-bg-subtle text-fg-subtle\"",
+      "reason": "decorative icon tile"
+    },
+    {
+      "file": "packages/mailbox/src/react.tsx",
+      "match": "className={cn('shrink-0', active ? 'text-primary' : 'text-fg-subtle')}",
+      "reason": "decorative icon slot"
+    },
+    {
+      "file": "packages/notifications/src/ui.tsx",
+      "match": "className=\"flex size-14 items-center justify-center rounded-full bg-bg-subtle text-fg-subtle\"",
+      "reason": "decorative icon tile"
+    },
+    {
+      "file": "packages/notifications/src/ui.tsx",
+      "match": "className={cn('shrink-0', active ? 'text-primary' : 'text-fg-subtle')}",
+      "reason": "decorative icon slot"
+    },
+    {
+      "file": "packages/query-console/src/query-console.tsx",
+      "match": "className=\"flex h-12 w-12 items-center justify-center rounded-xl bg-bg-subtle text-fg-subtle\"",
+      "reason": "decorative icon slot"
+    },
+    {
+      "file": "packages/storage/src/attachment-panel.tsx",
+      "match": "className=\"grid size-14 place-items-center rounded-2xl bg-surface text-fg-subtle shadow-sm\"",
+      "reason": "decorative icon tile"
+    },
+    {
+      "file": "packages/ui/src/empty-state.tsx",
+      "match": "className=\"mb-5 flex size-14 items-center justify-center rounded-2xl bg-surface text-fg-subtle",
+      "reason": "decorative icon tile"
+    },
+    {
+      "file": "packages/ui/src/multi-select.tsx",
+      "match": "className=\"truncate text-fg-subtle\"",
+      "reason": "empty-value placeholder"
+    },
+    {
+      "file": "packages/ui/src/settings-layout.tsx",
+      "match": "className={cn('shrink-0 [&_svg]:size-[15px]', active ? 'text-primary' : 'text-fg-subtle')}",
+      "reason": "decorative icon slot"
+    },
+    {
+      "file": "packages/workflows/src/record-approval-react.tsx",
+      "match": "className=\"size-4 text-fg-subtle\"",
+      "reason": "decorative icon (aria-hidden chevron)"
+    }
+  ]
+}

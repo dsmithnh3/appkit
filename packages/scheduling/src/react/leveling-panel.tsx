@@ -157,11 +157,11 @@ export function LevelingPanel({
           ) : null}
 
           <section className="space-y-2">
-            <h4 className="text-xs font-semibold tracking-[0.16em] text-fg-subtle uppercase">
+            <h4 className="text-xs font-semibold tracking-[0.16em] text-fg-muted uppercase">
               {labels.leveling.preview}
             </h4>
             {result.moves.length === 0 ? (
-              <p className="text-xs text-fg-subtle">{labels.leveling.noMoves}</p>
+              <p className="text-xs text-fg-muted">{labels.leveling.noMoves}</p>
             ) : (
               <div className="space-y-1.5">
                 {result.moves.map((move) => (
@@ -170,12 +170,12 @@ export function LevelingPanel({
                     className="flex items-center gap-3 rounded-lg border border-border bg-surface px-3 py-2 text-xs"
                   >
                     <span className="min-w-0 flex-1 truncate text-fg">{move.taskName}</span>
-                    <span className="shrink-0 text-fg-subtle">{move.fromStart ?? '—'}</span>
+                    <span className="shrink-0 text-fg-muted">{move.fromStart ?? '—'}</span>
                     <ArrowRight className="h-3 w-3 shrink-0 text-fg-subtle" />
                     <span className="shrink-0 font-medium text-fg">{move.toStart}</span>
                     <Badge variant="secondary">+{labels.format.days(move.delayDays)}</Badge>
                     {move.blockedByResourceIds.length > 0 ? (
-                      <span className="hidden shrink-0 text-[11px] text-fg-subtle sm:inline">
+                      <span className="hidden shrink-0 text-[11px] text-fg-muted sm:inline">
                         {move.blockedByResourceIds.map(resourceName).join(', ')}
                       </span>
                     ) : null}
@@ -187,7 +187,7 @@ export function LevelingPanel({
 
           {result.unresolved.length > 0 ? (
             <section className="space-y-2">
-              <h4 className="text-xs font-semibold tracking-[0.16em] text-fg-subtle uppercase">
+              <h4 className="text-xs font-semibold tracking-[0.16em] text-fg-muted uppercase">
                 {labels.leveling.unresolvedSummary}
               </h4>
               <div className="space-y-1.5">
@@ -211,11 +211,11 @@ export function LevelingPanel({
           ) : null}
 
           <section className="space-y-3">
-            <h4 className="text-xs font-semibold tracking-[0.16em] text-fg-subtle uppercase">
+            <h4 className="text-xs font-semibold tracking-[0.16em] text-fg-muted uppercase">
               {labels.leveling.load}
             </h4>
             {loadSeries.length === 0 ? (
-              <p className="text-xs text-fg-subtle">{labels.common.none}</p>
+              <p className="text-xs text-fg-muted">{labels.common.none}</p>
             ) : (
               loadSeries.map((series) => {
                 const days = series.days.slice(0, MAX_HISTOGRAM_DAYS)
@@ -224,7 +224,7 @@ export function LevelingPanel({
                   <div key={series.resourceId} className="space-y-1">
                     <div className="flex items-center justify-between text-[11px]">
                       <span className="truncate font-medium text-fg">{series.resourceName}</span>
-                      <span className="text-fg-subtle">
+                      <span className="text-fg-muted">
                         {labels.leveling.capacity} {series.capacityPerDay} ·{' '}
                         {series.overloadedDays} {labels.leveling.overloadedDays}
                       </span>
