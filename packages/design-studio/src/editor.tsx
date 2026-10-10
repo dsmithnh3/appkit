@@ -214,7 +214,7 @@ export function CanvasZoomControls({
         type="button"
         onClick={() => zoomTo(1)}
         title={tGenerated('m_0f91231303cad9')}
-        className="w-12 rounded px-1 py-1 text-center text-xs font-medium text-fg-muted tabular-nums hover:bg-surface-muted-subtle"
+        className="w-12 rounded px-1 py-1 text-center text-xs font-medium text-fg-muted tabular-nums hover:bg-surface-hover"
       >
         <GeneratedValue value={Math.round(zoom * 100)} />%
       </button>
@@ -385,7 +385,7 @@ export function ArtboardCanvas({
 
   return (
     <div
-      className="rounded-md bg-surface-muted p-8 shadow-inner"
+      className="rounded-md bg-bg-subtle p-8 shadow-inner"
       style={{
         backgroundImage:
           'linear-gradient(45deg, rgba(148,163,184,.22) 25%, transparent 25%), linear-gradient(-45deg, rgba(148,163,184,.22) 25%, transparent 25%), linear-gradient(45deg, transparent 75%, rgba(148,163,184,.22) 75%), linear-gradient(-45deg, transparent 75%, rgba(148,163,184,.22) 75%)',
@@ -623,7 +623,7 @@ export function InsertPanel({ onAdd }: { onAdd: (kind: DesignElement['kind']) =>
         icon={<BadgeCheck size={15} />}
         onClick={() => onAdd('seal')}
       />
-      <div className="rounded-md border border-border bg-surface-subtle p-3 text-xs leading-5 text-fg-muted">
+      <div className="rounded-md border border-border bg-bg-subtle p-3 text-xs leading-5 text-fg-muted">
         <GeneratedText id="m_1623eb9979e59c" />
       </div>
     </div>
@@ -709,7 +709,7 @@ export function LayersPanel({
                 'flex w-full items-center gap-2 rounded-md border px-2.5 py-2 text-left text-sm',
                 element.id === selectedElementId
                   ? 'border-primary bg-primary-subtle text-primary'
-                  : 'border-border bg-surface text-fg-muted hover:bg-surface-subtle',
+                  : 'border-border bg-surface text-fg-muted hover:bg-surface-hover',
               )}
             >
               <GeneratedValue value={iconForElement(element)} />
@@ -776,7 +776,7 @@ export function InspectorPanel({
             onChange={(height) => onPatchArtboard({ height, format: 'custom' })}
           />
         </div>
-        <div className="rounded-md border border-border bg-surface-subtle p-3 text-xs text-fg-muted">
+        <div className="rounded-md border border-border bg-bg-subtle p-3 text-xs text-fg-muted">
           <GeneratedText id="m_12b9991889a2c8" />
         </div>
       </div>
@@ -787,7 +787,7 @@ export function InspectorPanel({
   return (
     <div className="space-y-4">
       {/* What is this element? */}
-      <div className="rounded-md border border-border bg-surface-subtle p-3">
+      <div className="rounded-md border border-border bg-bg-subtle p-3">
         <div className="flex items-center justify-between gap-2">
           <span className="flex min-w-0 items-center gap-1.5 text-sm font-semibold text-fg">
             <GeneratedValue value={iconForElement(selectedElement)} />
@@ -803,7 +803,7 @@ export function InspectorPanel({
             <Trash2 size={14} className="text-danger" />
           </Button>
         </div>
-        <p className="mt-1 text-xs leading-5 text-fg-muted-subtle">
+        <p className="mt-1 text-xs leading-5 text-fg-muted">
           <GeneratedValue value={meta.hint} />
         </p>
       </div>
@@ -1226,7 +1226,7 @@ export function RailTabButton({
         'grid h-9 place-items-center rounded-md border text-xs',
         active
           ? 'border-primary bg-primary-subtle text-primary'
-          : 'border-border bg-surface text-fg-muted hover:bg-surface-subtle',
+          : 'border-border bg-surface text-fg-muted hover:bg-surface-hover',
       )}
     >
       <GeneratedValue value={icon} />
@@ -1246,7 +1246,7 @@ export function RailLabel({ icon, label }: { icon: ReactNode; label: string }) {
 export function Field({ label, children }: { label: string; children: ReactNode }) {
   return (
     <label className="block space-y-1.5">
-      <span className="text-xs font-medium text-fg-muted-subtle">
+      <span className="text-xs font-medium text-fg-muted">
         <GeneratedValue value={label} />
       </span>
       <GeneratedValue value={children} />
@@ -1267,7 +1267,7 @@ function ElementButton({
     <button
       type="button"
       onClick={onClick}
-      className="flex w-full items-center gap-2 rounded-md border border-border bg-surface px-3 py-2 text-left text-sm font-medium text-fg-muted transition-colors hover:bg-surface-subtle"
+      className="flex w-full items-center gap-2 rounded-md border border-border bg-surface px-3 py-2 text-left text-sm font-medium text-fg-muted transition-colors hover:bg-surface-hover"
     >
       <GeneratedValue value={icon} />
       <GeneratedValue value={label} />
@@ -1298,7 +1298,7 @@ export function LayerToggle({
         type="checkbox"
         checked={checked}
         onChange={(e) => onChange(e.currentTarget.checked)}
-        className="h-4 w-4 accent-teal-700"
+        className="h-4 w-4 accent-primary"
       />
     </label>
   )
@@ -1315,7 +1315,7 @@ function ColorField({
 }) {
   return (
     <label className="flex items-center gap-2">
-      <span className="w-20 text-xs font-medium text-fg-muted-subtle">
+      <span className="w-20 text-xs font-medium text-fg-muted">
         <GeneratedValue value={label} />
       </span>
       <input

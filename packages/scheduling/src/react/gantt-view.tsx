@@ -497,8 +497,10 @@ export function GanttView({
               return (
                 <div key={phase?.id ?? 'standalone'}>
                   {phase ? (
-                    <div
-                      className="flex cursor-pointer items-center gap-2 border-b border-border/50 bg-bg-subtle/40 px-3 transition-colors hover:bg-bg-subtle"
+                    <button
+                      type="button"
+                      aria-expanded={!isCollapsed}
+                      className="flex w-full cursor-pointer items-center gap-2 border-b border-border/50 bg-bg-subtle/40 px-3 text-left transition-colors hover:bg-bg-subtle focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
                       style={{ height: PHASE_ROW_HEIGHT }}
                       onClick={() => togglePhase(phase.id)}
                     >
@@ -507,7 +509,7 @@ export function GanttView({
                       ) : (
                         <ChevronDown className="h-3.5 w-3.5 shrink-0 text-fg-subtle" />
                       )}
-                      <div
+                      <span
                         className="h-2.5 w-2.5 shrink-0 rounded-full"
                         style={{ backgroundColor: groupColor }}
                       />
@@ -518,7 +520,7 @@ export function GanttView({
                       <span className="ml-auto shrink-0 text-[11px] text-fg-muted">
                         {labels.format.taskCount(group.tasks.length)}
                       </span>
-                    </div>
+                    </button>
                   ) : null}
 
                   {!isCollapsed &&
@@ -585,7 +587,7 @@ export function GanttView({
                               {hierarchy?.hasChildren ? (
                                 <button
                                   type="button"
-                                  className="mt-0.5 shrink-0 text-fg-muted transition-colors hover:text-fg"
+                                  className="mt-0.5 shrink-0 text-fg-muted transition-colors hover:text-fg rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                                   onClick={(event) => {
                                     event.stopPropagation()
                                     toggleTask(task.id)
@@ -610,9 +612,16 @@ export function GanttView({
                               )}
 
                               <div className="min-w-0 flex-1">
-                                <span className="block truncate text-xs text-fg">
+                                <button
+                                  type="button"
+                                  onClick={(event) => {
+                                    event.stopPropagation()
+                                    onClickTask(task)
+                                  }}
+                                  className="block max-w-full truncate rounded-sm text-left hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring text-xs text-fg"
+                                >
                                   {task.name || labels.badges.untitled}
-                                </span>
+                                </button>
                                 <div className="mt-1 flex max-h-5 min-w-0 flex-wrap items-center gap-1.5 overflow-hidden text-[10px] text-fg-muted">
                                   {!isCompactLeftPanel && isSummaryTask ? (
                                     <Badge variant="secondary" className="px-1.5 py-0 text-[10px] font-medium">{labels.badges.summary}</Badge>

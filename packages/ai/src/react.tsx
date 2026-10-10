@@ -1107,16 +1107,16 @@ export function AgentApprovalRequestCard({ request, labels: labelOverrides, onDe
   const settledFailure = status === 'failed'
 
   return (
-    <section className="rounded-xl border border-border bg-surface-raised p-3 shadow-sm" aria-label={labels.title}>
+    <section className="rounded-xl border border-border bg-elevated p-3 shadow-sm" aria-label={labels.title}>
       <div className="flex items-start gap-2.5">
         <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-warning-subtle text-warning"><ShieldCheck size={17} /></span>
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
             <p className="text-sm font-semibold text-fg">{labels.title}</p>
-            <span className="rounded-full bg-surface-muted px-2 py-0.5 text-[11px] font-medium text-fg-muted">{request.categoryLabel}</span>
+            <span className="rounded-full bg-bg-subtle px-2 py-0.5 text-[11px] font-medium text-fg-muted">{request.categoryLabel}</span>
           </div>
           <p className="mt-1 text-sm leading-5 text-fg-muted">{request.description}</p>
-          {request.details?.length ? <dl className="mt-2 grid gap-1 rounded-lg bg-surface-muted p-2 text-xs">{request.details.map((detail) => <div key={`${detail.label}:${detail.value}`} className="grid grid-cols-[minmax(5rem,auto)_1fr] gap-2"><dt className="font-medium text-fg-muted">{detail.label}</dt><dd className="min-w-0 break-words text-fg">{detail.value}</dd></div>)}</dl> : null}
+          {request.details?.length ? <dl className="mt-2 grid gap-1 rounded-lg bg-bg-subtle p-2 text-xs">{request.details.map((detail) => <div key={`${detail.label}:${detail.value}`} className="grid grid-cols-[minmax(5rem,auto)_1fr] gap-2"><dt className="font-medium text-fg-muted">{detail.label}</dt><dd className="min-w-0 break-words text-fg">{detail.value}</dd></div>)}</dl> : null}
           {status === 'pending' ? (
             <div className="mt-3 space-y-2">
               <Input ref={noteRef} placeholder={labels.note} aria-label={labels.note} disabled={!onDecide || deciding !== null} />

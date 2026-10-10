@@ -412,7 +412,7 @@ function ViewSpecDemo() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <pre className="max-h-80 overflow-auto rounded-md bg-muted p-3 text-xs">
+          <pre className="max-h-80 overflow-auto rounded-md bg-bg-subtle p-3 text-xs">
             {JSON.stringify(spec, null, 2)}
           </pre>
         </CardContent>

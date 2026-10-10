@@ -491,6 +491,7 @@ function ScheduleMenuItem({
       disabled={disabled}
       data-testid={testId}
       className={cn(
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring',
         'flex h-8 w-full items-center gap-2 rounded-md px-2 text-left text-[11px] transition-colors disabled:pointer-events-none disabled:opacity-35',
         selected ? 'bg-primary-subtle text-primary' : 'text-fg-muted hover:bg-bg-subtle hover:text-fg',
       )}
@@ -528,7 +529,7 @@ function ScheduleMenuIconButton({
         close()
       }}
       data-testid={testId}
-      className="flex h-7 items-center justify-center rounded-md text-fg-muted transition-colors hover:bg-bg-subtle hover:text-fg disabled:pointer-events-none disabled:opacity-35"
+      className="flex h-7 items-center justify-center rounded-md text-fg-muted transition-colors hover:bg-bg-subtle hover:text-fg disabled:pointer-events-none disabled:opacity-35 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
     >
       <Icon className="h-3.5 w-3.5" />
     </button>
@@ -556,6 +557,7 @@ function ScheduleMenuPill({
       }}
       data-testid={testId}
       className={cn(
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring',
         'h-7 rounded-md px-1 text-[10px] font-semibold uppercase transition-colors',
         selected ? 'bg-primary-subtle text-primary' : 'text-fg-muted hover:bg-bg-subtle hover:text-fg',
       )}
