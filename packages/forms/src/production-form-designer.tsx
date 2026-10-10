@@ -1501,7 +1501,7 @@ function FieldRow({
         type="button"
         aria-label={tGenerated('m_0b04b904ce4f9a')}
         onPointerDown={(e) => controls.start(e)}
-        className="cursor-grab touch-none rounded p-0.5 text-fg-subtle hover:text-fg-muted active:cursor-grabbing"
+        className="cursor-grab touch-none rounded p-0.5 text-fg-muted hover:text-fg active:cursor-grabbing"
       >
         <GripVertical size={14} />
       </button>

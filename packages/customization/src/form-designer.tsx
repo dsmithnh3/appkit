@@ -417,7 +417,7 @@ export function FormDesigner({
                     )
                   })}
                   {group.fields.length === 0 ? (
-                    <p className="px-2 py-3 text-sm text-fg-subtle">Move fields here or add a custom field.</p>
+                    <p className="px-2 py-3 text-sm text-fg-muted">Move fields here or add a custom field.</p>
                   ) : null}
                 </div>
               </div>
@@ -527,7 +527,7 @@ function EditorSection({
       <div className="flex items-end justify-between gap-3">
         <div>
           <h2 className="text-xs font-semibold uppercase tracking-wide text-fg-muted">{title}</h2>
-          {description ? <p className="mt-1 text-sm text-fg-subtle">{description}</p> : null}
+          {description ? <p className="mt-1 text-sm text-fg-muted">{description}</p> : null}
         </div>
         {action}
       </div>
@@ -558,7 +558,7 @@ function IconControl({
       title={label}
       disabled={disabled}
       onClick={onClick}
-      className="rounded-sm p-1 text-fg-subtle transition-colors hover:bg-surface-hover hover:text-fg disabled:pointer-events-none disabled:opacity-30"
+      className="rounded-sm p-1 text-fg-muted transition-colors hover:bg-surface-hover hover:text-fg disabled:pointer-events-none disabled:opacity-30"
     >
       <span className="[&>svg]:size-4">{children}</span>
     </button>

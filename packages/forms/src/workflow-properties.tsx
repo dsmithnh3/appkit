@@ -32,4 +32,4 @@ export function FormTabsEditor({ schema, locale, readOnly = false, onChange }: {
 }
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) { return <div className="space-y-1"><Label className="text-[10px]">{label}</Label>{children}</div> }
-function Icon({ label, disabled, onClick, children }: { label: string; disabled: boolean; onClick: () => void; children: React.ReactNode }) { return <button type="button" aria-label={label} title={label} disabled={disabled} onClick={onClick} className="grid size-7 place-items-center rounded text-fg-subtle hover:bg-surface-hover hover:text-fg disabled:opacity-30">{children}</button> }
+function Icon({ label, disabled, onClick, children }: { label: string; disabled: boolean; onClick: () => void; children: React.ReactNode }) { return <button type="button" aria-label={label} title={label} disabled={disabled} onClick={onClick} className="grid size-7 place-items-center rounded text-fg-muted hover:bg-surface-hover hover:text-fg disabled:opacity-30">{children}</button> }

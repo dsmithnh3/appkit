@@ -36,7 +36,7 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
         className={cn(
           'rounded-lg border border-border bg-surface shadow-sm',
           isInteractive &&
-            'cursor-pointer transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-border-strong hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 motion-reduce:transition-none motion-reduce:hover:translate-y-0',
+            'cursor-pointer transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-border-strong hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring motion-reduce:transition-none motion-reduce:hover:translate-y-0',
           className,
         )}
         {...props}

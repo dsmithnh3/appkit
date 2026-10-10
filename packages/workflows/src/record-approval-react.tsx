@@ -368,7 +368,7 @@ export function ApprovalHistory({
       >
         <Chevron className="size-4 text-fg-subtle" aria-hidden="true" />
         {labels.historyTitle}
-        <span className="text-xs font-normal text-fg-subtle">{history.length}</span>
+        <span className="text-xs font-normal text-fg-muted">{history.length}</span>
       </button>
       {open ? (
         <ol className="divide-y divide-border-subtle border-t border-border">
@@ -403,11 +403,11 @@ function ApprovalHistoryRow({
         <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5">
           <span className="font-medium text-fg">{labels.event(entry.type)}</span>
           {entry.actor ? <span className="text-fg-muted">{entry.actor}</span> : null}
-          {entry.title ? <span className="truncate text-xs text-fg-subtle">{entry.title}</span> : null}
+          {entry.title ? <span className="truncate text-xs text-fg-muted">{entry.title}</span> : null}
           {entry.delegated ? <Badge variant="outline">{labels.delegatedBadge}</Badge> : null}
           {entry.type === 'escalated' ? <Badge variant="warning">{labels.escalatedBadge}</Badge> : null}
           <span
-            className="ml-auto shrink-0 text-xs text-fg-subtle"
+            className="ml-auto shrink-0 text-xs text-fg-muted"
             title={new Date(entry.at).toLocaleString(locale)}
           >
             {formatApprovalRelativeTime(entry.at, locale)}

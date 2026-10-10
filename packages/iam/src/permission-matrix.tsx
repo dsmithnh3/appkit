@@ -67,7 +67,7 @@ export function PermissionMatrix({
               <div className="min-w-0">
                 <h3 className="text-sm font-semibold text-fg">
                   {group.label}
-                  {groupSome ? <span className="ml-1.5 text-xs font-normal text-fg-subtle">{labels?.partial ?? 'Partial'}</span> : null}
+                  {groupSome ? <span className="ml-1.5 text-xs font-normal text-fg-muted">{labels?.partial ?? 'Partial'}</span> : null}
                 </h3>
                 {group.description ? <p className="mt-0.5 text-xs text-fg-muted">{group.description}</p> : null}
               </div>
@@ -100,7 +100,7 @@ export function PermissionMatrix({
                       />
                       <span className="min-w-0">
                         <span className="block">{permission.label}</span>
-                        {permission.description ? <span className="mt-0.5 block text-xs text-fg-subtle">{permission.description}</span> : null}
+                        {permission.description ? <span className="mt-0.5 block text-xs text-fg-muted">{permission.description}</span> : null}
                       </span>
                     </label>
                   </li>

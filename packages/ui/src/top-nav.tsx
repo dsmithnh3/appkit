@@ -174,7 +174,7 @@ export function TopNav({
               {linkRender({
                 href: only.href,
                 className: cn(
-                  'flex h-14 shrink-0 items-center whitespace-nowrap px-2 text-sm font-medium transition-colors',
+                  'flex h-14 shrink-0 items-center whitespace-nowrap px-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring',
                   itemClassName,
                   activeHref === only.href
                     ? cn('text-primary', activeItemClassName)
@@ -202,7 +202,7 @@ export function TopNav({
                 onMouseLeave={scheduleClose}
                 onClick={() => enterMenu(index)}
                 className={cn(
-                  'flex h-14 shrink-0 items-center gap-1 whitespace-nowrap px-2 text-sm font-medium transition-colors',
+                  'flex h-14 shrink-0 items-center gap-1 whitespace-nowrap px-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring',
                   itemClassName,
                   groupActive
                     ? cn('text-primary', activeItemClassName)
@@ -242,7 +242,7 @@ export function TopNav({
               onMouseLeave={scheduleClose}
               onClick={() => enterMenu(MORE_MENU_INDEX)}
               className={cn(
-                'flex h-14 shrink-0 items-center gap-1 whitespace-nowrap px-2 text-sm font-medium transition-colors',
+                'flex h-14 shrink-0 items-center gap-1 whitespace-nowrap px-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring',
                 itemClassName,
                 moreActive
                   ? cn('text-primary', activeItemClassName)
@@ -386,7 +386,7 @@ function OverflowGroupRow({
           setOpen((current) => !current)
         }}
         className={cn(
-          'flex w-full items-center gap-2.5 px-3 py-1.5 text-sm transition-colors',
+          'flex w-full items-center gap-2.5 px-3 py-1.5 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring',
           active ? 'text-primary' : 'text-fg-muted hover:bg-surface-hover hover:text-fg',
         )}
       >
@@ -431,7 +431,7 @@ function MenuItemLink({
         ariaCurrent: active ? 'page' : undefined,
         dataWalkthrough: `nav:${item.href}`,
         className: cn(
-          'group flex items-center gap-2.5 px-3 py-1.5 text-sm transition-colors',
+          'group flex items-center gap-2.5 px-3 py-1.5 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring',
           active ? 'bg-primary-subtle text-fg' : 'text-fg-muted hover:bg-surface-hover hover:text-fg',
         ),
         children: (
@@ -479,8 +479,8 @@ function MenuSection({
             ariaCurrent: selfActive ? 'page' : undefined,
             dataWalkthrough: `nav:${href}`,
             className: cn(
-              'flex items-center gap-1.5 px-3 pb-1.5 text-[11px] font-semibold tracking-wide uppercase transition-colors',
-              selfActive ? 'text-primary' : 'text-fg-subtle hover:text-fg',
+              'flex items-center gap-1.5 px-3 pb-1.5 text-[11px] font-semibold tracking-wide uppercase transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring',
+              selfActive ? 'text-primary' : 'text-fg-muted hover:text-fg',
             ),
             children: (
               <>
@@ -491,7 +491,7 @@ function MenuSection({
           })}
         </React.Fragment>
       ) : (
-        <div className="px-3 pb-1.5 text-[11px] font-semibold tracking-wide text-fg-subtle uppercase">
+        <div className="px-3 pb-1.5 text-[11px] font-semibold tracking-wide text-fg-muted uppercase">
           {label}
         </div>
       )}

@@ -126,7 +126,7 @@ test('AgentPanel renders a subtle semantic timestamp for a completed assistant t
   assert.match(timestamp, /<time/)
   assert.match(timestamp, /dateTime="2026-09-12T15:02:00\.000Z"|datetime="2026-09-12T15:02:00\.000Z"/)
   assert.match(timestamp, /tabindex="0"/)
-  assert.match(timestamp, /text-fg-subtle/)
+  assert.match(timestamp, /text-fg-muted/)
   assert.match(timestamp, /appkit-agent-message-timestamp/)
   assert.match(panel, /appkit-agent-message-row/)
   assert.match(panel, /@media \(min-width: 640px\)/)

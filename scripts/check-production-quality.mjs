@@ -1,5 +1,6 @@
 import { readFileSync, readdirSync } from 'node:fs'
 import { extname, join, relative, resolve } from 'node:path'
+import { findFgSubtleViolations } from './fg-subtle-usage.mjs'
 
 const root = resolve(import.meta.dirname, '..')
 const roots = [
@@ -59,9 +60,12 @@ for (const path of roots.flatMap(files)) {
   }
 }
 
+const fgSubtleAllowlist = JSON.parse(readFileSync(join(import.meta.dirname, 'fg-subtle-allowlist.json'), 'utf8'))
+errors.push(...findFgSubtleViolations({ root, roots, allowlist: fgSubtleAllowlist.entries }))
+
 if (errors.length) {
   console.error(`Production-quality check failed:\n${errors.map((error) => `- ${error}`).join('\n')}`)
   process.exit(1)
 }
 
-console.log('Production source contains no suppressions, unfinished markers, raw UI palettes, empty handlers, fake-success adapters, or silently discarded promises.')
+console.log('Production source contains no suppressions, unfinished markers, raw UI palettes, fg-subtle on readable text, empty handlers, fake-success adapters, or silently discarded promises.')

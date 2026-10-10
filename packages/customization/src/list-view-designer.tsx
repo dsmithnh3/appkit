@@ -288,7 +288,7 @@ export function ListViewDesigner({
               </Button>
             </div>
             {view.filters.length === 0 ? (
-              <div className="rounded-lg border border-dashed border-border p-5 text-sm text-fg-subtle">
+              <div className="rounded-lg border border-dashed border-border p-5 text-sm text-fg-muted">
                 No filters. This view includes every matching record.
               </div>
             ) : (
@@ -464,7 +464,7 @@ function RowButton({
       title={label}
       disabled={disabled}
       onClick={onClick}
-      className="rounded-sm p-1 text-fg-subtle transition-colors hover:bg-surface-hover hover:text-fg disabled:pointer-events-none disabled:opacity-30"
+      className="rounded-sm p-1 text-fg-muted transition-colors hover:bg-surface-hover hover:text-fg disabled:pointer-events-none disabled:opacity-30"
     >
       <span className="[&>svg]:size-4">{children}</span>
     </button>

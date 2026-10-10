@@ -184,7 +184,7 @@ export function PlatformMenu({
         </button>
       }
     >
-      <div className="border-b border-border px-3 py-2 text-xs tracking-wide text-fg-subtle uppercase">
+      <div className="border-b border-border px-3 py-2 text-xs tracking-wide text-fg-muted uppercase">
         {switchLabel}
       </div>
       <ul className="py-1" role="menu">
@@ -726,7 +726,7 @@ export function DatabaseMaintenanceAdmin({
             <div className="overflow-hidden rounded-lg border border-border">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-border bg-bg-subtle text-left text-xs font-medium text-fg-subtle">
+                  <tr className="border-b border-border bg-bg-subtle text-left text-xs font-medium text-fg-muted">
                     <th className="px-3 py-2 font-medium">Table</th>
                     <th className="px-3 py-2 text-right font-medium">Size</th>
                     <th className="px-3 py-2 text-right font-medium">Rows</th>
@@ -738,7 +738,7 @@ export function DatabaseMaintenanceAdmin({
                     <tr key={table.table}>
                       <td className="px-3 py-2">
                         <div className="font-medium text-fg">{table.label}</div>
-                        <div className="font-mono text-xs text-fg-subtle">{table.table}</div>
+                        <div className="font-mono text-xs text-fg-muted">{table.table}</div>
                       </td>
                       <td className="px-3 py-2 text-right tabular-nums text-fg-muted">{table.prettySize ?? '—'}</td>
                       <td className="px-3 py-2 text-right tabular-nums text-fg-muted">
@@ -829,14 +829,14 @@ export function DatabaseMaintenanceAdmin({
                   <span className="text-fg-muted">
                     {lastRun.at.toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' })}
                   </span>
-                  <span className="text-fg-subtle">
+                  <span className="text-fg-muted">
                     {lastRun.trigger === 'manual' ? 'Manual' : 'Scheduled'} · {(lastRun.durationMs / 1000).toFixed(1)}s
                   </span>
                 </div>
                 <div className="overflow-hidden rounded-lg border border-border">
                   <table className="w-full text-sm">
                     <thead>
-                      <tr className="border-b border-border bg-bg-subtle text-left text-xs font-medium text-fg-subtle">
+                      <tr className="border-b border-border bg-bg-subtle text-left text-xs font-medium text-fg-muted">
                         <th className="px-3 py-2 font-medium">Table</th>
                         <th className="px-3 py-2 text-right font-medium">Deleted</th>
                         <th className="px-3 py-2 text-right font-medium">Retention</th>

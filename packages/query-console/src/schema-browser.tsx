@@ -124,7 +124,7 @@ export function QuerySchemaBrowser({
         ) : error ? (
           <div className="p-3 text-xs text-danger" role="alert">{error}</div>
         ) : filteredTables.length === 0 ? (
-          <div className="flex flex-col items-center gap-2 p-6 text-center text-xs text-fg-subtle">
+          <div className="flex flex-col items-center gap-2 p-6 text-center text-xs text-fg-muted">
             <Database size={20} />
             {labels.schema.noMatch}
           </div>
@@ -156,7 +156,7 @@ export function QuerySchemaBrowser({
                   >
                     {table.name}
                   </span>
-                  <span className="shrink-0 text-[10px] text-fg-subtle tabular-nums opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100">
+                  <span className="shrink-0 text-[10px] text-fg-muted tabular-nums opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100">
                     {table.columns.length}
                   </span>
                 </button>
@@ -173,7 +173,7 @@ export function QuerySchemaBrowser({
                           <Columns3 size={12} className="shrink-0 text-fg-subtle" />
                           <span className="min-w-0 flex-1 truncate font-mono text-fg-muted">{column.name}</span>
                           {!column.nullable ? <KeyRound size={10} className="shrink-0 text-warning" /> : null}
-                          <span className="shrink-0 font-mono text-[10px] text-fg-subtle opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100">
+                          <span className="shrink-0 font-mono text-[10px] text-fg-muted opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100">
                             {column.type}
                           </span>
                         </button>

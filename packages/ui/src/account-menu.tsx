@@ -137,13 +137,13 @@ export function AccountMenu({
           aria-label={labels.menu}
           aria-expanded={open}
           aria-haspopup="menu"
-          className="flex shrink-0 items-center gap-2 rounded-md border border-transparent px-1.5 py-1 text-sm text-fg-muted transition-colors hover:bg-surface-hover hover:text-fg"
+          className="flex shrink-0 items-center gap-2 rounded-md border border-transparent px-1.5 py-1 text-sm text-fg-muted transition-colors hover:bg-surface-hover hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
         >
           <Avatar name={displayName} size={28} />
           <span className="hidden min-w-0 max-w-44 flex-col text-left sm:flex">
             <span className="truncate text-sm leading-tight text-fg">{displayName}</span>
             {contextLabel ? (
-              <span className={cn('truncate text-[11px] leading-tight', contextTone === 'warning' ? 'text-warning' : 'text-fg-subtle')}>
+              <span className={cn('truncate text-[11px] leading-tight', contextTone === 'warning' ? 'text-warning' : 'text-fg-muted')}>
                 {contextLabel}
               </span>
             ) : null}
@@ -172,7 +172,7 @@ export function AccountMenu({
             {showTheme ? <LauncherCard icon={Palette} tone="primary" label={labels.theme} onClick={() => setView('theme')} /> : null}
             {navigation ? <LauncherCard icon={LayoutPanelLeft} tone="warning" label={navigation.label} summary={navigation.summary} onClick={() => setView('navigation')} /> : null}
             {elevatedAccess ? (
-              <UiLink href={elevatedAccess.href} onClick={close} className="group relative flex flex-col gap-2 rounded-xl border border-border bg-surface p-3 transition-colors hover:border-border-strong hover:bg-surface-hover">
+              <UiLink href={elevatedAccess.href} onClick={close} className="group relative flex flex-col gap-2 rounded-xl border border-border bg-surface p-3 transition-colors hover:border-border-strong hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-elevated">
                 <span className="grid size-9 place-items-center rounded-lg bg-danger-subtle text-danger"><ShieldAlert size={18} /></span>
                 <span className="truncate text-sm font-medium text-fg">{elevatedAccess.label}</span>
               </UiLink>
@@ -186,7 +186,7 @@ export function AccountMenu({
                 disabled={signingOut}
                 role="menuitem"
                 onClick={() => startSignOut(async () => { await onSignOut(); close() })}
-                className="flex w-full items-center gap-2.5 rounded-md px-3 py-2 text-sm text-fg-muted transition-colors hover:bg-surface-hover hover:text-fg disabled:opacity-60"
+                className="flex w-full items-center gap-2.5 rounded-md px-3 py-2 text-sm text-fg-muted transition-colors hover:bg-surface-hover hover:text-fg disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
               >
                 <LogOut size={15} />
                 {signingOut ? labels.signingOut : labels.signOut}
@@ -197,7 +197,7 @@ export function AccountMenu({
       ) : (
         <div>
           <div className="flex items-center gap-1.5 border-b border-border-subtle px-2 py-2">
-            <button type="button" onClick={() => setView('home')} aria-label={labels.back} className="grid size-7 place-items-center rounded-md text-fg-muted hover:bg-surface-hover hover:text-fg">
+            <button type="button" onClick={() => setView('home')} aria-label={labels.back} className="grid size-7 place-items-center rounded-md text-fg-muted hover:bg-surface-hover hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-elevated">
               <ChevronLeft size={16} />
             </button>
             <span className="text-sm font-semibold text-fg">{title}</span>
@@ -214,11 +214,11 @@ export function AccountMenu({
 
 function LauncherCard({ icon: Icon, tone, label, summary, onClick }: { icon: LucideIcon; tone: 'primary' | 'info' | 'warning'; label: string; summary?: string; onClick: () => void }) {
   return (
-    <button type="button" onClick={onClick} className="group relative flex flex-col gap-2 rounded-xl border border-border bg-surface p-3 text-left transition-colors hover:border-border-strong hover:bg-surface-hover">
+    <button type="button" onClick={onClick} className="group relative flex flex-col gap-2 rounded-xl border border-border bg-surface p-3 text-left transition-colors hover:border-border-strong hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-elevated">
       <span className={cn('grid size-9 place-items-center rounded-lg', tone === 'info' ? 'bg-info-subtle text-info' : tone === 'warning' ? 'bg-warning-subtle text-warning' : 'bg-primary-subtle text-primary')}><Icon size={18} /></span>
       <span className="min-w-0">
         <span className="block truncate text-sm font-medium text-fg">{label}</span>
-        {summary ? <span className="block truncate text-[11px] text-fg-subtle">{summary}</span> : null}
+        {summary ? <span className="block truncate text-[11px] text-fg-muted">{summary}</span> : null}
       </span>
       <ChevronRight size={14} className="absolute right-2.5 top-3 text-fg-subtle transition-transform group-hover:translate-x-0.5" />
     </button>
@@ -231,9 +231,9 @@ function ChoiceList({ choice, saving, onChoose }: { choice: AccountMenuChoice; s
       {choice.options.map((option) => {
         const active = choice.value === option.value
         return (
-          <button key={option.value} type="button" role="menuitemradio" aria-checked={active} disabled={saving} onClick={() => void onChoose(choice, option.value)} className="flex w-full items-start gap-2 rounded-md px-3 py-2 text-left text-sm text-fg-muted hover:bg-surface-hover hover:text-fg disabled:opacity-60">
+          <button key={option.value} type="button" role="menuitemradio" aria-checked={active} disabled={saving} onClick={() => void onChoose(choice, option.value)} className="flex w-full items-start gap-2 rounded-md px-3 py-2 text-left text-sm text-fg-muted hover:bg-surface-hover hover:text-fg disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring">
             <Check size={15} className={cn('mt-0.5 shrink-0', active ? 'text-primary' : 'text-transparent')} />
-            <span className="min-w-0"><span className="block truncate">{option.label}</span>{option.description ? <span className="block truncate text-xs text-fg-subtle">{option.description}</span> : null}</span>
+            <span className="min-w-0"><span className="block truncate">{option.label}</span>{option.description ? <span className="block truncate text-xs text-fg-muted">{option.description}</span> : null}</span>
           </button>
         )
       })}

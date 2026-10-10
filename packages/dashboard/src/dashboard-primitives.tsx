@@ -44,7 +44,7 @@ export function DashboardMetricCard({
     >
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <div className="truncate text-xs font-semibold uppercase tracking-wider text-fg-subtle">
+          <div className="truncate text-xs font-semibold uppercase tracking-wider text-fg-muted">
             {label}
           </div>
           <div className="mt-3 truncate text-2xl font-semibold tabular-nums text-fg">{value}</div>

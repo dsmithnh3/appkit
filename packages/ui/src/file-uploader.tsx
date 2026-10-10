@@ -252,7 +252,7 @@ export function FileUploader({
           }
         }}
         className={cn(
-          'flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed text-center transition-colors',
+          'flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed text-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg',
           compact ? 'px-3 py-3' : 'px-4 py-6',
           dragOver
             ? 'border-primary bg-primary-subtle text-primary'
@@ -321,7 +321,7 @@ export function FileUploader({
                 <button
                   type="button"
                   onClick={() => setItems((prev) => prev.filter((i) => i.id !== item.id))}
-                  className="rounded px-2 py-0.5 text-[11px] font-medium text-danger hover:bg-danger-subtle"
+                  className="rounded px-2 py-0.5 text-[11px] font-medium text-danger hover:bg-danger-subtle focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
                 >
                   {t('Dismiss')}
                 </button>

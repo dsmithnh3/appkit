@@ -13,7 +13,7 @@ import { cn } from './utils'
 
 const tabClass = (active: boolean) =>
   cn(
-    'flex min-w-0 flex-1 flex-col items-center gap-1 px-1 pt-2 pb-1.5 text-[10px] font-medium transition-colors',
+    'flex min-w-0 flex-1 flex-col items-center gap-1 px-1 pt-2 pb-1.5 text-[10px] font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring',
     active ? 'text-primary' : 'text-fg-muted hover:text-fg',
   )
 

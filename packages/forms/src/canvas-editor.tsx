@@ -135,7 +135,7 @@ export function CanvasEditor({
         value={
           items.length === 0 ? (
             <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-              <span className="rounded-md bg-white/80 px-3 py-1.5 text-xs text-fg-subtle">
+              <span className="rounded-md bg-white/80 px-3 py-1.5 text-xs text-fg-muted">
                 <GeneratedText id="m_16c009976e0b86" />
               </span>
             </div>
@@ -197,7 +197,7 @@ export function CanvasEditor({
                       preview of the element as it ships. */}
                       <div className="absolute top-1 right-1 z-10 flex items-center gap-0.5 opacity-0 transition group-hover:opacity-100">
                         <span
-                          className="cv-drag flex h-5 w-5 cursor-grab items-center justify-center rounded bg-white/90 text-fg-subtle shadow-sm ring-1 ring-ring hover:text-fg-muted active:cursor-grabbing"
+                          className="cv-drag flex h-5 w-5 cursor-grab items-center justify-center rounded bg-white/90 text-fg-muted shadow-sm ring-1 ring-ring hover:text-fg active:cursor-grabbing"
                           title={tGenerated('m_17cb3d26a75938')}
                         >
                           <GripVertical size={11} />
@@ -209,7 +209,7 @@ export function CanvasEditor({
                             e.stopPropagation()
                             onDelete(f.id)
                           }}
-                          className="flex h-5 w-5 items-center justify-center rounded bg-white/90 text-fg-subtle shadow-sm ring-1 ring-ring hover:text-danger"
+                          className="flex h-5 w-5 items-center justify-center rounded bg-white/90 text-fg-muted shadow-sm ring-1 ring-ring hover:text-danger"
                         >
                           <Trash2 size={11} />
                         </button>

@@ -1,6 +1,6 @@
 'use client'
 
-import { Button, cn } from '@braedonsaunders/appkit-ui'
+import { Button } from '@braedonsaunders/appkit-ui'
 import { ChevronDown, ChevronLeft, ChevronRight, ChevronUp } from 'lucide-react'
 import type { ListResult } from './types'
 
@@ -42,7 +42,7 @@ export function ServicePagination({
       <span>{first}–{last} of {total}</span>
       <div className="flex items-center gap-2">
         <Button size="sm" variant="outline" disabled={page <= 1} onClick={() => onPage(page - 1)}><ChevronLeft size={14} />Previous</Button>
-        <span className={cn('min-w-20 text-center tabular-nums', pages === 1 && 'text-fg-subtle')}>Page {Math.min(page, pages)} of {pages}</span>
+        <span className="min-w-20 text-center tabular-nums">Page {Math.min(page, pages)} of {pages}</span>
         <Button size="sm" variant="outline" disabled={page >= pages} onClick={() => onPage(page + 1)}>Next<ChevronRight size={14} /></Button>
       </div>
     </div>

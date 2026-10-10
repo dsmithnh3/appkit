@@ -321,7 +321,7 @@ export function AttachmentPanel({
               {canEdit ? <Button
                 variant="ghost"
                 size="icon"
-                className="size-8 shrink-0 text-fg-subtle hover:text-danger"
+                className="size-8 shrink-0 text-fg-muted hover:text-danger"
                 disabled={deleting === item.attachmentId}
                 onClick={() => void remove(item)}
                 aria-label={labels.removeAria(item.name)}

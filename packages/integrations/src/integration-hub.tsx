@@ -75,7 +75,7 @@ export function IntegrationHub({
           <h2 className="text-sm font-semibold tracking-wide text-fg-muted uppercase">
             Connected
           </h2>
-          <span className="text-xs text-fg-subtle">{connected.length}</span>
+          <span className="text-xs text-fg-muted">{connected.length}</span>
         </div>
         {!connected.length ? (
           <div className="rounded-xl border border-dashed border-border px-5 py-8 text-sm text-fg-muted">
@@ -142,7 +142,7 @@ function ConnectedCard({
           ) : null}
         </div>
         <p className="mt-1 truncate text-xs text-fg-muted">{item.subtitle}</p>
-        <p className="mt-0.5 truncate text-[11px] text-fg-subtle">{item.meta}</p>
+        <p className="mt-0.5 truncate text-[11px] text-fg-muted">{item.meta}</p>
       </div>
       <div className="flex items-center gap-1 self-center text-fg-subtle transition group-hover:text-fg-muted">
         <ArrowUpRight size={15} className="hidden sm:block" />

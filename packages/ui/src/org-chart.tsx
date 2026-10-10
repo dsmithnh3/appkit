@@ -278,7 +278,7 @@ export function OrgChart({
           <button
             type="button"
             onClick={() => onSelect?.(node.id)}
-            className="flex flex-col items-center gap-2 focus-visible:outline-none"
+            className="flex flex-col items-center gap-2 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
             aria-current={selectedId === node.id ? 'true' : undefined}
           >
             {node.avatar ?? (
@@ -290,7 +290,7 @@ export function OrgChart({
               {node.badge ? (
                 <Badge variant={node.badge.variant ?? 'secondary'}>{node.badge.label}</Badge>
               ) : null}
-              {node.meta ? <span className="max-w-full truncate text-[11px] text-fg-subtle">{node.meta}</span> : null}
+              {node.meta ? <span className="max-w-full truncate text-[11px] text-fg-muted">{node.meta}</span> : null}
             </span>
           </button>
           {hasChildren ? (
@@ -300,7 +300,7 @@ export function OrgChart({
               aria-expanded={!isCollapsed}
               aria-label={isCollapsed ? text.expand : text.collapse}
               title={`${node.children.length} ${text.reports}`}
-              className="absolute -bottom-3 left-1/2 z-1 flex -translate-x-1/2 items-center gap-1 rounded-full border border-border bg-surface px-2 py-0.5 text-[11px] text-fg-muted shadow-sm transition-colors hover:border-primary hover:text-primary"
+              className="absolute -bottom-3 left-1/2 z-1 flex -translate-x-1/2 items-center gap-1 rounded-full border border-border bg-surface px-2 py-0.5 text-[11px] text-fg-muted shadow-sm transition-colors hover:border-primary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
             >
               {isCollapsed ? <ChevronRight className="size-3" /> : <ChevronDown className="size-3" />}
               {node.children.length}
@@ -350,7 +350,7 @@ export function OrgChart({
           >
             <RotateCcw className="size-4" />
           </Button>
-          <span className="ml-1 text-xs tabular-nums text-fg-subtle">{Math.round(zoom * 100)}%</span>
+          <span className="ml-1 text-xs tabular-nums text-fg-muted">{Math.round(zoom * 100)}%</span>
         </div>
         {toolbar}
       </div>
@@ -371,7 +371,7 @@ export function OrgChart({
               }}
               className={cn(
                 'mx-auto mb-4 w-fit rounded-full border border-dashed px-4 py-1.5 text-xs transition-colors',
-                topDrop ? 'border-primary bg-primary-subtle text-primary' : 'border-border text-fg-subtle',
+                topDrop ? 'border-primary bg-primary-subtle text-primary' : 'border-border text-fg-muted',
               )}
             >
               {dragging ? text.topLevelHint : text.topLevel}

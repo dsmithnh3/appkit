@@ -29,7 +29,7 @@
   /* Text / foreground */
   --ch-fg: 15 23 42; /* primary */
   --ch-fg-muted: 100 116 139; /* secondary */
-  --ch-fg-subtle: 148 163 184; /* tertiary, placeholder */
+  --ch-fg-subtle: 148 163 184; /* placeholders and decorative icons only — under 4.5:1, never readable text (use fg-muted) */
 
   /* Borders */
   --ch-border: 226 232 240;
@@ -46,13 +46,13 @@
   --ch-signature-ink: 15 23 42; /* stable printed ink */
 
   /* Semantic — each: solid / on-solid text / tinted background */
-  --ch-danger: 220 38 38;
+  --ch-danger: 185 28 28; /* red-700: 5.9:1 on danger-subtle, 6.5:1 under danger-fg */
   --ch-danger-fg: 255 255 255;
   --ch-danger-subtle: 254 242 242;
-  --ch-warning: 217 119 6;
+  --ch-warning: 180 83 9; /* amber-700: 4.8:1 on warning-subtle, 5.0:1 under warning-fg */
   --ch-warning-fg: 255 255 255;
   --ch-warning-subtle: 255 251 235;
-  --ch-success: 22 163 74;
+  --ch-success: 21 128 61; /* green-700: 4.8:1 on success-subtle, 5.0:1 under success-fg */
   --ch-success-fg: 255 255 255;
   --ch-success-subtle: 240 253 244;
   --ch-info: 37 99 235;
@@ -74,7 +74,7 @@
   --ch-accent-violet: 124 58 237;
 
   /* Focus ring */
-  --ch-ring: 20 184 166;
+  --ch-ring: 13 148 136; /* teal-600: 3.7:1 on bg, so a full-strength ring meets the 3:1 focus floor */
 
   /* Shape */
   --radius: 0.625rem;

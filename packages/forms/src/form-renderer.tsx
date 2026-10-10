@@ -351,7 +351,7 @@ function FieldControl({ field, value, onChange, error, disabled, locale, options
     case 'area_picker':
     case 'gl_account':
     case 'party':
-      control = <select {...common} className="h-10 w-full rounded-md border border-border bg-surface px-3 text-sm text-fg focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/40" value={typeof value === 'string' ? value : ''} onChange={(event) => onChange(event.target.value || undefined)}><option value="">Select…</option>{choiceOptions.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}</select>
+      control = <select {...common} className="h-10 w-full rounded-md border border-border bg-surface px-3 text-sm text-fg focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring" value={typeof value === 'string' ? value : ''} onChange={(event) => onChange(event.target.value || undefined)}><option value="">Select…</option>{choiceOptions.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}</select>
       break
     case 'yes_no_comment': {
       const current = typeof value === 'object' && value !== null ? value as { answer?: string; comment?: string } : {}

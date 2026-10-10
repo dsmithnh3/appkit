@@ -226,7 +226,7 @@ function RecipientsEditor({
                         type="button"
                         title={tGenerated('m_0d9b2e08c28452')}
                         onClick={() => onChange(rows.filter((_, j) => j !== i))}
-                        className="shrink-0 rounded p-1 text-fg-subtle hover:bg-danger-subtle hover:text-danger "
+                        className="shrink-0 rounded p-1 text-fg-muted hover:bg-danger-subtle hover:text-danger "
                       >
                         <X size={14} />
                       </button>
@@ -1267,7 +1267,7 @@ export function FlowsCanvas({
       {/* Left rail — flows list */}
       <aside className="flex w-60 shrink-0 flex-col border-r border-border bg-bg-subtle">
         <div className="flex items-center justify-between border-b border-border px-3 py-2">
-          <span className="flex items-center gap-1.5 text-xs font-semibold tracking-wide text-fg-muted uppercase text-fg-subtle">
+          <span className="flex items-center gap-1.5 text-xs font-semibold tracking-wide text-fg-muted uppercase">
             <Workflow size={13} /> <GeneratedText id="m_1a4786daa752b1" />
           </span>
           <GeneratedValue
@@ -1278,7 +1278,7 @@ export function FlowsCanvas({
                   onClick={addFlow}
                   disabled={pending}
                   title={tGenerated('m_0c4753241b87b2')}
-                  className="rounded p-1 text-fg-muted hover:bg-surface hover:text-fg disabled:opacity-50 text-fg-subtle  "
+                  className="rounded p-1 text-fg-muted hover:bg-surface hover:text-fg disabled:opacity-50  "
                 >
                   <Plus size={15} />
                 </button>
@@ -1306,7 +1306,7 @@ export function FlowsCanvas({
           <GeneratedValue
             value={
               flowList.length === 0 ? (
-                <div className="px-2 py-6 text-center text-xs text-fg-subtle">
+                <div className="px-2 py-6 text-center text-xs text-fg-muted">
                   <GeneratedText id="m_09b3b5bd8c347d" />
                   <GeneratedValue
                     value={
@@ -1360,7 +1360,7 @@ export function FlowsCanvas({
                               className={`min-w-0 flex-1 truncate ${
                                 f.enabled
                                   ? 'text-fg'
-                                  : 'text-fg-subtle line-through text-fg-muted'
+                                  : 'line-through text-fg-muted'
                               }`}
                             >
                               <GeneratedValue value={f.name} />
@@ -1433,7 +1433,7 @@ export function FlowsCanvas({
                 }
               />
               <GeneratedValue value={' '} />
-              <span className={embedded ? 'font-semibold text-fg' : 'text-fg-subtle'}>
+              <span className={embedded ? 'font-semibold text-fg' : 'text-fg-muted'}>
                 <GeneratedValue value={embedded ? '' : '· '} />
                 <GeneratedValue
                   value={selectedFlow ? selectedFlow.name : <GeneratedText id="m_1a4786daa752b1" />}
@@ -1662,7 +1662,7 @@ export function FlowsCanvas({
               </button>
             ))}
           />
-          <p className="pt-1 text-[11px] text-fg-subtle text-fg-muted">
+          <p className="pt-1 text-[11px] text-fg-muted">
             <GeneratedText id="m_0be1be4daf3028" />
           </p>
         </div>
@@ -1701,7 +1701,7 @@ export function FlowsCanvas({
             placeholder={tGenerated('m_01e855ecae74db')}
             onChange={(e) => setAiPrompt(e.target.value)}
           />
-          <p className="text-[11px] text-fg-subtle text-fg-muted">
+          <p className="text-[11px] text-fg-muted">
             <GeneratedText id="m_06e04a2aa58e1f" />
           </p>
         </div>
@@ -1928,7 +1928,7 @@ function NodeInspector({
                       onChange({ kind: 'trigger', trigger: { ...t, showIf: rule ?? undefined } })
                     }
                   />
-                  <p className="mt-1 text-[11px] text-fg-subtle text-fg-muted">
+                  <p className="mt-1 text-[11px] text-fg-muted">
                     <GeneratedText id="m_01a3b7ba2ed936" />
                     <GeneratedValue value={' '} />
                     <span className="font-mono">
@@ -2237,7 +2237,7 @@ function ActionInspector({
                               <GeneratedText id="m_1a12949487d961" />
                             </p>
                           ) : (
-                            <p className="text-xs text-fg-subtle">
+                            <p className="text-xs text-fg-muted">
                               <GeneratedText id="m_00021f60b601ff" />
                             </p>
                           )
@@ -2263,7 +2263,7 @@ function ActionInspector({
                       <GeneratedValue
                         value={
                           emailTemplates.length === 0 ? (
-                            <p className="text-xs text-fg-subtle">
+                            <p className="text-xs text-fg-muted">
                               <GeneratedText id="m_01725f4d4cbece" />
                             </p>
                           ) : null
@@ -2640,7 +2640,7 @@ function ActionInspector({
                 ariaLabel="Target app"
                 onChange={(templateId) => set({ ...a, templateId })}
               />
-              <p className="mt-1 text-[11px] text-fg-subtle text-fg-muted">
+              <p className="mt-1 text-[11px] text-fg-muted">
                 <GeneratedText id="m_0569fdc1833cbf" />
               </p>
             </Field>
@@ -2795,7 +2795,7 @@ function MonitorNum({
           disabled={readOnly || !!fieldKey}
           onChange={(e) => onValue(Math.floor(Number(e.target.value) || 0))}
         />
-        <span className="text-xs text-fg-subtle text-fg-muted">
+        <span className="text-xs text-fg-muted">
           <GeneratedText id="m_0e0bbc9cd7e263" />
         </span>
         <Select

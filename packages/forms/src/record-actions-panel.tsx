@@ -131,7 +131,7 @@ function ButtonList({ buttons, adapter, onChanged, confirmRemove, readOnly }: { 
     await run(flow, () => adapter.remove(flow.id))
   }
 
-  if (buttons.length === 0) return <p className="rounded-md border border-dashed border-border px-3 py-4 text-center text-xs text-fg-subtle">No record buttons yet.</p>
+  if (buttons.length === 0) return <p className="rounded-md border border-dashed border-border px-3 py-4 text-center text-xs text-fg-muted">No record buttons yet.</p>
 
   return (
     <div className="space-y-2">
@@ -193,7 +193,7 @@ function AddButtonForm({ adapter, nextOrder, onChanged, readOnly }: { adapter: R
         <div className="space-y-1"><Label className="text-xs">Style</Label><Select value={variant} disabled={readOnly} onChange={(event) => setVariant(event.target.value as ButtonVariant)}>{VARIANTS.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}</Select></div>
         <div className="space-y-1"><Label className="text-xs">Icon</Label><Input value={icon} disabled={readOnly} placeholder="download" onChange={(event) => setIcon(event.target.value)} /></div>
       </div>
-      <p className="text-[11px] text-fg-subtle">The workflow opens with one trigger and one action. Add conditions, approvals, notifications, and branches in the workflow studio.</p>
+      <p className="text-[11px] text-fg-muted">The workflow opens with one trigger and one action. Add conditions, approvals, notifications, and branches in the workflow studio.</p>
       {error ? <p role="alert" className="text-xs text-danger">{error}</p> : null}
       <Button type="button" disabled={pending || readOnly} className="w-full" onClick={add}><Plus size={14} />{pending ? 'Adding…' : 'Add button'}</Button>
     </div>

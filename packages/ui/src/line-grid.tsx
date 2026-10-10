@@ -169,7 +169,7 @@ export function LineGrid<Row extends Record<string, unknown>>({
 
   const cellBase = 'flex min-h-[38px] items-center border-b border-border-subtle px-1'
   const inputBase =
-    'w-full rounded-sm border-0 bg-transparent px-1.5 py-1 text-sm text-fg outline-none focus:ring-2 focus:ring-ring/50'
+    'w-full rounded-sm border-0 bg-transparent px-1.5 py-1 text-sm text-fg outline-none focus:ring-2 focus:ring-ring'
 
   return (
     <div>
@@ -200,7 +200,7 @@ export function LineGrid<Row extends Record<string, unknown>>({
                       setMenuRow(i)
                       menu.openBelow(e.currentTarget)
                     }}
-                    className="group flex size-7 items-center justify-center rounded text-fg-subtle transition-colors hover:bg-surface-hover hover:text-fg-muted"
+                    className="group flex size-7 items-center justify-center rounded text-fg-muted transition-colors hover:bg-surface-hover hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
                   >
                     <span className="text-[11px] tabular-nums group-hover:hidden">{i + 1}</span>
                     <GripVertical size={13} className="hidden group-hover:block" />
@@ -255,7 +255,7 @@ export function LineGrid<Row extends Record<string, unknown>>({
                           inputBase,
                           'text-right tabular-nums',
                           value !== '' && value != null && Number.isNaN(Number(value)) &&
-                            'text-danger focus:ring-danger/50',
+                            'text-danger focus:ring-danger',
                         )}
                       />
                     ) : (
@@ -284,7 +284,7 @@ export function LineGrid<Row extends Record<string, unknown>>({
         )}
         {footer}
       </div>
-      {!readOnly ? <p className="mt-1.5 text-[11px] text-fg-subtle">{labels.keyboardHint}</p> : null}
+      {!readOnly ? <p className="mt-1.5 text-[11px] text-fg-muted">{labels.keyboardHint}</p> : null}
 
       <ContextMenu
         open={menu.open && menuRow != null}

@@ -467,7 +467,7 @@ export function GanttView({
               className="flex items-center border-b border-border bg-bg-subtle px-4"
               style={{ height: HEADER_BAND_HEIGHT }}
             >
-              <span className="text-[11px] font-semibold tracking-wide text-fg-subtle uppercase">
+              <span className="text-[11px] font-semibold tracking-wide text-fg-muted uppercase">
                 {labels.badges.schedule}
               </span>
             </div>
@@ -477,9 +477,9 @@ export function GanttView({
             >
               <div className="grid w-full items-center gap-2" style={{ gridTemplateColumns: LEFT_GRID_COLUMNS }}>
                 <span className="text-xs font-medium text-fg-muted">{labels.columns.name}</span>
-                <span className="text-xs font-medium text-fg-subtle">{labels.columns.start}</span>
-                <span className="text-xs font-medium text-fg-subtle">{labels.columns.finish}</span>
-                <span className="text-xs font-medium text-fg-subtle">{labels.columns.duration}</span>
+                <span className="text-xs font-medium text-fg-muted">{labels.columns.start}</span>
+                <span className="text-xs font-medium text-fg-muted">{labels.columns.finish}</span>
+                <span className="text-xs font-medium text-fg-muted">{labels.columns.duration}</span>
               </div>
             </div>
           </div>
@@ -511,7 +511,7 @@ export function GanttView({
                         {phase.number ? `${phase.number}. ` : ''}
                         {phase.name}
                       </span>
-                      <span className="ml-auto shrink-0 text-[11px] text-fg-subtle">
+                      <span className="ml-auto shrink-0 text-[11px] text-fg-muted">
                         {labels.format.taskCount(group.tasks.length)}
                       </span>
                     </div>
@@ -574,7 +574,7 @@ export function GanttView({
                                   setDropTarget(null)
                                 }}
                                 onClick={(event) => event.stopPropagation()}
-                                className="mt-0.5 shrink-0 text-fg-subtle transition-colors hover:text-fg-muted"
+                                className="mt-0.5 shrink-0 text-fg-muted transition-colors hover:text-fg"
                                 aria-label={`${labels.toolbar.indent}: ${task.name || labels.badges.untitled}`}
                                 title={labels.badges.reorderHint}
                               >
@@ -584,7 +584,7 @@ export function GanttView({
                               {hierarchy?.hasChildren ? (
                                 <button
                                   type="button"
-                                  className="mt-0.5 shrink-0 text-fg-subtle transition-colors hover:text-fg"
+                                  className="mt-0.5 shrink-0 text-fg-muted transition-colors hover:text-fg"
                                   onClick={(event) => {
                                     event.stopPropagation()
                                     toggleTask(task.id)
@@ -612,7 +612,7 @@ export function GanttView({
                                 <span className="block truncate text-xs text-fg">
                                   {task.name || labels.badges.untitled}
                                 </span>
-                                <div className="mt-1 flex max-h-5 min-w-0 flex-wrap items-center gap-1.5 overflow-hidden text-[10px] text-fg-subtle">
+                                <div className="mt-1 flex max-h-5 min-w-0 flex-wrap items-center gap-1.5 overflow-hidden text-[10px] text-fg-muted">
                                   {!isCompactLeftPanel && isSummaryTask ? (
                                     <Badge variant="secondary" className="px-1.5 py-0 text-[10px] font-medium">{labels.badges.summary}</Badge>
                                   ) : null}
@@ -913,7 +913,7 @@ function HeaderColumn({
         {column.label}
       </span>
       {column.subLabel ? (
-        <span className="mt-0.5 text-[10px] leading-tight text-fg-subtle">{column.subLabel}</span>
+        <span className="mt-0.5 text-[10px] leading-tight text-fg-muted">{column.subLabel}</span>
       ) : null}
     </div>
   )

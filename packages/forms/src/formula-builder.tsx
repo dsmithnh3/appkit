@@ -398,7 +398,7 @@ function Node({
             showClear && onClear ? (
               <button
                 type="button"
-                className="rounded p-1 text-fg-subtle hover:text-danger"
+                className="rounded p-1 text-fg-muted hover:text-danger"
                 onClick={onClear}
                 title={tGenerated('m_1e4d427e74e767')}
               >

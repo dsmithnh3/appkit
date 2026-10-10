@@ -16,11 +16,11 @@ Never write a raw color. Every surface, text, and border resolves through a
 | Group | Utilities |
 |---|---|
 | Surfaces | `bg-bg` `bg-bg-subtle` `bg-surface` `bg-surface-hover` `bg-elevated` `bg-overlay` |
-| Text | `text-fg` `text-fg-muted` `text-fg-subtle` |
+| Text | `text-fg` `text-fg-muted` · `text-fg-subtle` for placeholders, disabled items and decorative icons only (it is under 4.5:1; readable text uses `text-fg-muted`). `pnpm check:quality` fails on any other `text-fg-subtle`; a reviewed exception goes in `scripts/fg-subtle-allowlist.json` with its reason |
 | Borders | `border-border` `border-border-strong` `border-border-subtle` |
 | Brand | `bg-primary` `bg-primary-hover` `bg-primary-active` `text-primary-fg` `bg-primary-subtle` |
 | Semantic | `{bg,text,border}-{danger,warning,success,info}` + each `*-subtle` / `*-fg` |
-| Focus | `ring-ring` |
+| Focus | `ring-ring` at full strength: `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring` plus `ring-offset-2` on standalone controls, offset on the ground they sit on (`ring-offset-bg` on the page, `ring-offset-surface` in dialogs and drawers, `ring-offset-elevated` in popovers), or `ring-inset` on rows, tabs and bar items inside clipping containers. Never put an opacity modifier on a focus ring colour (`ring-ring/40`, `ring-danger/30`); an invalid field's ring is `ring-danger` |
 | Shape | `rounded-{sm,md,lg,xl}` (off `--radius`) · shadows `shadow-{sm,md,lg}` |
 
 Opacity works (`bg-primary/40`, `bg-overlay/50`). Light/dark is one `.dark` class
@@ -67,6 +67,12 @@ backdrop, focus trap, scroll-lock, **expand-to-fullscreen**, stacked/nested) ·
 `Popover` (portal-positioned floating panel) · `ContextMenu` + `useContextMenu`
 (kebab / right-click menu, items array) · `Tooltip`.
 
+Modal layers stack in the order they open. A `Dialog` opened over a `Drawer`, a
+`Drawer` opened from a `Dialog`, and a confirm or prompt over either all paint
+above the layer they came from (a layer opens at its own z-index or at the
+highest modal layer already open), and only the top layer handles Tab and
+Escape, so one Escape closes one layer.
+
 **Data display** — `Table` (+ `TableHeader/Body/Row/Head/Cell`, staggered rows;
 use `containerClassName` to adapt its default card shell when embedded) ·
 `RecordList` (`className`, `tableContainerClassName`, and `tableClassName`
@@ -74,7 +80,7 @@ support full-height embedded workspaces; controlled in-memory
 search/sort/pagination with typed reference/amount/status/custom/actions
 columns) · URL list kit: `parseListParams` /
 `parsePrefixedListParams`, `ListNavProvider`, `SearchInput`, `FilterChips`,
-`SortableTh` / `SortTh`, `Pagination` (shareable server-list state) · `LineGrid`
+`SortableTh` / `SortTh` (set `aria-sort` on the active column and pass `<th>` attributes through), `Pagination` (shareable server-list state) · `LineGrid`
 (the **spreadsheet line editor**: Enter appends, Alt+↑/↓ moves, ⌘D/⌘⌫, data-driven
 columns) · `OrgChart` (parent-pointer hierarchies: server-rendered border
 connectors, collapsible branches, zoom, optional drag-to-reparent; the pure
@@ -118,6 +124,10 @@ sidebar via `navigationMode="topbar" | "sidebar"`. The registry supports the
 siblings' serializable `iconKey`, `id`, subgroup, exact-match, and mobile-pin
 fields; mobile uses the same data in a drawer and bottom tab bar. `TopNav`,
 `AppSidebar`, `SidebarNav`, and `MobileTabBar` are also exported directly.
+The sidebar remembers a person's collapse choice in the `SIDEBAR_COLLAPSED_COOKIE`
+cookie: server-render `defaultCollapsed={readSidebarCollapsed(await cookies())}`
+to paint the remembered width on first load, or omit `defaultCollapsed` and the
+rail restores it after mount.
 Hosts can tune top-level topbar typography and active/inactive emphasis through
 `topNavigationItemClassName`, `topNavigationActiveItemClassName`, and
 `topNavigationInactiveItemClassName` without changing sidebar or mobile

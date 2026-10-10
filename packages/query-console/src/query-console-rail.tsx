@@ -139,7 +139,7 @@ export function QueryConsoleRail({
             <div className="min-h-0 flex-1 overflow-y-auto p-2">
               {savedSnippets.length > 0 ? (
                 <div className="mb-2">
-                  <div className="px-1.5 pb-1 text-[10px] font-semibold tracking-wide text-fg-subtle uppercase">
+                  <div className="px-1.5 pb-1 text-[10px] font-semibold tracking-wide text-fg-muted uppercase">
                     {labels.snippets.savedHeading}
                   </div>
                   <ul>
@@ -154,7 +154,7 @@ export function QueryConsoleRail({
                             <Bookmark size={12} className="shrink-0 text-primary" />
                             <span className="truncate">{snippet.name}</span>
                           </div>
-                          <p className="mt-0.5 truncate pl-[1.15rem] font-mono text-[11px] text-fg-subtle">
+                          <p className="mt-0.5 truncate pl-[1.15rem] font-mono text-[11px] text-fg-muted">
                             {snippet.sql.split('\n')[0]}
                           </p>
                         </button>
@@ -162,7 +162,7 @@ export function QueryConsoleRail({
                           type="button"
                           onClick={() => onDeleteSnippet(snippet.id)}
                           aria-label={labels.snippets.delete}
-                          className="absolute top-2 right-1.5 rounded-sm p-1 text-fg-subtle opacity-0 hover:bg-danger-subtle hover:text-danger focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring group-hover:opacity-100"
+                          className="absolute top-2 right-1.5 rounded-sm p-1 text-fg-muted opacity-0 hover:bg-danger-subtle hover:text-danger focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring group-hover:opacity-100"
                         >
                           <Trash2 size={13} />
                         </button>
@@ -174,7 +174,7 @@ export function QueryConsoleRail({
 
               {snippets.length > 0 ? (
                 <>
-                  <div className="px-1.5 pb-1 text-[10px] font-semibold tracking-wide text-fg-subtle uppercase">
+                  <div className="px-1.5 pb-1 text-[10px] font-semibold tracking-wide text-fg-muted uppercase">
                     {labels.snippets.examplesHeading}
                   </div>
                   <ul>
@@ -203,7 +203,7 @@ export function QueryConsoleRail({
         ) : (
           <div className="flex h-full flex-col">
             {history.length > 0 ? (
-              <div className="flex shrink-0 items-center justify-between px-3 py-1.5 text-[11px] text-fg-subtle">
+              <div className="flex shrink-0 items-center justify-between px-3 py-1.5 text-[11px] text-fg-muted">
                 <span>{labels.history.count(history.length)}</span>
                 <button
                   type="button"
@@ -216,7 +216,7 @@ export function QueryConsoleRail({
             ) : null}
             <ul className="min-h-0 flex-1 overflow-y-auto p-2">
               {history.length === 0 ? (
-                <li className="flex flex-col items-center gap-2 p-6 text-center text-xs text-fg-subtle">
+                <li className="flex flex-col items-center gap-2 p-6 text-center text-xs text-fg-muted">
                   <History size={20} />
                   {labels.history.empty}
                 </li>
@@ -230,7 +230,7 @@ export function QueryConsoleRail({
                     <div className="truncate font-mono text-xs text-fg-muted group-hover:text-primary">
                       {item.sql.split('\n')[0]}
                     </div>
-                    <div className="mt-1 flex items-center gap-2 text-[10px] text-fg-subtle">
+                    <div className="mt-1 flex items-center gap-2 text-[10px] text-fg-muted">
                       {item.ok ? (
                         <span className="tabular-nums">
                           {labels.history.rows(item.rowCount)} · {item.durationMs}ms

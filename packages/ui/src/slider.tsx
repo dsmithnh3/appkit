@@ -19,7 +19,7 @@ export const Slider = React.forwardRef<HTMLInputElement, SliderProps>(
       type="range"
       className={cn(
         'h-1.5 w-full cursor-pointer appearance-none rounded-full bg-border accent-primary',
-        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-bg',
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg',
         'disabled:cursor-not-allowed disabled:opacity-50',
         className,
       )}

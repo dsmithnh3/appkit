@@ -182,7 +182,7 @@ function BreakdownMeter({
     <div>
       <div className="mb-1.5 flex items-center justify-between gap-3 text-[11px]">
         <span className="truncate font-medium text-fg-muted">{breakdown.label}</span>
-        <span className="shrink-0 tabular-nums text-fg-subtle">{formatCount(total)}</span>
+        <span className="shrink-0 tabular-nums text-fg-muted">{formatCount(total)}</span>
       </div>
       <div className="flex h-4 overflow-visible rounded-full bg-bg-subtle">
         {breakdown.segments.map((segment, index) => {
@@ -239,7 +239,7 @@ function WorkspaceLaunchCard<Id extends string>({
       onClick={() => onSelect(item.id, item)}
       className={cn(
         'group/card relative z-0 flex h-full min-h-0 min-w-0 flex-col overflow-visible rounded-lg border border-border bg-surface text-left shadow-sm transition-all duration-200',
-        'hover:z-20 hover:-translate-y-0.5 hover:shadow-[0_18px_48px_rgb(var(--ch-fg)/0.10)] focus-visible:z-20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/35',
+        'hover:z-20 hover:-translate-y-0.5 hover:shadow-[0_18px_48px_rgb(var(--ch-fg)/0.10)] focus-visible:z-20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
         'disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0 disabled:hover:shadow-sm',
         density === 'comfortable' ? 'p-5' : 'p-3',
         tone.hover,

@@ -65,7 +65,7 @@ export function FilterChips({
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
           className={cn(
-            'inline-flex h-8 max-w-[16rem] items-center gap-1.5 rounded-md border px-3 text-sm transition-colors',
+            'inline-flex h-8 max-w-[16rem] items-center gap-1.5 rounded-md border px-3 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg',
             active
               ? 'border-primary/40 bg-primary-subtle text-primary'
               : 'border-border bg-surface text-fg hover:border-border-strong hover:bg-surface-hover',
@@ -188,14 +188,14 @@ function FilterItem({
       role="option"
       aria-selected={active}
       className={cn(
-        'flex items-center gap-2 rounded px-2 py-1.5 text-sm transition-colors',
+        'flex items-center gap-2 rounded px-2 py-1.5 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring',
         active ? 'bg-primary-subtle font-medium text-primary' : 'text-fg hover:bg-surface-hover',
       )}
     >
       <Check size={14} className={cn('shrink-0', active ? 'text-primary' : 'text-transparent')} />
       <span className="flex-1 truncate">{children}</span>
       {typeof count === 'number' ? (
-        <span className={cn('shrink-0 text-xs tabular-nums', active ? 'text-primary/80' : 'text-fg-subtle')}>
+        <span className={cn('shrink-0 text-xs tabular-nums', active ? 'text-primary/80' : 'text-fg-muted')}>
           {count}
         </span>
       ) : null}

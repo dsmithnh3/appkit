@@ -134,7 +134,7 @@ export function RecordListPanel({ value, fields, onChange, onSave, readOnly = fa
           </Select>
           <Button type="button" variant="outline" size="sm" onClick={add} disabled={readOnly || !addKind} aria-label="Add column"><Plus size={14} /></Button>
         </div>
-        <p className="text-[11px] text-fg-subtle">Drag-free ordering keeps the list editor keyboard accessible; use the arrow controls to set exact order.</p>
+        <p className="text-[11px] text-fg-muted">Drag-free ordering keeps the list editor keyboard accessible; use the arrow controls to set exact order.</p>
       </section>
 
       <section className="space-y-2">
@@ -161,7 +161,7 @@ export function RecordListPanel({ value, fields, onChange, onSave, readOnly = fa
         <Select value={value?.defaultStatus ?? ''} disabled={readOnly} onChange={(event) => commit({ defaultStatus: event.target.value || undefined })}>
           {STATUS_OPTIONS.map((option) => <option key={option.value || 'none'} value={option.value}>{option.label}</option>)}
         </Select>
-        <p className="text-[11px] text-fg-subtle">People can still change the filter after the list opens.</p>
+        <p className="text-[11px] text-fg-muted">People can still change the filter after the list opens.</p>
       </section>
 
       {onSave ? <Button type="button" disabled={pending || readOnly} className="w-full" onClick={() => startTransition(async () => onSave(value ?? {}))}><Check size={14} />{pending ? 'Saving…' : 'Save list settings'}</Button> : null}
@@ -170,5 +170,5 @@ export function RecordListPanel({ value, fields, onChange, onSave, readOnly = fa
 }
 
 function IconButton({ label, disabled, danger = false, onClick, children }: { label: string; disabled: boolean; danger?: boolean; onClick: () => void; children: React.ReactNode }) {
-  return <button type="button" aria-label={label} title={label} disabled={disabled} onClick={onClick} className={cn('rounded p-1 text-fg-subtle hover:bg-surface-hover hover:text-fg disabled:opacity-30', danger && 'hover:bg-danger-subtle hover:text-danger')}>{children}</button>
+  return <button type="button" aria-label={label} title={label} disabled={disabled} onClick={onClick} className={cn('rounded p-1 text-fg-muted hover:bg-surface-hover hover:text-fg disabled:opacity-30', danger && 'hover:bg-danger-subtle hover:text-danger')}>{children}</button>
 }

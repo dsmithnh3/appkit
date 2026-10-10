@@ -84,6 +84,11 @@ export {
 } from './api-reference'
 export { AppShell, type AppShellNavigationMode } from './app-shell'
 export { AppSidebar } from './app-sidebar'
+export {
+  SIDEBAR_COLLAPSED_COOKIE,
+  readSidebarCollapsed,
+  type SidebarCookieStore,
+} from './sidebar-state'
 export { TopNav } from './top-nav'
 export { MobileTabBar } from './mobile-tab-bar'
 export {
@@ -129,7 +134,7 @@ export {
 export { ListNavProvider, useListNav, useListNavClick, type ListNav } from './list-nav'
 export { SearchInput } from './list-search-input'
 export { FilterChips, SearchSelectFilter, type FilterOption } from './filter-chips'
-export { SortableTh, SortTh } from './sortable-th'
+export { SortableTh, SortTh, type SortableThProps, type SortThProps } from './sortable-th'
 export { Pagination, type PaginationLabels } from './list-pagination'
 export {
   PagedTable,

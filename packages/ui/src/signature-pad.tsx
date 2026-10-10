@@ -445,7 +445,8 @@ export function SignaturePad({
                   style={{ top: `${(2 / 3) * 100}%` }}
                 />
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-xs text-fg-subtle">{t('Sign here')}</span>
+                  {/* On the white signing surface in both themes, so it takes the stable ink, not a theme's fg. */}
+                  <span className="text-xs text-signature-ink/70">{t('Sign here')}</span>
                 </div>
               </div>
             ) : null}

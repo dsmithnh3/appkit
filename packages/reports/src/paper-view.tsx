@@ -107,7 +107,7 @@ export function PaperView<TDrillTarget>({
             <h3 className="pt-2 text-xs font-semibold tracking-wide uppercase">{group.title}</h3>
             {group.subtitle ? <span className="text-xs text-fg-muted">{group.subtitle}</span> : null}
           </div> : null}
-          {group.isEmpty || group.rows.length === 0 ? <p className="py-6 text-center text-sm text-fg-subtle italic">{emptyLabel}</p> : <ReportTable>
+          {group.isEmpty || group.rows.length === 0 ? <p className="py-6 text-center text-sm text-fg-muted italic">{emptyLabel}</p> : <ReportTable>
             <ReportTableHeader><ReportTableRow>{group.columns.map((column, columnIndex) => <ReportTableHead
               key={`${column}-${columnIndex}`}
               className={(group.align?.[columnIndex] ?? (columnIndex === 0 ? 'left' : 'right')) === 'right' ? 'text-right' : (group.align?.[columnIndex] === 'center' ? 'text-center' : 'text-left')}

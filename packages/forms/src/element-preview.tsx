@@ -64,7 +64,7 @@ export function ElementPreview({
       <GeneratedValue
         value={
           helpText ? (
-            <p className="text-[10px] text-fg-subtle">
+            <p className="text-[10px] text-fg-muted">
               <GeneratedValue value={helpText} />
             </p>
           ) : null
@@ -203,7 +203,7 @@ function ElementInput({
       )
     case 'signature':
       return (
-        <div className="flex h-16 items-center justify-center rounded border border-dashed border-border-strong bg-bg-subtle text-xs text-fg-subtle italic">
+        <div className="flex h-16 items-center justify-center rounded border border-dashed border-border-strong bg-bg-subtle text-xs text-fg-muted italic">
           <GeneratedText id="m_05a0e2d38bded7" />
         </div>
       )
@@ -213,26 +213,26 @@ function ElementInput({
     case 'video':
     case 'audio':
       return (
-        <div className="flex h-16 items-center justify-center rounded border border-dashed border-border-strong bg-bg-subtle text-xs text-fg-subtle">
+        <div className="flex h-16 items-center justify-center rounded border border-dashed border-border-strong bg-bg-subtle text-xs text-fg-muted">
           <GeneratedText id="m_10e50435ff2693" />
         </div>
       )
     case 'sketch':
       return (
-        <div className="flex h-20 items-center justify-center rounded border border-dashed border-border-strong bg-[repeating-linear-gradient(45deg,transparent,transparent_9px,rgba(148,163,184,0.12)_9px,rgba(148,163,184,0.12)_10px)] text-xs text-fg-subtle italic">
+        <div className="flex h-20 items-center justify-center rounded border border-dashed border-border-strong bg-[repeating-linear-gradient(45deg,transparent,transparent_9px,rgba(148,163,184,0.12)_9px,rgba(148,163,184,0.12)_10px)] text-xs text-fg-muted italic">
           <GeneratedText id="m_1abf555859c0a8" />
         </div>
       )
     case 'photo_ai':
       return (
         <div className="space-y-1.5">
-          <div className="flex h-14 items-center justify-center rounded border border-dashed border-border-strong bg-bg-subtle text-xs text-fg-subtle">
+          <div className="flex h-14 items-center justify-center rounded border border-dashed border-border-strong bg-bg-subtle text-xs text-fg-muted">
             <GeneratedText id="m_18010438ac7907" />
           </div>
           <span className="inline-flex items-center gap-1 rounded-md border border-info bg-info-subtle px-2 py-1 text-[11px] text-info">
             <Sparkles size={12} /> <GeneratedText id="m_0fec93e95858fc" />
           </span>
-          <div className="flex items-center gap-1 text-[10px] text-fg-subtle">
+          <div className="flex items-center gap-1 text-[10px] text-fg-muted">
             <AlertTriangle size={11} className="text-warning" />{' '}
             <GeneratedText id="m_0289ca8aa7b891" />
           </div>
@@ -256,7 +256,7 @@ function ElementInput({
             disabled
             className="h-2 flex-1 rounded-full bg-border accent-primary"
           />
-          <span className="text-xs text-fg-subtle">
+          <span className="text-xs text-fg-muted">
             <GeneratedValue value={Math.round((min + max) / 2)} />
           </span>
         </div>
@@ -289,7 +289,7 @@ function ElementInput({
               <th />
               <GeneratedValue
                 value={scale.map((s) => (
-                  <th key={s.value} className="px-1 text-center font-normal text-fg-subtle">
+                  <th key={s.value} className="px-1 text-center font-normal text-fg-muted">
                     <GeneratedValue value={s.label} />
                   </th>
                 ))}
@@ -339,7 +339,7 @@ function ElementInput({
     case 'photo_annotated':
       return (
         <div className="space-y-1">
-          <div className="relative flex h-24 items-center justify-center rounded border border-dashed border-border-strong bg-bg-subtle text-xs text-fg-subtle">
+          <div className="relative flex h-24 items-center justify-center rounded border border-dashed border-border-strong bg-bg-subtle text-xs text-fg-muted">
             <GeneratedText id="m_18010438ac7907" />
             <span className="absolute top-1/3 left-1/3 flex h-5 w-5 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-danger text-[10px] font-bold text-danger-fg ring-2 ring-surface">
               1
@@ -348,7 +348,7 @@ function ElementInput({
               2
             </span>
           </div>
-          <div className="text-[10px] text-fg-subtle">
+          <div className="text-[10px] text-fg-muted">
             <GeneratedText id="m_18c006b02858b9" />
           </div>
         </div>
@@ -377,13 +377,13 @@ function ElementInput({
                 key={i}
                 className="flex items-center gap-2 rounded border border-border bg-white px-2 py-1 text-xs"
               >
-                <span className="w-4 text-center font-semibold text-fg-subtle">
+                <span className="w-4 text-center font-semibold text-fg-muted">
                   <GeneratedValue value={i + 1} />
                 </span>
                 <span className="flex-1 truncate text-fg-muted">
                   <GeneratedValue value={l} />
                 </span>
-                <span className="text-fg-subtle">⇅</span>
+                <span className="text-fg-muted">⇅</span>
               </li>
             ))}
           />
@@ -393,7 +393,7 @@ function ElementInput({
     case 'rich_text':
       return (
         <div className="rounded border border-border">
-          <div className="flex gap-2 border-b border-border bg-bg-subtle px-1.5 py-1 text-[11px] text-fg-subtle">
+          <div className="flex gap-2 border-b border-border bg-bg-subtle px-1.5 py-1 text-[11px] text-fg-muted">
             <span className="font-bold">
               <GeneratedText id="m_03d716fddcdd92" />
             </span>
@@ -478,7 +478,7 @@ function ElementInput({
                   value={headers.slice(0, 5).map((_, i) => (
                     <div
                       key={i}
-                      className="flex-1 border-r border-border-subtle px-1.5 py-1 text-fg-subtle last:border-0"
+                      className="flex-1 border-r border-border-subtle px-1.5 py-1 text-fg-muted last:border-0"
                     >
                       —
                     </div>
@@ -490,7 +490,7 @@ function ElementInput({
           <GeneratedValue
             value={
               sel && sel !== 'none' ? (
-                <div className="bg-bg-subtle px-1.5 py-0.5 text-[9px] text-fg-subtle">
+                <div className="bg-bg-subtle px-1.5 py-0.5 text-[9px] text-fg-muted">
                   <GeneratedValue
                     value={
                       sel === 'single' ? (
@@ -527,7 +527,7 @@ function ElementInput({
           <BarChart3 size={18} className="text-primary" />
           <div>
             <div className="text-2xl leading-none font-semibold text-fg">—</div>
-            <div className="mt-0.5 text-[10px] tracking-wide text-fg-subtle uppercase">
+            <div className="mt-0.5 text-[10px] tracking-wide text-fg-muted uppercase">
               <GeneratedValue value={agg?.fn ?? <GeneratedText id="m_15f748343d3956" />} />
               <GeneratedValue value={agg?.column ? ` · ${agg.column}` : ''} />
             </div>
@@ -544,7 +544,7 @@ function MiniTable({ field }: { field: FormField }) {
   const cols = (cfg(field).columns as { key: string; label: string }[] | undefined) ?? []
   if (cols.length === 0) {
     return (
-      <div className="rounded border border-dashed border-border-strong p-2 text-center text-[11px] text-fg-subtle">
+      <div className="rounded border border-dashed border-border-strong p-2 text-center text-[11px] text-fg-muted">
         <GeneratedText id="m_0d90d1eceb566b" />
       </div>
     )
@@ -571,7 +571,7 @@ function MiniTable({ field }: { field: FormField }) {
               value={shown.map((c) => (
                 <div
                   key={c.key}
-                  className="flex-1 border-r border-border-subtle px-1.5 py-1 text-fg-subtle last:border-0"
+                  className="flex-1 border-r border-border-subtle px-1.5 py-1 text-fg-muted last:border-0"
                 >
                   —
                 </div>

@@ -300,7 +300,7 @@ export function SidebarNav({
             {collapsed ? (
               <div className="mx-2 mb-1 border-t border-border-subtle" aria-hidden />
             ) : (
-              <div className="px-2 pb-1 text-[10px] font-semibold tracking-wider text-fg-subtle uppercase">
+              <div className="px-2 pb-1 text-[10px] font-semibold tracking-wider text-fg-muted uppercase">
                 {group.label}
               </div>
             )}
@@ -348,7 +348,7 @@ export function SidebarNav({
                     active
                       ? 'bg-primary-subtle text-primary'
                       : 'text-fg-muted hover:bg-surface-hover hover:text-fg',
-                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40',
+                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
                   )}
                 >
                   <NavIcon iconKey={group.iconKey} icon={group.icon} size={14} className="shrink-0" />
@@ -450,7 +450,7 @@ function CollapsedWorkspace({
             active
               ? 'bg-primary-subtle text-primary before:bg-primary'
               : 'text-fg-muted before:bg-transparent hover:bg-surface-hover hover:text-fg',
-            'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40',
+            'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
           )}
         >
           <NavIcon iconKey={group.iconKey} icon={group.icon} size={17} />
@@ -533,7 +533,7 @@ function NavLink({
           active
             ? 'bg-primary-subtle text-fg before:h-6 before:bg-primary'
             : 'text-fg-muted before:bg-transparent hover:bg-surface-hover hover:text-fg hover:before:bg-border-strong',
-          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40',
+          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
         ),
         children: (
           <>
@@ -577,15 +577,18 @@ function SubgroupSection({
     if (hasActiveChild) setOpen(true)
   }, [hasActiveChild])
 
-  const headerClass = cn(
+  const headerTone = cn(
     'group flex w-full items-center gap-2.5 rounded-md px-2 py-1.5 text-sm transition-colors duration-150 ease-out',
     selfActive
       ? 'bg-primary-subtle text-fg'
       : hasActiveChild && !open
         ? 'text-primary'
         : 'text-fg-muted hover:bg-surface-hover hover:text-fg',
-    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40',
   )
+  // The ring goes on whatever takes focus: the whole header when it is one
+  // button, or each half of a split header (the wrapper itself never focuses).
+  const focusRing = 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
+  const headerClass = cn(headerTone, focusRing)
   const chevron = (
     <ChevronRight
       size={15}
@@ -596,13 +599,13 @@ function SubgroupSection({
   return (
     <div>
       {href ? (
-        <div className={cn(headerClass, 'p-0')}>
+        <div className={cn(headerTone, 'p-0')}>
           <button
             type="button"
             aria-expanded={open}
             aria-label={label}
             onClick={() => setOpen((current) => !current)}
-            className="grid shrink-0 place-items-center self-stretch rounded-l-md pl-2 hover:bg-surface-active"
+            className={cn('grid shrink-0 place-items-center self-stretch rounded-l-md pl-2 hover:bg-surface-hover', focusRing, 'focus-visible:ring-inset')}
           >
             {chevron}
           </button>
@@ -610,7 +613,7 @@ function SubgroupSection({
             href,
             ariaCurrent: selfActive ? 'page' : undefined,
             dataWalkthrough: `nav:${href}`,
-            className: 'flex flex-1 items-center gap-2.5 rounded-r-md py-1.5 pr-2',
+            className: cn('flex flex-1 items-center gap-2.5 rounded-r-md py-1.5 pr-2', focusRing, 'focus-visible:ring-inset'),
             children: (
               <>
                 {iconKey ? <NavIcon iconKey={iconKey} className="shrink-0 text-fg-muted" /> : null}

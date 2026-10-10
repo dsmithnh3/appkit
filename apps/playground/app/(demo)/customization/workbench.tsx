@@ -221,7 +221,7 @@ export function CustomizationWorkbench() {
           { value: 'manager', label: 'Manager' },
           { value: 'member', label: 'Member' },
         ]}
-        footer={<p className="text-xs text-fg-subtle">Changes are saved in this browser.</p>}
+        footer={<p className="text-xs text-fg-muted">Changes are saved in this browser.</p>}
       />}
     </div>
   </div>
@@ -308,4 +308,4 @@ function RecordListDemo({ views, fields, onCustomize, setViews }: { views: ListV
 }
 
 function SurfaceTab({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) { return <button type="button" onClick={onClick} className={active ? '-mb-px border-b-2 border-primary px-3 py-2 text-sm font-medium text-primary' : '-mb-px border-b-2 border-transparent px-3 py-2 text-sm font-medium text-fg-muted hover:text-fg'}>{children}</button> }
-function RecordField({ label, children }: { label: string; children: React.ReactNode }) { return <div><p className="text-xs font-medium uppercase tracking-wide text-fg-subtle">{label}</p><div className="mt-1 text-sm text-fg">{children}</div></div> }
+function RecordField({ label, children }: { label: string; children: React.ReactNode }) { return <div><p className="text-xs font-medium uppercase tracking-wide text-fg-muted">{label}</p><div className="mt-1 text-sm text-fg">{children}</div></div> }

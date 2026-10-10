@@ -47,7 +47,7 @@ export default function PackagesPage() {
                       <CardTitle className="font-mono text-base">{item.name}</CardTitle>
                       <CardDescription>{item.description}</CardDescription>
                     </CardHeader>
-                    <CardContent className="flex items-center justify-between gap-3 text-xs text-fg-subtle">
+                    <CardContent className="flex items-center justify-between gap-3 text-xs text-fg-muted">
                       <span>{item.exports.length} public {item.exports.length === 1 ? 'entry' : 'entries'}</span>
                       <span className="inline-flex items-center gap-1 font-medium text-primary">
                         Package details <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />

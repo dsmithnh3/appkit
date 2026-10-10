@@ -271,7 +271,7 @@ function FolderRail({
       </div>
       {categories.length ? (
         <>
-          <p className="px-2.5 pb-1 pt-4 text-[11px] font-semibold uppercase tracking-wide text-fg-subtle">{copy.categories}</p>
+          <p className="px-2.5 pb-1 pt-4 text-[11px] font-semibold uppercase tracking-wide text-fg-muted">{copy.categories}</p>
           <div className="space-y-0.5">
             {categories.map((category) => {
               const visual = visuals?.[category.category]
@@ -359,10 +359,10 @@ function MessageRow({
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-2">
           <span className={cn('min-w-0 truncate text-xs', item.read ? 'text-fg-muted' : 'font-semibold text-fg')}>{label}</span>
-          <time suppressHydrationWarning className="ml-auto shrink-0 text-[11px] whitespace-nowrap text-fg-subtle group-hover:opacity-0">{relativeTime(item.occurredAt)}</time>
+          <time suppressHydrationWarning className="ml-auto shrink-0 text-[11px] whitespace-nowrap text-fg-muted group-hover:opacity-0">{relativeTime(item.occurredAt)}</time>
         </div>
         <p className={cn('truncate text-sm', item.read ? 'text-fg-muted' : 'font-semibold text-fg')}>{item.title}</p>
-        {item.body ? <p className="truncate text-xs text-fg-subtle">{item.body}</p> : null}
+        {item.body ? <p className="truncate text-xs text-fg-muted">{item.body}</p> : null}
         {item.isCritical ? <Badge variant="destructive" className="mt-1 h-4 px-1.5 text-[10px]">{copy.critical}</Badge> : null}
       </div>
       <div className="absolute right-2 top-1.5 hidden items-center gap-0.5 rounded-md bg-surface/95 p-0.5 shadow-sm group-hover:flex group-focus-within:flex">
@@ -386,10 +386,10 @@ function TodoRow({ todo, visual, copy }: { todo: NotificationTodoItem; visual?: 
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-2">
           <span className="min-w-0 truncate text-xs text-fg-muted">{visual?.label ?? todo.kind}</span>
-          {todo.dueOn ? <span className={cn('ml-auto shrink-0 text-[11px] whitespace-nowrap', todo.status === 'overdue' ? 'font-medium text-danger' : 'text-fg-subtle')}>{copy.due} {todo.dueOn}</span> : null}
+          {todo.dueOn ? <span className={cn('ml-auto shrink-0 text-[11px] whitespace-nowrap', todo.status === 'overdue' ? 'font-medium text-danger' : 'text-fg-muted')}>{copy.due} {todo.dueOn}</span> : null}
         </div>
         <p className="truncate text-sm font-medium text-fg">{todo.title}</p>
-        {todo.subtitle ? <p className="truncate text-xs capitalize text-fg-subtle">{todo.subtitle}</p> : null}
+        {todo.subtitle ? <p className="truncate text-xs capitalize text-fg-muted">{todo.subtitle}</p> : null}
       </div>
       <ArrowUpRight size={15} className="shrink-0 text-fg-subtle opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" />
     </UiLink>
@@ -420,7 +420,7 @@ function ReadingPane({
       <div className="flex h-full flex-col items-center justify-center gap-3 px-6 text-center">
         <div className="flex size-16 items-center justify-center rounded-full bg-bg-subtle"><Mail size={28} className="text-fg-subtle" /></div>
         <p className="text-sm font-medium text-fg-muted">{copy.selectTitle}</p>
-        <p className="max-w-xs text-xs text-fg-subtle">{copy.selectDescription}</p>
+        <p className="max-w-xs text-xs text-fg-muted">{copy.selectDescription}</p>
       </div>
     )
   }
@@ -448,7 +448,7 @@ function ReadingPane({
   )
   const body = (
     <div className="space-y-5">
-      {item.body ? <p className="text-sm leading-relaxed whitespace-pre-wrap text-fg-muted">{item.body}</p> : <p className="text-sm text-fg-subtle">{copy.noBody}</p>}
+      {item.body ? <p className="text-sm leading-relaxed whitespace-pre-wrap text-fg-muted">{item.body}</p> : <p className="text-sm text-fg-muted">{copy.noBody}</p>}
       {item.linkPath ? <Button asChild><UiLink href={item.linkPath}>{copy.openRecord}<ArrowUpRight size={16} /></UiLink></Button> : null}
     </div>
   )
@@ -633,7 +633,7 @@ export function NotificationInbox({
     <div className="flex flex-col items-center justify-center px-6 py-20 text-center">
       <div className="flex size-14 items-center justify-center rounded-full bg-bg-subtle text-fg-subtle">{icon}</div>
       <p className="mt-3 text-sm font-medium text-fg-muted">{title}</p>
-      <p className="mt-1 text-xs text-fg-subtle">{description}</p>
+      <p className="mt-1 text-xs text-fg-muted">{description}</p>
     </div>
   )
 
@@ -642,7 +642,7 @@ export function NotificationInbox({
       ? todos.map((todo) => <TodoRow key={todo.id} todo={todo} visual={todoVisuals?.[todo.kind]} copy={copy} />)
       : empty(<ListChecks size={26} />, copy.emptyTodosTitle, copy.emptyTodosDescription)
     : items.length
-      ? <>{items.map((item) => <MessageRow key={item.id} item={item} label={labels.get(item.category) ?? item.category} visuals={categoryVisuals} copy={copy} selected={item.id === selectedId} onOpen={() => open(item)} onToggleRead={() => setRead(item, !item.read)} onDelete={() => remove(item)} />)}{hasMore ? <div ref={sentinelRef} className="flex items-center justify-center py-6"><Loader2 size={18} className="animate-spin text-fg-subtle" /></div> : <p className="py-6 text-center text-xs text-fg-subtle">{copy.endOfInbox}</p>}</>
+      ? <>{items.map((item) => <MessageRow key={item.id} item={item} label={labels.get(item.category) ?? item.category} visuals={categoryVisuals} copy={copy} selected={item.id === selectedId} onOpen={() => open(item)} onToggleRead={() => setRead(item, !item.read)} onDelete={() => remove(item)} />)}{hasMore ? <div ref={sentinelRef} className="flex items-center justify-center py-6"><Loader2 size={18} className="animate-spin text-fg-subtle" /></div> : <p className="py-6 text-center text-xs text-fg-muted">{copy.endOfInbox}</p>}</>
       : empty(<Inbox size={26} />, search.trim() ? copy.emptySearchTitle : copy.emptyTitle, search.trim() ? copy.emptySearchDescription : copy.emptyDescription)
 
   return (
@@ -654,7 +654,7 @@ export function NotificationInbox({
             <button type="button" onClick={() => setFoldersOpen(true)} aria-label={copy.folders} className="-ml-1 rounded-md p-1.5 text-fg-muted hover:bg-surface-hover hover:text-fg lg:hidden"><Menu size={20} /></button>
             <div className="min-w-0 flex-1">
               <h1 className="truncate text-sm font-semibold text-fg">{active.label}</h1>
-              <p className="text-[11px] text-fg-subtle">{active.total} {active.total === 1 ? copy.item : copy.items}{active.unread ? copy.unreadSuffix(active.unread) : ''}</p>
+              <p className="text-[11px] text-fg-muted">{active.total} {active.total === 1 ? copy.item : copy.items}{active.unread ? copy.unreadSuffix(active.unread) : ''}</p>
             </div>
             {active.unread ? <button type="button" onClick={() => void markAll()} title={copy.markAllRead} aria-label={copy.markAllRead} className="rounded-md p-1.5 text-fg-muted hover:bg-surface-hover hover:text-fg"><CheckCheck size={18} /></button> : null}
             <UiLink href={preferencesHref} aria-label={copy.preferences} className="rounded-md p-1.5 text-fg-muted hover:bg-surface-hover hover:text-fg lg:hidden"><Settings size={18} /></UiLink>
@@ -662,8 +662,8 @@ export function NotificationInbox({
           <div className={cn('px-3 pb-2.5 sm:px-4', filter.kind === 'todos' && 'hidden')}>
             <div className="relative">
               <Search size={15} className="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-fg-subtle" />
-              <input type="search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder={copy.search} className="h-9 w-full rounded-lg border border-border bg-bg-subtle pl-8 pr-8 text-base text-fg outline-none transition-colors placeholder:text-fg-subtle focus:border-primary focus:bg-surface focus:ring-2 focus:ring-ring/20 sm:text-sm" />
-              {search ? <button type="button" onClick={() => setSearch('')} aria-label={copy.clearSearch} className="absolute right-2 top-1/2 -translate-y-1/2 rounded p-0.5 text-fg-subtle hover:text-fg"><X size={14} /></button> : null}
+              <input type="search" value={search} onChange={(event) => setSearch(event.target.value)} placeholder={copy.search} className="h-9 w-full rounded-lg border border-border bg-bg-subtle pl-8 pr-8 text-base text-fg outline-none transition-colors placeholder:text-fg-subtle focus:border-primary focus:bg-surface focus:ring-2 focus:ring-ring sm:text-sm" />
+              {search ? <button type="button" onClick={() => setSearch('')} aria-label={copy.clearSearch} className="absolute right-2 top-1/2 -translate-y-1/2 rounded p-0.5 text-fg-muted hover:text-fg"><X size={14} /></button> : null}
             </div>
           </div>
         </header>

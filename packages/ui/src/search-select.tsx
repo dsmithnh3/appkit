@@ -250,7 +250,7 @@ export function SearchSelect({
     <>
       <ul role="listbox" className="py-1">
         {filtered.length === 0 && !loading ? (
-          <li role="option" aria-disabled="true" className="px-3 py-8 text-center text-sm text-fg-subtle">
+          <li role="option" aria-disabled="true" className="px-3 py-8 text-center text-sm text-fg-muted">
             {noMatchesLabel}
           </li>
         ) : null}
@@ -261,7 +261,7 @@ export function SearchSelect({
           return (
             <li key={o.value || `__opt-${i}`} role="presentation">
               {header ? (
-                <div className="px-4 pb-1 pt-2.5 text-[11px] font-semibold tracking-wide text-fg-subtle uppercase lg:px-3">
+                <div className="px-4 pb-1 pt-2.5 text-[11px] font-semibold tracking-wide text-fg-muted uppercase lg:px-3">
                   {header}
                 </div>
               ) : null}
@@ -284,7 +284,7 @@ export function SearchSelect({
               >
                 <span className="min-w-0 flex-1 truncate">
                   {o.label}
-                  {o.hint ? <span className="ml-1.5 text-xs text-fg-subtle">{o.hint}</span> : null}
+                  {o.hint ? <span className="ml-1.5 text-xs text-fg-muted">{o.hint}</span> : null}
                 </span>
                 {active ? <Check size={17} className="shrink-0 text-primary" /> : null}
               </button>
@@ -322,7 +322,7 @@ export function SearchSelect({
         aria-label={searchPlaceholder}
         aria-busy={loading || undefined}
         className={cn(
-          'w-full rounded-lg border border-border bg-bg-subtle pl-9 pr-3 outline-none transition focus:border-primary focus:bg-surface focus:ring-2 focus:ring-ring/20',
+          'w-full rounded-lg border border-border bg-bg-subtle pl-9 pr-3 outline-none transition focus:border-primary focus:bg-surface focus:ring-2 focus:ring-ring',
           largeText ? 'h-11 text-base' : 'h-9 text-base sm:text-sm',
         )}
       />
@@ -343,10 +343,10 @@ export function SearchSelect({
         aria-invalid={invalid || undefined}
         className={cn(
           'flex h-10 w-full items-center gap-2 rounded-lg border border-border bg-surface px-3 text-left text-sm shadow-sm transition',
-          'focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring/25',
+          'focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring',
           disabled && 'cursor-not-allowed bg-bg-subtle opacity-70',
           open && 'border-primary ring-2 ring-ring/25',
-          invalid && 'border-danger focus:border-danger focus:ring-danger/30',
+          invalid && 'border-danger focus:border-danger focus:ring-danger',
           triggerClassName,
         )}
       >

@@ -203,7 +203,7 @@ export function ScheduleManagementDialog({
                               onClick={() => void onUpdateCalendar(calendar.id, { isDefault: true })}
                               aria-label={labels.menu.primary}
                               title={labels.menu.primary}
-                              className="text-fg-subtle transition-colors hover:text-primary"
+                              className="text-fg-muted transition-colors hover:text-primary"
                             >
                               <Star className="h-3.5 w-3.5" />
                             </button>
@@ -212,7 +212,7 @@ export function ScheduleManagementDialog({
                             type="button"
                             onClick={() => void onDeleteCalendar(calendar.id)}
                             aria-label={labels.editor.delete}
-                            className="text-fg-subtle transition-colors hover:text-danger"
+                            className="text-fg-muted transition-colors hover:text-danger"
                           >
                             <Trash2 className="h-3.5 w-3.5" />
                           </button>
@@ -238,7 +238,7 @@ export function ScheduleManagementDialog({
                                   'rounded-md px-2 py-1 text-[10px] font-medium transition-colors',
                                   working
                                     ? 'bg-primary-subtle text-primary'
-                                    : 'bg-bg-subtle text-fg-subtle',
+                                    : 'bg-bg-subtle text-fg-muted',
                                 )}
                               >
                                 {weekdayLabel(day)}
@@ -283,7 +283,7 @@ export function ScheduleManagementDialog({
                           onClick={() => setCalendarDays((c) => ({ ...c, [day]: !working }))}
                           className={cn(
                             'rounded-md px-2 py-1 text-[10px] font-medium transition-colors',
-                            working ? 'bg-primary-subtle text-primary' : 'bg-bg-subtle text-fg-subtle',
+                            working ? 'bg-primary-subtle text-primary' : 'bg-bg-subtle text-fg-muted',
                           )}
                         >
                           {weekdayLabel(day)}
@@ -308,7 +308,7 @@ export function ScheduleManagementDialog({
                       >
                         <div className="min-w-0">
                           <p className="truncate text-xs font-medium text-fg">{resource.name}</p>
-                          <p className="text-[11px] text-fg-subtle">
+                          <p className="text-[11px] text-fg-muted">
                             {labels.resourceKind[resource.kind]}
                             {resource.role ? ` · ${resource.role}` : ''}
                           </p>
@@ -344,7 +344,7 @@ export function ScheduleManagementDialog({
                           type="button"
                           onClick={() => void onDeleteResource(resource.id)}
                           aria-label={labels.editor.delete}
-                          className="text-fg-subtle transition-colors hover:text-danger"
+                          className="text-fg-muted transition-colors hover:text-danger"
                         >
                           <Trash2 className="h-3.5 w-3.5" />
                         </button>
@@ -443,14 +443,14 @@ function List({
         >
           <div className="min-w-0 flex-1">
             <p className="truncate text-xs font-medium text-fg">{item.title}</p>
-            {item.subtitle ? <p className="text-[11px] text-fg-subtle">{item.subtitle}</p> : null}
+            {item.subtitle ? <p className="text-[11px] text-fg-muted">{item.subtitle}</p> : null}
           </div>
           {item.badge ? <Badge variant="secondary">{item.badge}</Badge> : null}
           <button
             type="button"
             onClick={item.onDelete}
             aria-label={item.deleteLabel}
-            className="text-fg-subtle transition-colors hover:text-danger"
+            className="text-fg-muted transition-colors hover:text-danger"
           >
             <Trash2 className="h-3.5 w-3.5" />
           </button>
@@ -486,5 +486,5 @@ function Creator({
 }
 
 function Empty({ children }: { children: React.ReactNode }) {
-  return <p className="text-xs text-fg-subtle">{children}</p>
+  return <p className="text-xs text-fg-muted">{children}</p>
 }

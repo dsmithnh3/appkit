@@ -3,6 +3,8 @@
 import * as React from 'react'
 import { createPortal } from 'react-dom'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { FOCUSABLE_SELECTOR, isTopModalLayer, trapTabKey } from './focus-trap'
+import { useModalLayer } from './modal-layer'
 import { cn } from './utils'
 
 // Z-INDEX SCALE (single source of truth for the ecosystem)
@@ -12,8 +14,15 @@ import { cn } from './utils'
 //   sticky-bars  : z-30
 //   dropdowns    : z-40
 //   drawer       : z-50   (stacked/nested: z-[55])
-//   floating UI  : z-[60] — Popover, Select dropdown, confirm dialog
-//   toast        : z-70
+//   dialog       : z-[58] — above every drawer, below the floating UI it opens
+//   floating UI  : z-[60] — Popover, Select dropdown, Tooltip, confirm/prompt dialogs
+//   context menu : z-[70]
+//   toast        : z-[80]
+//
+// Modal layers (drawer, dialog) open at their base, or at the highest modal layer
+// already open when that is higher (`useModalLayer`), so a Drawer opened from a
+// Dialog paints above it. Equal layers paint in open order, the order Tab and
+// Escape use to find the top layer.
 //
 // The drawer's top edge is `--drawer-top` (default 0). An app shell sets it to
 // its header height so drawers sit beneath the persistent header:
@@ -71,9 +80,6 @@ function useDrawerText(): DrawerText {
 let openDrawerCount = 0
 let originalBodyOverflow: string | null = null
 
-const FOCUSABLE =
-  'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
-
 export type DrawerProps = {
   open: boolean
   onClose: () => void
@@ -128,6 +134,8 @@ export function Drawer({
   const text = useDrawerText()
   const tr = text.translate ?? ((s: string) => s)
   const reduce = useReducedMotion()
+  const titleId = React.useId()
+  const descriptionId = React.useId()
   const [mounted, setMounted] = React.useState(false)
   React.useEffect(() => setMounted(true), [])
 
@@ -137,6 +145,7 @@ export function Drawer({
   }, [initialFullscreen, open])
 
   const panelRef = React.useRef<HTMLElement>(null)
+  const layer = useModalLayer<HTMLDivElement>(open, stacked ? 55 : 50)
   const onCloseRef = React.useRef(onClose)
   React.useEffect(() => {
     onCloseRef.current = onClose
@@ -148,8 +157,11 @@ export function Drawer({
     if (!open) return
     function onKey(e: KeyboardEvent) {
       if (e.key !== 'Escape') return
+      // A popover or menu closes first, and a layer opened over this one (a nested
+      // drawer, a Dialog) owns Escape.
       if (document.querySelector('[data-ui-overlay]')) return
       if (!stacked && document.querySelector('[data-drawer-layer="nested"]')) return
+      if (panelRef.current && !isTopModalLayer(panelRef.current)) return
       onCloseRef.current()
     }
     document.addEventListener('keydown', onKey)
@@ -176,7 +188,7 @@ export function Drawer({
       if (!panel) return
       if (panel.contains(document.activeElement)) return
       const preferred = panel.querySelector<HTMLElement>('[autofocus]')
-      const first = panel.querySelector<HTMLElement>(FOCUSABLE)
+      const first = panel.querySelector<HTMLElement>(FOCUSABLE_SELECTOR)
       ;(preferred ?? first ?? panel).focus()
     }, 0)
 
@@ -184,27 +196,7 @@ export function Drawer({
       if (e.key !== 'Tab') return
       if (!stacked && document.querySelector('[data-drawer-layer="nested"]')) return
       const panel = panelRef.current
-      if (!panel) return
-      const focusables = Array.from(panel.querySelectorAll<HTMLElement>(FOCUSABLE)).filter(
-        (el) => el.offsetParent !== null || el === document.activeElement,
-      )
-      if (focusables.length === 0) {
-        e.preventDefault()
-        panel.focus()
-        return
-      }
-      const firstEl = focusables[0]!
-      const lastEl = focusables[focusables.length - 1]!
-      const activeEl = document.activeElement
-      if (e.shiftKey) {
-        if (activeEl === firstEl || activeEl === panel || !panel.contains(activeEl)) {
-          e.preventDefault()
-          lastEl.focus()
-        }
-      } else if (activeEl === lastEl) {
-        e.preventDefault()
-        firstEl.focus()
-      }
+      if (panel) trapTabKey(e, panel)
     }
 
     document.addEventListener('keydown', onKeyDown)
@@ -237,7 +229,9 @@ export function Drawer({
       {mounted && open ? (
         <div
           key="drawer"
+          ref={layer.ref}
           data-drawer-layer={stacked ? 'nested' : 'base'}
+          {...layer.attributes}
           className={cn(
             'fixed inset-x-0 bottom-0 top-[var(--drawer-top,0px)]',
             stacked ? 'z-[55]' : 'z-50',
@@ -247,7 +241,7 @@ export function Drawer({
           // z-index. Naming the drawer gives it its own top-layer group,
           // stacked over the page group, so the page can never flash across
           // an open drawer mid-navigation.
-          style={{ viewTransitionName: stacked ? 'appkit-drawer-nested' : 'appkit-drawer' }}
+          style={{ viewTransitionName: stacked ? 'appkit-drawer-nested' : 'appkit-drawer', ...layer.style }}
         >
           <motion.div
             initial={{ opacity: 0 }}
@@ -262,6 +256,8 @@ export function Drawer({
             ref={panelRef}
             role="dialog"
             aria-modal="true"
+            aria-labelledby={title ? titleId : undefined}
+            aria-describedby={description ? descriptionId : undefined}
             tabIndex={-1}
             {...panelMotion}
             className={cn(
@@ -273,92 +269,92 @@ export function Drawer({
               panelClassName,
             )}
           >
-            {title || description || headerActions ? (
-              <header className="flex items-center justify-between gap-4 border-b border-border px-6 py-4">
-                <div className="min-w-0 space-y-0.5">
-                  {title ? (
-                    <h2 className="truncate text-base font-semibold text-fg">
-                      {typeof title === 'string' ? tr(title) : title}
-                    </h2>
-                  ) : null}
-                  {description ? (
-                    <p className="text-sm text-fg-muted">
-                      {typeof description === 'string' ? tr(description) : description}
-                    </p>
-                  ) : null}
-                </div>
-                <div className="flex shrink-0 items-center gap-2">
-                  {headerActions ? (
-                    <div className="flex flex-wrap items-center justify-end gap-2">
-                      {headerActions}
-                    </div>
-                  ) : null}
-                  {!disableFullscreen ? (
-                    <button
-                      type="button"
-                      onClick={() => setFullscreen((f) => !f)}
-                      className="hidden rounded-md p-1.5 text-fg-muted transition-colors hover:bg-surface-hover hover:text-fg sm:block"
-                      aria-label={fullscreen ? text.exitFullscreen : text.fullscreen}
-                      title={fullscreen ? text.exitFullscreen : text.fullscreen}
-                    >
-                      {fullscreen ? (
-                        <svg
-                          width="18"
-                          height="18"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <polyline points="4 14 10 14 10 20" />
-                          <polyline points="20 10 14 10 14 4" />
-                          <line x1="14" y1="10" x2="21" y2="3" />
-                          <line x1="3" y1="21" x2="10" y2="14" />
-                        </svg>
-                      ) : (
-                        <svg
-                          width="18"
-                          height="18"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <polyline points="15 3 21 3 21 9" />
-                          <polyline points="9 21 3 21 3 15" />
-                          <line x1="21" y1="3" x2="14" y2="10" />
-                          <line x1="3" y1="21" x2="10" y2="14" />
-                        </svg>
-                      )}
-                    </button>
-                  ) : null}
+            {/* The header always renders: it carries the close button, the one
+                pointer/touch way out of a drawer opened without a title. */}
+            <header className="flex items-center justify-between gap-4 border-b border-border px-6 py-4">
+              <div className="min-w-0 space-y-0.5">
+                {title ? (
+                  <h2 id={titleId} className="truncate text-base font-semibold text-fg">
+                    {typeof title === 'string' ? tr(title) : title}
+                  </h2>
+                ) : null}
+                {description ? (
+                  <p id={descriptionId} className="text-sm text-fg-muted">
+                    {typeof description === 'string' ? tr(description) : description}
+                  </p>
+                ) : null}
+              </div>
+              <div className="flex shrink-0 items-center gap-2">
+                {headerActions ? (
+                  <div className="flex flex-wrap items-center justify-end gap-2">
+                    {headerActions}
+                  </div>
+                ) : null}
+                {!disableFullscreen ? (
                   <button
                     type="button"
-                    onClick={onClose}
-                    className="rounded-md p-1.5 text-fg-muted transition-colors hover:bg-surface-hover hover:text-fg"
-                    aria-label={text.close}
+                    onClick={() => setFullscreen((f) => !f)}
+                    className="hidden rounded-md p-1.5 text-fg-muted transition-colors hover:bg-surface-hover hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface sm:block"
+                    aria-label={fullscreen ? text.exitFullscreen : text.fullscreen}
+                    title={fullscreen ? text.exitFullscreen : text.fullscreen}
                   >
-                    <svg
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <line x1="18" y1="6" x2="6" y2="18" />
-                      <line x1="6" y1="6" x2="18" y2="18" />
-                    </svg>
+                    {fullscreen ? (
+                      <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <polyline points="4 14 10 14 10 20" />
+                        <polyline points="20 10 14 10 14 4" />
+                        <line x1="14" y1="10" x2="21" y2="3" />
+                        <line x1="3" y1="21" x2="10" y2="14" />
+                      </svg>
+                    ) : (
+                      <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <polyline points="15 3 21 3 21 9" />
+                        <polyline points="9 21 3 21 3 15" />
+                        <line x1="21" y1="3" x2="14" y2="10" />
+                        <line x1="3" y1="21" x2="10" y2="14" />
+                      </svg>
+                    )}
                   </button>
-                </div>
-              </header>
-            ) : null}
+                ) : null}
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="rounded-md p-1.5 text-fg-muted transition-colors hover:bg-surface-hover hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
+                  aria-label={text.close}
+                >
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                </button>
+              </div>
+            </header>
             {subtabs ? (
               <div className="shrink-0 border-b border-border bg-surface px-6">{subtabs}</div>
             ) : null}

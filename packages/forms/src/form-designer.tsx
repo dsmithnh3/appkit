@@ -210,7 +210,7 @@ export function FormDesigner({
               if (items.length === 0) return null
               return (
                 <section key={category} className="mb-3">
-                  <h3 className="px-1 pb-1 text-[10px] font-semibold tracking-wider text-fg-subtle uppercase">{category}</h3>
+                  <h3 className="px-1 pb-1 text-[10px] font-semibold tracking-wider text-fg-muted uppercase">{category}</h3>
                   <div className="grid grid-cols-1 gap-1">
                     {items.map((type) => (
                       <button
@@ -339,7 +339,7 @@ export function FormDesigner({
                             setSelected({ sectionId: itemSection.id })
                             setPropertiesOpen(true)
                           }}
-                          className="w-full rounded-md border border-dashed border-border-strong p-4 text-center text-xs text-fg-subtle"
+                          className="w-full rounded-md border border-dashed border-border-strong p-4 text-center text-xs text-fg-muted"
                         >
                           Select this section, then add a field from the library.
                         </button>
@@ -362,7 +362,7 @@ export function FormDesigner({
                                 <span className="min-w-0 flex-1 truncate text-sm font-medium">{readText(itemField.label, locale, FIELD_TYPES[itemField.type].label)}</span>
                                 <Badge variant="secondary" className="text-[10px]">{FIELD_TYPES[itemField.type].label}</Badge>
                                 {itemField.required || itemField.validation?.required ? <Badge variant="warning" className="text-[10px]">Required</Badge> : null}
-                                <span className="w-5 text-right text-xs tabular-nums text-fg-subtle">{itemFieldIndex + 1}</span>
+                                <span className="w-5 text-right text-xs tabular-nums text-fg-muted">{itemFieldIndex + 1}</span>
                               </button>
                             </li>
                           ))}

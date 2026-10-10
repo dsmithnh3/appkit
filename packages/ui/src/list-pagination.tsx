@@ -84,7 +84,7 @@ export function Pagination({
             <ChevronLeft size={14} />
             {labels.prev}
           </PageButton>
-          <span className="px-2 text-fg-subtle">{labels.pageOf(page, pageCount)}</span>
+          <span className="px-2 text-fg-muted">{labels.pageOf(page, pageCount)}</span>
           <PageButton href={nextHref} disabled={page >= pageCount}>
             {labels.next}
             <ChevronRight size={14} />
@@ -120,7 +120,7 @@ function PageButton({
     <a
       href={href}
       onClick={navClick}
-      className="inline-flex items-center gap-1 rounded-md border border-border px-2 py-1 text-xs text-fg hover:bg-surface-hover"
+      className="inline-flex items-center gap-1 rounded-md border border-border px-2 py-1 text-xs text-fg hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
       {...(rest as object)}
     >
       {children}

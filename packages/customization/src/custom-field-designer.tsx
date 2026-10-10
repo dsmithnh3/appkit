@@ -206,7 +206,7 @@ export function CustomFieldDesigner({
               <div className="mt-2 flex items-center gap-2">
                 <Badge variant="secondary">{targetRecordType.replace(/_/g, ' ')}</Badge>
                 <Badge variant="outline">{targetLevel === 'header' ? 'Header field' : 'Line-item field'}</Badge>
-                {!creating ? <span className="font-mono text-xs text-fg-subtle">{field.key}</span> : null}
+                {!creating ? <span className="font-mono text-xs text-fg-muted">{field.key}</span> : null}
               </div>
             )}
           </div>
@@ -218,7 +218,7 @@ export function CustomFieldDesigner({
             </div>
             {creating ? (
               <div className="space-y-1.5">
-                <Label>Field key <span className="font-normal text-fg-subtle">permanent</span></Label>
+                <Label>Field key <span className="font-normal text-fg-muted">permanent</span></Label>
                 <Input
                   value={key}
                   onChange={(event) => setKey(slugify(event.target.value))}
@@ -234,7 +234,7 @@ export function CustomFieldDesigner({
             <Select aria-label="Field type" value={fieldType} onChange={(event) => setFieldType(event.target.value as FieldKind)}>
               {FIELD_TYPES.map((type) => <option key={type.value} value={type.value}>{type.label}</option>)}
             </Select>
-            <p className="text-xs text-fg-subtle">{FIELD_TYPES.find((type) => type.value === fieldType)?.help}</p>
+            <p className="text-xs text-fg-muted">{FIELD_TYPES.find((type) => type.value === fieldType)?.help}</p>
           </div>
 
           {needsOptions ? (
@@ -255,14 +255,14 @@ export function CustomFieldDesigner({
                         type="button"
                         aria-label={`Remove ${option}`}
                         onClick={() => setOptions((current) => current.filter((_, itemIndex) => itemIndex !== index))}
-                        className="rounded-sm p-1 text-fg-subtle hover:bg-danger-subtle hover:text-danger"
+                        className="rounded-sm p-1 text-fg-muted hover:bg-danger-subtle hover:text-danger"
                       >
                         <X className="size-4" />
                       </button>
                     </li>
                   ))}
                 </ul>
-              ) : <p className="text-xs text-fg-subtle">No options yet.</p>}
+              ) : <p className="text-xs text-fg-muted">No options yet.</p>}
               <div className="flex gap-2">
                 <Input
                   value={optionDraft}
@@ -341,7 +341,7 @@ export function CustomFieldDesigner({
             </div>
             {roleOptions.length > 0 ? (
               <div className="space-y-1.5">
-                <Label>Allowed roles <span className="font-normal text-fg-subtle">optional</span></Label>
+                <Label>Allowed roles <span className="font-normal text-fg-muted">optional</span></Label>
                 <div className="flex flex-wrap gap-2">
                   {roleOptions.map((role) => (
                     <Toggle
