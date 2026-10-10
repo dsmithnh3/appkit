@@ -172,7 +172,7 @@ export function AccountMenu({
             {showTheme ? <LauncherCard icon={Palette} tone="primary" label={labels.theme} onClick={() => setView('theme')} /> : null}
             {navigation ? <LauncherCard icon={LayoutPanelLeft} tone="warning" label={navigation.label} summary={navigation.summary} onClick={() => setView('navigation')} /> : null}
             {elevatedAccess ? (
-              <UiLink href={elevatedAccess.href} onClick={close} className="group relative flex flex-col gap-2 rounded-xl border border-border bg-surface p-3 transition-colors hover:border-border-strong hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg">
+              <UiLink href={elevatedAccess.href} onClick={close} className="group relative flex flex-col gap-2 rounded-xl border border-border bg-surface p-3 transition-colors hover:border-border-strong hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-elevated">
                 <span className="grid size-9 place-items-center rounded-lg bg-danger-subtle text-danger"><ShieldAlert size={18} /></span>
                 <span className="truncate text-sm font-medium text-fg">{elevatedAccess.label}</span>
               </UiLink>
@@ -197,7 +197,7 @@ export function AccountMenu({
       ) : (
         <div>
           <div className="flex items-center gap-1.5 border-b border-border-subtle px-2 py-2">
-            <button type="button" onClick={() => setView('home')} aria-label={labels.back} className="grid size-7 place-items-center rounded-md text-fg-muted hover:bg-surface-hover hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg">
+            <button type="button" onClick={() => setView('home')} aria-label={labels.back} className="grid size-7 place-items-center rounded-md text-fg-muted hover:bg-surface-hover hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-elevated">
               <ChevronLeft size={16} />
             </button>
             <span className="text-sm font-semibold text-fg">{title}</span>
@@ -214,7 +214,7 @@ export function AccountMenu({
 
 function LauncherCard({ icon: Icon, tone, label, summary, onClick }: { icon: LucideIcon; tone: 'primary' | 'info' | 'warning'; label: string; summary?: string; onClick: () => void }) {
   return (
-    <button type="button" onClick={onClick} className="group relative flex flex-col gap-2 rounded-xl border border-border bg-surface p-3 text-left transition-colors hover:border-border-strong hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg">
+    <button type="button" onClick={onClick} className="group relative flex flex-col gap-2 rounded-xl border border-border bg-surface p-3 text-left transition-colors hover:border-border-strong hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-elevated">
       <span className={cn('grid size-9 place-items-center rounded-lg', tone === 'info' ? 'bg-info-subtle text-info' : tone === 'warning' ? 'bg-warning-subtle text-warning' : 'bg-primary-subtle text-primary')}><Icon size={18} /></span>
       <span className="min-w-0">
         <span className="block truncate text-sm font-medium text-fg">{label}</span>

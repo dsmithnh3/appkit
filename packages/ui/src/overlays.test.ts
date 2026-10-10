@@ -247,7 +247,7 @@ test('PromptDialog: Tab reaches Cancel and Save and never parks on the hidden sc
   await dispose()
 })
 
-test('every button in Dialog and Drawer chrome draws the focus ring', async (t) => {
+test('every button in Dialog and Drawer chrome draws the focus ring, offset on the panel ground', async (t) => {
   for (const element of [
     React.createElement(Dialog, { open: true, onClose: () => {}, title: 'Delete rows', footer: 'Footer' }, 'Body'),
     React.createElement(Drawer, { open: true, onClose: () => {}, title: 'New contact', children: 'Body' }),
@@ -257,7 +257,50 @@ test('every button in Dialog and Drawer chrome draws the focus ring', async (t) 
     assert.ok(buttons.length > 0, 'the panel renders its close control')
     for (const button of buttons) {
       assert.match(button.className, /focus-visible:ring-2/, `no focus ring on ${button.outerHTML.slice(0, 120)}`)
+      // The panel is bg-surface; a bg-coloured offset would draw a dark band inside it in the dark theme.
+      assert.match(button.className, /focus-visible:ring-offset-surface\b/, `offset not on the panel ground: ${button.outerHTML.slice(0, 120)}`)
     }
     await dispose()
   }
+})
+
+test('a confirm or prompt raised over an open Dialog owns Tab and Escape; the Dialog stands aside', async (t) => {
+  let dialogClosed = 0
+  await render(
+    t,
+    React.createElement(Dialog, { open: true, onClose: () => dialogClosed++, title: 'Edit rows', footer: 'Footer' }, 'Body'),
+  )
+  await render(t, React.createElement(ConfirmRoot))
+  await render(t, React.createElement(PromptRoot))
+  const topPanel = () => Array.from(document.querySelectorAll<HTMLElement>('[role="dialog"]')).at(-1)!
+
+  let confirmed!: Promise<boolean>
+  await act(async () => {
+    confirmed = confirmDialog('Discard changes?')
+  })
+  const cancel = Array.from(topPanel().querySelectorAll('button')).find((b) => b.textContent === 'Cancel')!
+  cancel.focus()
+  const tab = pressTab()
+  assert.ok(!tab.defaultPrevented, 'Tab from Cancel moves on to Confirm; no layer pulls it elsewhere')
+  assert.ok(document.activeElement === cancel)
+  await act(async () => {
+    document.dispatchEvent(new dom.window.KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true }))
+  })
+  assert.equal(await confirmed, false, 'Escape cancels the confirm')
+  assert.equal(dialogClosed, 0, 'and leaves the Dialog under it open')
+
+  let named!: Promise<string | null>
+  await act(async () => {
+    named = promptDialog({ title: 'Rename file', initialValue: 'Q3 report' })
+    await new Promise((resolve) => setTimeout(resolve, 30))
+  })
+  const input = topPanel().querySelector('input')!
+  input.focus()
+  const fromField = pressTab()
+  assert.ok(!fromField.defaultPrevented, 'Tab from the field moves on to Cancel')
+  assert.ok(document.activeElement === input)
+  const save = Array.from(topPanel().querySelectorAll('button')).find((b) => b.textContent === 'Save')!
+  await act(async () => save.click())
+  assert.equal(await named, 'Q3 report')
+  assert.equal(dialogClosed, 0)
 })

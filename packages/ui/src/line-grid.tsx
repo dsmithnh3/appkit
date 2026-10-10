@@ -255,7 +255,7 @@ export function LineGrid<Row extends Record<string, unknown>>({
                           inputBase,
                           'text-right tabular-nums',
                           value !== '' && value != null && Number.isNaN(Number(value)) &&
-                            'text-danger focus:ring-danger/50',
+                            'text-danger focus:ring-danger',
                         )}
                       />
                     ) : (

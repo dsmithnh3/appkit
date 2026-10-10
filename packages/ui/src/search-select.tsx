@@ -346,7 +346,7 @@ export function SearchSelect({
           'focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring',
           disabled && 'cursor-not-allowed bg-bg-subtle opacity-70',
           open && 'border-primary ring-2 ring-ring/25',
-          invalid && 'border-danger focus:border-danger focus:ring-danger/30',
+          invalid && 'border-danger focus:border-danger focus:ring-danger',
           triggerClassName,
         )}
       >

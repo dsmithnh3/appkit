@@ -20,7 +20,7 @@ Never write a raw color. Every surface, text, and border resolves through a
 | Borders | `border-border` `border-border-strong` `border-border-subtle` |
 | Brand | `bg-primary` `bg-primary-hover` `bg-primary-active` `text-primary-fg` `bg-primary-subtle` |
 | Semantic | `{bg,text,border}-{danger,warning,success,info}` + each `*-subtle` / `*-fg` |
-| Focus | `ring-ring` at full strength: `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring` plus `ring-offset-2 ring-offset-bg` on standalone controls, or `ring-inset` on rows, tabs and bar items inside clipping containers |
+| Focus | `ring-ring` at full strength: `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring` plus `ring-offset-2` on standalone controls, offset on the ground they sit on (`ring-offset-bg` on the page, `ring-offset-surface` in dialogs and drawers, `ring-offset-elevated` in popovers), or `ring-inset` on rows, tabs and bar items inside clipping containers. Never put an opacity modifier on a focus ring colour (`ring-ring/40`, `ring-danger/30`); an invalid field's ring is `ring-danger` |
 | Shape | `rounded-{sm,md,lg,xl}` (off `--radius`) · shadows `shadow-{sm,md,lg}` |
 
 Opacity works (`bg-primary/40`, `bg-overlay/50`). Light/dark is one `.dark` class

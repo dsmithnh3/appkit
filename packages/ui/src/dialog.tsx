@@ -148,7 +148,7 @@ export function Dialog({
                 type="button"
                 onClick={onClose}
                 aria-label={closeLabel}
-                className="absolute right-4 top-4 rounded-md p-1.5 text-fg-muted transition-colors hover:bg-surface-hover hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+                className="absolute right-4 top-4 rounded-md p-1.5 text-fg-muted transition-colors hover:bg-surface-hover hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
               >
                 <X className="size-4" />
               </button>

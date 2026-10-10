@@ -282,7 +282,7 @@ export function Drawer({
                   <button
                     type="button"
                     onClick={() => setFullscreen((f) => !f)}
-                    className="hidden rounded-md p-1.5 text-fg-muted transition-colors hover:bg-surface-hover hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg sm:block"
+                    className="hidden rounded-md p-1.5 text-fg-muted transition-colors hover:bg-surface-hover hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface sm:block"
                     aria-label={fullscreen ? text.exitFullscreen : text.fullscreen}
                     title={fullscreen ? text.exitFullscreen : text.fullscreen}
                   >
@@ -324,7 +324,7 @@ export function Drawer({
                 <button
                   type="button"
                   onClick={onClose}
-                  className="rounded-md p-1.5 text-fg-muted transition-colors hover:bg-surface-hover hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+                  className="rounded-md p-1.5 text-fg-muted transition-colors hover:bg-surface-hover hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
                   aria-label={text.close}
                 >
                   <svg

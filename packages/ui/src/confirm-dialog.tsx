@@ -104,7 +104,7 @@ export function ConfirmRoot({ labels = {} }: ConfirmRootProps) {
   return createPortal(
     <AnimatePresence>
       {request ? (
-        <div key={request.id} className="fixed inset-0 z-[60] flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="appkit-confirm-title">
+        <div key={request.id} data-ui-overlay="confirm" className="fixed inset-0 z-[60] flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="appkit-confirm-title">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

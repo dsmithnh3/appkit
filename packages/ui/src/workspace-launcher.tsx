@@ -239,7 +239,7 @@ function WorkspaceLaunchCard<Id extends string>({
       onClick={() => onSelect(item.id, item)}
       className={cn(
         'group/card relative z-0 flex h-full min-h-0 min-w-0 flex-col overflow-visible rounded-lg border border-border bg-surface text-left shadow-sm transition-all duration-200',
-        'hover:z-20 hover:-translate-y-0.5 hover:shadow-[0_18px_48px_rgb(var(--ch-fg)/0.10)] focus-visible:z-20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/35',
+        'hover:z-20 hover:-translate-y-0.5 hover:shadow-[0_18px_48px_rgb(var(--ch-fg)/0.10)] focus-visible:z-20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
         'disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0 disabled:hover:shadow-sm',
         density === 'comfortable' ? 'p-5' : 'p-3',
         tone.hover,

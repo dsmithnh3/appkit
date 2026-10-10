@@ -18,7 +18,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         'transition-shadow duration-150 ease-out',
         'focus-visible:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
         'disabled:cursor-not-allowed disabled:bg-bg-subtle disabled:opacity-50',
-        'aria-[invalid=true]:border-danger aria-[invalid=true]:focus-visible:ring-danger/30',
+        'aria-[invalid=true]:border-danger aria-[invalid=true]:focus-visible:ring-danger',
         className,
       )}
       {...props}

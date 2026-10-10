@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict'
+import { readdirSync, readFileSync } from 'node:fs'
 import test from 'node:test'
 import React from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
@@ -112,3 +113,19 @@ for (const [name, element] of Object.entries(surfaces)) {
     }
   })
 }
+
+test('no focus ring in the package is drawn at partial opacity', () => {
+  // A focus ring needs 3:1 against its ground; an opacity modifier on the ring
+  // colour (`focus-visible:ring-ring/40`, `focus:ring-danger/30`) drops it below
+  // that while every rendered class list still looks like it has a ring.
+  const dir = new URL('.', import.meta.url)
+  const offenders: string[] = []
+  for (const file of readdirSync(dir)) {
+    if (!file.endsWith('.tsx') || file.includes('.test.')) continue
+    const source = readFileSync(new URL(file, dir), 'utf8')
+    for (const match of source.matchAll(/\bfocus(?:-visible|-within)?:(?:[\w-]+:)*ring-[\w-]+\/\d+/g)) {
+      offenders.push(`${file}: ${match[0]}`)
+    }
+  }
+  assert.deepEqual(offenders, [])
+})
