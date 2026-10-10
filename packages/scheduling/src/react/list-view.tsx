@@ -11,7 +11,7 @@
  */
 
 import { Fragment, useMemo, useRef, useState } from 'react'
-import { ChevronDown, ChevronRight, GripVertical, Trash2 } from 'lucide-react'
+import { ChevronDown, ChevronRight, Trash2 } from 'lucide-react'
 import { Badge, Button, Checkbox, Progress, cn } from '@braedonsaunders/appkit-ui'
 import { diffDays, parseDate } from '../dates'
 import { buildTaskHierarchyInfo, getSummaryTaskIds, getVisibleTasks } from '../hierarchy'
@@ -28,8 +28,9 @@ import type {
   ScheduleTaskStatus,
 } from '../types'
 import { useScheduleFormatters, useSchedulingLabels } from './context'
+import { TaskReorderHandle, type TaskOutlineActions } from './task-reorder-handle'
 
-export interface ListViewProps {
+export interface ListViewProps extends TaskOutlineActions {
   tasks: ScheduleTask[]
   insights: ScheduleInsights
   phases: SchedulePhase[]
@@ -81,6 +82,9 @@ export function ListView({
   onReorderTask,
   onClickTask,
   onContextMenu,
+  onMoveTask,
+  onIndentTask,
+  onOutdentTask,
 }: ListViewProps) {
   const labels = useSchedulingLabels()
   const formatters = useScheduleFormatters()
@@ -230,14 +234,25 @@ export function ListView({
     }
   }
 
-  const SortHeader = ({ label, field }: { label: string; field: SortKey }) => (
+  // A render helper, not a component: a component declared in render is a new
+  // type every render, so React would remount the header and drop its focus.
+  const sortHeader = (label: string, field: SortKey) => (
     <th
-      className="cursor-pointer px-3 py-2 text-left text-xs font-medium text-fg-muted transition-colors select-none hover:text-fg"
-      onClick={() => toggleSort(field)}
+      className="px-3 py-2 text-left text-xs font-medium text-fg-muted"
       aria-sort={sortKey === field ? (sortDir === 'asc' ? 'ascending' : 'descending') : 'none'}
     >
-      {label}
-      {sortKey === field && <span className="ml-1">{sortDir === 'asc' ? '↑' : '↓'}</span>}
+      <button
+        type="button"
+        onClick={() => toggleSort(field)}
+        className="cursor-pointer rounded-sm transition-colors select-none hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      >
+        {label}
+        {sortKey === field && (
+          <span className="ml-1" aria-hidden>
+            {sortDir === 'asc' ? '↑' : '↓'}
+          </span>
+        )}
+      </button>
     </th>
   )
 
@@ -327,27 +342,27 @@ export function ListView({
                   }}
                 />
               </th>
-              <SortHeader label={labels.list.wbs} field="order" />
-              <SortHeader label={labels.columns.name} field="name" />
+              {sortHeader(labels.list.wbs, 'order')}
+              {sortHeader(labels.columns.name, 'name')}
               <th className="px-3 py-2 text-left text-xs font-medium text-fg-muted">
                 {labels.columns.phase}
               </th>
-              <SortHeader label={labels.columns.status} field="status" />
-              <SortHeader label={labels.columns.start} field="startDate" />
-              <SortHeader label={labels.columns.finish} field="endDate" />
+              {sortHeader(labels.columns.status, 'status')}
+              {sortHeader(labels.columns.start, 'startDate')}
+              {sortHeader(labels.columns.finish, 'endDate')}
               <th className="px-3 py-2 text-left text-xs font-medium text-fg-muted">
                 {labels.columns.deadline}
               </th>
               <th className="px-3 py-2 text-left text-xs font-medium text-fg-muted">
                 {labels.columns.duration}
               </th>
-              <SortHeader label={labels.list.variance} field="variance" />
-              <SortHeader label={labels.columns.float} field="float" />
+              {sortHeader(labels.list.variance, 'variance')}
+              {sortHeader(labels.columns.float, 'float')}
               <th className="px-3 py-2 text-left text-xs font-medium text-fg-muted">
                 {labels.columns.resources}
               </th>
-              <SortHeader label={labels.columns.progress} field="progress" />
-              <SortHeader label={labels.columns.assignee} field="assignee" />
+              {sortHeader(labels.columns.progress, 'progress')}
+              {sortHeader(labels.columns.assignee, 'assignee')}
               <th className="px-3 py-2 text-left text-xs font-medium text-fg-muted">
                 {labels.list.flags}
               </th>
@@ -430,9 +445,10 @@ export function ListView({
                           onDrop={(event) => void handleRowDrop(event, task.id)}
                         >
                           <td className="px-2 py-2 text-center">
-                            <button
-                              type="button"
-                              draggable={sortKey === 'order'}
+                            <TaskReorderHandle
+                              task={task}
+                              enabled={sortKey === 'order'}
+                              disabledHint={labels.list.reorderRequiresWbsSort}
                               onDragStart={(event) => {
                                 event.dataTransfer.effectAllowed = 'move'
                                 event.dataTransfer.setData('text/plain', task.id)
@@ -445,16 +461,10 @@ export function ListView({
                                 draggingTaskIdRef.current = null
                                 setDropTarget(null)
                               }}
-                              className="text-fg-muted transition-colors hover:text-fg"
-                              aria-label={`${labels.toolbar.indent}: ${task.name || labels.badges.untitled}`}
-                              title={
-                                sortKey === 'order'
-                                  ? labels.badges.reorderHint
-                                  : labels.list.reorderRequiresWbsSort
-                              }
-                            >
-                              <GripVertical className="h-3.5 w-3.5" />
-                            </button>
+                              onMoveTask={onMoveTask}
+                              onIndentTask={onIndentTask}
+                              onOutdentTask={onOutdentTask}
+                            />
                           </td>
                           <td className="px-3 py-2">
                             <Checkbox

@@ -295,7 +295,7 @@ export function SchedulePage() {
     <PageContainer className="space-y-6">
       <PageHeader
         title="Scheduling"
-        description="Critical-path scheduling with a drag-editable Gantt, work-breakdown outline, working calendars, baselines, and resource levelling. Everything on this page runs against an in-memory adapter."
+        description="Critical-path scheduling with a drag-editable Gantt, a work-breakdown outline you reorder by dragging a row's handle or with its arrow keys, working calendars, baselines, and resource levelling. Everything on this page runs against an in-memory adapter."
       />
 
       {stats ? (

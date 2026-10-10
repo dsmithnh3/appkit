@@ -13,7 +13,7 @@
  */
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { ChevronDown, ChevronRight, GripVertical } from 'lucide-react'
+import { ChevronDown, ChevronRight } from 'lucide-react'
 import { Badge, cn } from '@braedonsaunders/appkit-ui'
 import {
   addDays,
@@ -49,9 +49,10 @@ import type {
 import { GanttBar } from './gantt-bar'
 import { GanttDependencies } from './gantt-dependencies'
 import { MilestoneMarker } from './milestone-marker'
+import { TaskReorderHandle, type TaskOutlineActions } from './task-reorder-handle'
 import { useScheduleFormatters, useSchedulingLabels } from './context'
 
-export interface GanttViewProps {
+export interface GanttViewProps extends TaskOutlineActions {
   tasks: ScheduleTask[]
   dependencies: ScheduleDependency[]
   insights: ScheduleInsights
@@ -113,6 +114,9 @@ export function GanttView({
   onReorderTask,
   onClickTask,
   onContextMenu,
+  onMoveTask,
+  onIndentTask,
+  onOutdentTask,
 }: GanttViewProps) {
   const labels = useSchedulingLabels()
   const formatters = useScheduleFormatters()
@@ -558,9 +562,8 @@ export function GanttView({
                             style={{ paddingLeft: `${depth * TREE_INDENT + (phase ? 6 : 0)}px` }}
                           >
                             <div className="flex items-start gap-2">
-                              <button
-                                type="button"
-                                draggable
+                              <TaskReorderHandle
+                                task={task}
                                 onDragStart={(event) => {
                                   event.dataTransfer.effectAllowed = 'move'
                                   event.dataTransfer.setData('text/plain', task.id)
@@ -573,13 +576,11 @@ export function GanttView({
                                   draggingTaskIdRef.current = null
                                   setDropTarget(null)
                                 }}
-                                onClick={(event) => event.stopPropagation()}
-                                className="mt-0.5 shrink-0 text-fg-muted transition-colors hover:text-fg"
-                                aria-label={`${labels.toolbar.indent}: ${task.name || labels.badges.untitled}`}
-                                title={labels.badges.reorderHint}
-                              >
-                                <GripVertical className="h-3.5 w-3.5" />
-                              </button>
+                                onMoveTask={onMoveTask}
+                                onIndentTask={onIndentTask}
+                                onOutdentTask={onOutdentTask}
+                                className="mt-0.5"
+                              />
 
                               {hierarchy?.hasChildren ? (
                                 <button

@@ -11,7 +11,12 @@ the packages' durable adapters.
 ## 1. The design system is tokens
 
 Never write a raw color. Every surface, text, and border resolves through a
-**semantic token**, surfaced as a Tailwind v4 utility:
+**semantic token**, surfaced as a Tailwind v4 utility. `white` and `black` are raw
+colours too: they do not flip with the theme, so `bg-white` under `text-fg` is
+light text on a white card in dark mode. `pnpm check:quality` fails on raw palette
+shades and on `white`/`black` utilities; a deliberate one (illustration art, a
+switch knob, a mail preview's page) goes in `scripts/white-black-allowlist.json`
+with its reason.
 
 | Group | Utilities |
 |---|---|

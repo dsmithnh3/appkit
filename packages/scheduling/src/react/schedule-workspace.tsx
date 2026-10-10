@@ -254,6 +254,12 @@ export function ScheduleWorkspace({
     onClickTask: (task: ScheduleTask) => setEditingTaskId(task.id),
     onContextMenu: handleContextMenu,
   }
+  // The row handle's arrow keys take the context menu's outline moves.
+  const outlineActions = {
+    onMoveTask: handleMove,
+    onIndentTask: handleIndent,
+    onOutdentTask: handleOutdent,
+  }
 
   return (
     <div className={className}>
@@ -342,6 +348,7 @@ export function ScheduleWorkspace({
             showBaseline={showBaseline}
             onUpdateTask={adapter.updateTask}
             onReorderTask={handleReorder}
+            {...outlineActions}
           />
         ) : view === 'list' ? (
           <ListView
@@ -353,6 +360,7 @@ export function ScheduleWorkspace({
             onBatchUpdateTasks={adapter.batchUpdateTasks}
             onDeleteTask={adapter.deleteTask}
             onReorderTask={handleReorder}
+            {...outlineActions}
           />
         ) : (
           <BoardView

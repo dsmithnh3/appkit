@@ -135,7 +135,7 @@ export function CanvasEditor({
         value={
           items.length === 0 ? (
             <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-              <span className="rounded-md bg-white/80 px-3 py-1.5 text-xs text-fg-muted">
+              <span className="rounded-md bg-surface/80 px-3 py-1.5 text-xs text-fg-muted">
                 <GeneratedText id="m_16c009976e0b86" />
               </span>
             </div>
@@ -167,65 +167,65 @@ export function CanvasEditor({
                 if (!sameItems(items, next)) onLayout(next)
               }}
             >
-              <GeneratedValue
-                value={items.map((it) => {
-                  const f = fieldById.get(it.i)!
-                  const sel = f.id === selectedFieldId
-                  return (
-                    <div
-                      key={it.i}
-                      onPointerDown={(e) => {
-                        pressRef.current = { x: e.clientX, y: e.clientY }
-                      }}
-                      onClick={(e) => {
-                        const d = pressRef.current
-                        pressRef.current = null
-                        // The click that ends a drag/resize lands far from the press —
-                        // only a near-stationary click selects, so moving an element no
-                        // longer opens the properties panel.
-                        if (d && Math.hypot(e.clientX - d.x, e.clientY - d.y) > 5) return
-                        onSelect(f.id)
-                      }}
-                      title={tGeneratedValue(FIELD_TYPES[f.type]?.label ?? f.type)}
-                      className={`group relative flex h-full cursor-pointer flex-col overflow-hidden rounded-lg border bg-white shadow-sm transition ${
-                        sel
-                          ? 'border-primary ring-1 ring-ring'
-                          : 'border-border hover:border-border-strong hover:shadow'
-                      }`}
-                    >
-                      {/* Hover toolbar: drag handle + remove. The card body is a live
-                      preview of the element as it ships. */}
-                      <div className="absolute top-1 right-1 z-10 flex items-center gap-0.5 opacity-0 transition group-hover:opacity-100">
-                        <span
-                          className="cv-drag flex h-5 w-5 cursor-grab items-center justify-center rounded bg-white/90 text-fg-muted shadow-sm ring-1 ring-ring hover:text-fg active:cursor-grabbing"
-                          title={tGenerated('m_17cb3d26a75938')}
-                        >
-                          <GripVertical size={11} />
-                        </span>
-                        <button
-                          type="button"
-                          title={tGenerated('m_0e6eb1d4f48e48')}
-                          onClick={(e) => {
-                            e.stopPropagation()
-                            onDelete(f.id)
-                          }}
-                          className="flex h-5 w-5 items-center justify-center rounded bg-white/90 text-fg-muted shadow-sm ring-1 ring-ring hover:text-danger"
-                        >
-                          <Trash2 size={11} />
-                        </button>
-                      </div>
-                      <div className="app-scroll min-h-0 flex-1 overflow-auto p-2.5">
-                        <ElementPreview
-                          field={f}
-                          locale={locale}
-                          defaultLocale={defaultLocale}
-                          compact
-                        />
-                      </div>
+              {/* Items are GridLayout's direct children: it places each one by its
+                  key and drops any child without a key, so a wrapper renders nothing. */}
+              {items.map((it) => {
+                const f = fieldById.get(it.i)!
+                const sel = f.id === selectedFieldId
+                return (
+                  <div
+                    key={it.i}
+                    onPointerDown={(e) => {
+                      pressRef.current = { x: e.clientX, y: e.clientY }
+                    }}
+                    onClick={(e) => {
+                      const d = pressRef.current
+                      pressRef.current = null
+                      // The click that ends a drag/resize lands far from the press —
+                      // only a near-stationary click selects, so moving an element no
+                      // longer opens the properties panel.
+                      if (d && Math.hypot(e.clientX - d.x, e.clientY - d.y) > 5) return
+                      onSelect(f.id)
+                    }}
+                    title={tGeneratedValue(FIELD_TYPES[f.type]?.label ?? f.type)}
+                    className={`group relative flex h-full cursor-pointer flex-col overflow-hidden rounded-lg border bg-surface shadow-sm transition ${
+                      sel
+                        ? 'border-primary ring-1 ring-ring'
+                        : 'border-border hover:border-border-strong hover:shadow'
+                    }`}
+                  >
+                    {/* Hover toolbar: drag handle + remove. The card body is a live
+                    preview of the element as it ships. */}
+                    <div className="absolute top-1 right-1 z-10 flex items-center gap-0.5 opacity-0 transition group-hover:opacity-100">
+                      <span
+                        className="cv-drag flex h-5 w-5 cursor-grab items-center justify-center rounded bg-surface/90 text-fg-muted shadow-sm ring-1 ring-ring hover:text-fg active:cursor-grabbing"
+                        title={tGenerated('m_17cb3d26a75938')}
+                      >
+                        <GripVertical size={11} />
+                      </span>
+                      <button
+                        type="button"
+                        title={tGenerated('m_0e6eb1d4f48e48')}
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          onDelete(f.id)
+                        }}
+                        className="flex h-5 w-5 items-center justify-center rounded bg-surface/90 text-fg-muted shadow-sm ring-1 ring-ring hover:text-danger"
+                      >
+                        <Trash2 size={11} />
+                      </button>
                     </div>
-                  )
-                })}
-              />
+                    <div className="app-scroll min-h-0 flex-1 overflow-auto p-2.5">
+                      <ElementPreview
+                        field={f}
+                        locale={locale}
+                        defaultLocale={defaultLocale}
+                        compact
+                      />
+                    </div>
+                  </div>
+                )
+              })}
             </GridLayout>
           ) : null
         }

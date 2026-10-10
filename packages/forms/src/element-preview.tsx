@@ -92,28 +92,23 @@ function ElementInput({
 
   switch (t) {
     case 'long_text':
-      return <Textarea rows={compact ? 2 : 3} disabled placeholder="" className="bg-white" />
+      return <Textarea rows={compact ? 2 : 3} disabled placeholder="" />
     case 'number':
-      return <Input type="number" disabled placeholder="0" className="bg-white" />
+      return <Input type="number" disabled placeholder="0" />
     case 'date':
-      return <Input type="date" disabled className="bg-white" />
+      return <Input type="date" disabled />
     case 'datetime':
-      return <Input type="datetime-local" disabled className="bg-white" />
+      return <Input type="datetime-local" disabled />
     case 'time':
-      return <Input type="time" disabled className="bg-white" />
+      return <Input type="time" disabled />
     case 'email':
       return (
-        <Input
-          type="email"
-          disabled
-          placeholder={tGenerated('m_1b781270c0d2f5')}
-          className="bg-white"
-        />
+        <Input type="email" disabled placeholder={tGenerated('m_1b781270c0d2f5')} />
       )
     case 'phone':
-      return <Input disabled placeholder="(555) 555-5555" className="bg-white" />
+      return <Input disabled placeholder="(555) 555-5555" />
     case 'url':
-      return <Input disabled placeholder="https://" className="bg-white" />
+      return <Input disabled placeholder="https://" />
     case 'select':
     case 'customer_picker':
     case 'site_picker':
@@ -122,7 +117,7 @@ function ElementInput({
     case 'person_picker':
     case 'multi_person_picker':
       return (
-        <Select disabled className="bg-white">
+        <Select disabled>
           <option>{labels[0] ?? 'Select…'}</option>
         </Select>
       )
@@ -239,7 +234,7 @@ function ElementInput({
         </div>
       )
     case 'typed_attestation':
-      return <Input disabled placeholder={tGenerated('m_0d0facbd71aa6a')} className="bg-white" />
+      return <Input disabled placeholder={tGenerated('m_0d0facbd71aa6a')} />
     case 'formula':
       return <Input disabled value="= computed" className="bg-bg-subtle italic" />
     case 'slider': {
@@ -264,7 +259,7 @@ function ElementInput({
     }
     case 'gps':
       return (
-        <div className="flex items-center gap-1.5 rounded border border-border bg-white px-2 py-1.5 text-xs text-fg-muted">
+        <div className="flex items-center gap-1.5 rounded border border-border bg-surface px-2 py-1.5 text-xs text-fg-muted">
           <MapPin size={13} /> <GeneratedText id="m_07cd022cc38d60" />
         </div>
       )
@@ -344,7 +339,7 @@ function ElementInput({
             <span className="absolute top-1/3 left-1/3 flex h-5 w-5 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-danger text-[10px] font-bold text-danger-fg ring-2 ring-surface">
               1
             </span>
-            <span className="absolute top-1/2 left-2/3 flex h-5 w-5 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-danger text-[10px] font-bold text-white ring-2 ring-white">
+            <span className="absolute top-1/2 left-2/3 flex h-5 w-5 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-danger text-[10px] font-bold text-danger-fg ring-2 ring-surface">
               2
             </span>
           </div>
@@ -359,7 +354,7 @@ function ElementInput({
           <Input
             disabled
             placeholder={tGenerated('m_0a43fb83c91fdf')}
-            className="flex-1 bg-white"
+            className="flex-1"
           />
           <span className="inline-flex items-center gap-1 rounded border border-border px-1.5 py-1 text-[11px] text-fg-muted">
             <ScanLine size={12} /> <GeneratedText id="m_198b8dba5a829c" />
@@ -375,7 +370,7 @@ function ElementInput({
             value={itemsR.slice(0, 4).map((l, i) => (
               <li
                 key={i}
-                className="flex items-center gap-2 rounded border border-border bg-white px-2 py-1 text-xs"
+                className="flex items-center gap-2 rounded border border-border bg-surface px-2 py-1 text-xs"
               >
                 <span className="w-4 text-center font-semibold text-fg-muted">
                   <GeneratedValue value={i + 1} />
@@ -413,13 +408,13 @@ function ElementInput({
     case 'address':
       return (
         <div className="space-y-1.5">
-          <div className="flex items-center gap-1 rounded border border-border bg-white px-2 py-1.5 text-xs text-fg-subtle">
+          <div className="flex items-center gap-1 rounded border border-border bg-surface px-2 py-1.5 text-xs text-fg-subtle">
             <MapPin size={12} /> <GeneratedText id="m_178de0c94da150" />
           </div>
           <div className="grid grid-cols-2 gap-1.5">
-            <div className="col-span-2 h-7 rounded border border-border bg-white" />
-            <div className="h-7 rounded border border-border bg-white" />
-            <div className="h-7 rounded border border-border bg-white" />
+            <div className="col-span-2 h-7 rounded border border-border bg-surface" />
+            <div className="h-7 rounded border border-border bg-surface" />
+            <div className="h-7 rounded border border-border bg-surface" />
           </div>
         </div>
       )
@@ -428,7 +423,7 @@ function ElementInput({
     case 'lookup':
       return (
         <div className="space-y-1">
-          <Select disabled className="bg-white">
+          <Select disabled>
             <option>{'Select…'}</option>
           </Select>
           <GeneratedValue
@@ -523,7 +518,7 @@ function ElementInput({
         )
       }
       return (
-        <div className="inline-flex items-center gap-2 rounded-lg border border-border bg-white px-3 py-2">
+        <div className="inline-flex items-center gap-2 rounded-lg border border-border bg-surface px-3 py-2">
           <BarChart3 size={18} className="text-primary" />
           <div>
             <div className="text-2xl leading-none font-semibold text-fg">—</div>
@@ -536,7 +531,7 @@ function ElementInput({
       )
     }
     default:
-      return <Input disabled placeholder="" className="bg-white" />
+      return <Input disabled placeholder="" />
   }
 }
 
