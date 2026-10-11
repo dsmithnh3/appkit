@@ -37,6 +37,22 @@ Object.defineProperty(dom.window.HTMLElement.prototype, 'offsetParent', {
 })
 
 
+// jsdom has no media queries. SearchSelect asks whether it is on a desktop width;
+// reporting no match puts it on the phone-sized bottom sheet.
+if (dom.window.matchMedia === undefined) {
+  dom.window.matchMedia = (media: string) =>
+    ({
+      matches: false,
+      media,
+      onchange: null,
+      addEventListener() {},
+      removeEventListener() {},
+      addListener() {},
+      removeListener() {},
+      dispatchEvent: () => false,
+    }) as MediaQueryList
+}
+
 const React = await import('react')
 // tsx compiles imported JSX in classic mode from the repo root, so React must be global.
 Object.assign(globalThis, { React })
@@ -48,6 +64,8 @@ const { FilterChips } = await import('./filter-chips')
 const { MultiSelect } = await import('./multi-select')
 const { GlobalSearch } = await import('./global-search')
 const { FileUploader } = await import('./file-uploader')
+const { SearchSelect } = await import('./search-select')
+const { ApiReference } = await import('./api-reference')
 
 // The same rule focus-visible.test.ts applies to server-rendered surfaces, for
 // controls that only exist once something is open, typed or failed.
@@ -169,4 +187,36 @@ test('FileUploader Dismiss draws the focus ring on a failed file', async (t) => 
     await new Promise((resolve) => setTimeout(resolve, 10))
   })
   assertFocusRings('FileUploader', container, 'button, [tabindex="0"]', 2)
+})
+
+test('SearchSelect\'s phone-sized sheet draws the focus ring on its Close button', async (t) => {
+  const container = await render(
+    t,
+    React.createElement(SearchSelect, {
+      value: '',
+      onChange: () => {},
+      options: [{ value: 'a', label: 'Alpha' }, { value: 'b', label: 'Beta' }],
+      ariaLabel: 'Pick one',
+      closeLabel: 'Close list',
+    }),
+  )
+  await click(container.querySelector('button[aria-haspopup="listbox"]')!)
+  const sheet = document.querySelector('[data-ui-overlay]')
+  assert.ok(sheet, 'the sheet opens on a phone-sized screen')
+  assertFocusRings('SearchSelect sheet', sheet, 'button[aria-label="Close list"]', 1)
+})
+
+test('ApiReference endpoint toggle says whether it is open and draws the focus ring', async (t) => {
+  const container = await render(
+    t,
+    React.createElement(ApiReference, {
+      endpoints: [{ method: 'GET', path: '/v1/invoices', summary: 'List invoices', description: 'Every invoice.' }],
+    }),
+  )
+  const toggle = container.querySelector<HTMLButtonElement>('button[aria-expanded]')
+  assert.ok(toggle, 'the endpoint row is a button that reports its state')
+  assert.equal(toggle.getAttribute('aria-expanded'), 'false')
+  assertFocusRings('ApiReference toggle', container, 'button[aria-expanded]', 1)
+  await click(toggle)
+  assert.equal(toggle.getAttribute('aria-expanded'), 'true')
 })

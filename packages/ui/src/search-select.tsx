@@ -409,7 +409,7 @@ export function SearchSelect({
                         type="button"
                         onClick={() => setOpen(false)}
                         aria-label={closeLabel}
-                        className="rounded-md p-1.5 text-fg-muted hover:bg-surface-hover"
+                        className="rounded-md p-1.5 text-fg-muted hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
                       >
                         <X size={18} />
                       </button>
