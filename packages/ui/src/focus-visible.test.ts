@@ -22,6 +22,7 @@ import { RecordList } from './record-list'
 import { AdminHub, SettingsShell } from './settings-layout'
 import { SidebarNav } from './sidebar-nav'
 import { SortableTh, SortTh } from './sortable-th'
+import { ApiReference, CodeBlock } from './api-reference'
 import { SubtabNav } from './subtab-nav'
 import { ThemeProvider, ThemeToggle } from './theme'
 import { TopNav } from './top-nav'
@@ -99,6 +100,10 @@ const surfaces: Record<string, React.ReactElement> = {
     empty: 'Nothing here',
     rowKey: (row) => row.id,
   }),
+  CodeBlock: React.createElement(CodeBlock, { code: '{ "ok": true }' }),
+  ApiReference: React.createElement(ApiReference, {
+    endpoints: [{ method: 'GET', path: '/v1/invoices', summary: 'List invoices' }],
+  }),
   Pagination: React.createElement(Pagination, { basePath: '/invoices', currentParams: {}, total: 60, page: 2, perPage: 20 }),
   SortableTh: React.createElement(SortableTh, { basePath: '/invoices', currentParams: {}, column: 'total', active: true, dir: 'asc', children: 'Total' }),
   SortTh: React.createElement(SortTh, { basePath: '/invoices', currentParams: {}, column: 'total', sort: 'name', dir: 'asc', children: 'Total' }),
@@ -157,6 +162,10 @@ for (const [name, element] of Object.entries(surfaces)) {
       assert.match(tag, /focus-visible:ring-2/, `${name}: no focus ring on ${tag.slice(0, 140)}`)
       if (/focus-visible:outline-none/.test(tag)) {
         assert.match(tag, /focus-visible:ring-ring\b/, `${name}: outline removed without a full-strength ring`)
+      }
+      // A control revealed only on hover (a copy button) must also appear when it takes keyboard focus.
+      if (/(?:^|[\s"])opacity-0\b/.test(tag)) {
+        assert.match(tag, /focus-visible:opacity-100/, `${name}: hidden until hover, but not shown on focus: ${tag.slice(0, 140)}`)
       }
     }
   })
