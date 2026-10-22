@@ -1380,7 +1380,7 @@ export function FlowsCanvas({
                                   setEditingId(f.id)
                                   setEditName(f.name)
                                 }}
-                                className="opacity-0 transition group-hover:opacity-100"
+                                className="rounded opacity-0 transition group-hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                               >
                                 <Pencil size={12} className="text-fg-subtle hover:text-fg-muted" />
                               </button>
@@ -1391,7 +1391,7 @@ export function FlowsCanvas({
                                   e.stopPropagation()
                                   removeFlow(f.id)
                                 }}
-                                className="opacity-0 transition group-hover:opacity-100"
+                                className="rounded opacity-0 transition group-hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                               >
                                 <Trash2 size={12} className="text-fg-subtle hover:text-danger" />
                               </button>

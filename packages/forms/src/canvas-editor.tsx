@@ -196,7 +196,7 @@ export function CanvasEditor({
                   >
                     {/* Hover toolbar: drag handle + remove. The card body is a live
                     preview of the element as it ships. */}
-                    <div className="absolute top-1 right-1 z-10 flex items-center gap-0.5 opacity-0 transition group-hover:opacity-100">
+                    <div className="absolute top-1 right-1 z-10 flex items-center gap-0.5 opacity-0 transition group-hover:opacity-100 focus-within:opacity-100">
                       <span
                         className="cv-drag flex h-5 w-5 cursor-grab items-center justify-center rounded bg-surface/90 text-fg-muted shadow-sm ring-1 ring-ring hover:text-fg active:cursor-grabbing"
                         title={tGenerated('m_17cb3d26a75938')}
@@ -210,7 +210,7 @@ export function CanvasEditor({
                           e.stopPropagation()
                           onDelete(f.id)
                         }}
-                        className="flex h-5 w-5 items-center justify-center rounded bg-surface/90 text-fg-muted shadow-sm ring-1 ring-ring hover:text-danger"
+                        className="flex h-5 w-5 items-center justify-center rounded bg-surface/90 text-fg-muted shadow-sm ring-1 ring-ring hover:text-danger focus-visible:outline-none focus-visible:ring-2"
                       >
                         <Trash2 size={11} />
                       </button>

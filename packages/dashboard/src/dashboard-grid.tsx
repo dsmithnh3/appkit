@@ -158,7 +158,7 @@ export function DashboardGrid({
         >
           {layout.map((widget) => <div key={widget.id} className="group/dashboard-cell">
             <div className="relative h-full w-full" onClickCapture={mode === 'edit' ? (event) => { if ((event.target as HTMLElement).closest('a')) { event.preventDefault(); event.stopPropagation() } } : undefined}>
-              {mode === 'edit' ? <><div className="pointer-events-none absolute inset-0 z-10 rounded-xl ring-1 ring-primary/0 transition group-hover/dashboard-cell:ring-primary/70" /><button type="button" onClick={() => setLayout((current) => current.filter((item) => item.id !== widget.id))} aria-label="Remove widget" className="no-drag absolute -right-2 -top-2 z-20 grid size-6 place-items-center rounded-full border border-danger/30 bg-surface text-danger opacity-0 shadow-sm transition group-hover/dashboard-cell:opacity-100 hover:bg-danger-subtle"><X size={12} /></button></> : null}
+              {mode === 'edit' ? <><div className="pointer-events-none absolute inset-0 z-10 rounded-xl ring-1 ring-primary/0 transition group-hover/dashboard-cell:ring-primary/70" /><button type="button" onClick={() => setLayout((current) => current.filter((item) => item.id !== widget.id))} aria-label="Remove widget" className="no-drag absolute -right-2 -top-2 z-20 grid size-6 place-items-center rounded-full border border-danger/30 bg-surface text-danger opacity-0 shadow-sm transition group-hover/dashboard-cell:opacity-100 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring hover:bg-danger-subtle"><X size={12} /></button></> : null}
               {nodes[widget.id] ?? <MissingCard id={widget.id} />}
             </div>
           </div>)}

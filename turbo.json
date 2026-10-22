@@ -11,7 +11,8 @@
     },
     "lint": {},
     "test": {
-      "dependsOn": ["^build"]
+      "dependsOn": ["^build"],
+      "passThroughEnv": ["PUPPETEER_EXECUTABLE_PATH"]
     },
     "dev": {
       "cache": false,

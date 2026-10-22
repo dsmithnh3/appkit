@@ -181,7 +181,7 @@ export function AdminHub({
                             size={15}
                             aria-hidden
                             className={cn(
-                              'shrink-0 text-fg-subtle opacity-0 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:opacity-100',
+                              'pointer-events-none shrink-0 text-fg-subtle opacity-0 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:opacity-100',
                               accent.link,
                             )}
                           />

@@ -69,7 +69,7 @@ export function CodeBlock({ code, className }: { code: string; className?: strin
         type="button"
         onClick={copy}
         aria-label="Copy"
-        className="absolute right-2 top-2 rounded-md p-1.5 text-fg-muted opacity-0 transition hover:bg-surface-hover hover:text-fg group-hover:opacity-100"
+        className="absolute right-2 top-2 rounded-md p-1.5 text-fg-muted opacity-0 transition hover:bg-surface-hover hover:text-fg group-hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       >
         {copied ? <Check className="size-4 text-success" /> : <Copy className="size-4" />}
       </button>
@@ -131,7 +131,8 @@ export function ApiEndpoint({
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
-        className="flex w-full items-center gap-3 px-4 py-3 text-left transition-colors hover:bg-surface-hover"
+        aria-expanded={open}
+        className="flex w-full items-center gap-3 px-4 py-3 text-left transition-colors hover:bg-surface-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
       >
         <MethodBadge method={endpoint.method} />
         <code className="min-w-0 flex-1 truncate font-mono text-sm text-fg">{endpoint.path}</code>
