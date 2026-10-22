@@ -1,5 +1,12 @@
 # @braedonsaunders/appkit-forms-documents
 
+## 0.1.2
+
+### Patch Changes
+
+- Updated dependencies [6c1b18a]
+  - @braedonsaunders/appkit-tokens@0.1.3
+
 ## 0.1.1
 
 ### Patch Changes

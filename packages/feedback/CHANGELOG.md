@@ -1,5 +1,15 @@
 # @braedonsaunders/appkit-feedback
 
+## 1.0.0
+
+### Patch Changes
+
+- Updated dependencies [6c1b18a]
+- Updated dependencies [2da1e53]
+- Updated dependencies [0f6e203]
+- Updated dependencies [6a1f901]
+  - @braedonsaunders/appkit-ui@0.4.0
+
 ## 0.2.1
 
 ### Patch Changes
