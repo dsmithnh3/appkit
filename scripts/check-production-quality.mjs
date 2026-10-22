@@ -3,6 +3,7 @@ import { extname, join, relative, resolve } from 'node:path'
 import { findFgSubtleViolations } from './fg-subtle-usage.mjs'
 import { findWhiteBlackViolations } from './white-black-usage.mjs'
 import { definedColours, findUndefinedColourTokens } from './colour-token-usage.mjs'
+import { findHoverOnlyReveals } from './hover-reveal-usage.mjs'
 
 const root = resolve(import.meta.dirname, '..')
 const roots = [
@@ -77,10 +78,11 @@ errors.push(
 
 const tokensCss = readFileSync(join(root, 'packages', 'tokens', 'src', 'tokens.css'), 'utf8')
 errors.push(...findUndefinedColourTokens({ root, roots, defined: definedColours(tokensCss) }))
+errors.push(...findHoverOnlyReveals({ root, roots }))
 
 if (errors.length) {
   console.error(`Production-quality check failed:\n${errors.map((error) => `- ${error}`).join('\n')}`)
   process.exit(1)
 }
 
-console.log('Production source contains no suppressions, unfinished markers, raw UI palettes, white/black or undefined colour utilities, fg-subtle on readable text, empty handlers, fake-success adapters, or silently discarded promises.')
+console.log('Production source contains no suppressions, unfinished markers, raw UI palettes, white/black or undefined colour utilities, hover-only controls, fg-subtle on readable text, empty handlers, fake-success adapters, or silently discarded promises.')
